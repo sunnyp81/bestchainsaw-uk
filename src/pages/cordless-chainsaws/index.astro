@@ -40,9 +40,9 @@ const faqs = [
 ];
 
 const picks = [
-  { name: 'Ryobi ONE+ RY18CSA', url: `${url}#ryobi-ry18csa` },
-  { name: 'Makita DUC353', url: `${url}#makita-duc353` },
-  { name: 'EGO Power+ CS1401E', url: `${url}#ego-cs1401e` },
+  { name: 'Ryobi ONE+ OCS1830', url: `${url}#ryobi-ocs1830` },
+  { name: 'Makita DUC353Z', url: `${url}#makita-duc353` },
+  { name: 'EGO Power+ CS1410E', url: `${url}#ego-cs1401e` },
 ];
 
 const schema = [
@@ -175,23 +175,23 @@ const schema = [
       </p>
     </div>
 
-    <div id="ryobi-ry18csa" class="my-6">
+    <div id="ryobi-ocs1830" class="my-6">
       <PickCard
         rank={1}
-        name="Ryobi ONE+ RY18CSA"
+        name="Ryobi ONE+ OCS1830"
         brand="Ryobi"
         bestFor="light pruning on a budget"
         rating={4}
         rrp="~£70 to £120, battery often sold separately"
-        reviewUrl={`${url}#ryobi-ry18csa`}
-        verdict="An 18V, 25cm-bar saw built around Ryobi's ONE+ battery platform. Sensible if pruning and light branch work is genuinely all you need, especially if you already own other ONE+ garden tools and can share a battery across them."
+        reviewUrl={`${url}#ryobi-ocs1830`}
+        verdict="An 18V, 30cm-bar saw built around Ryobi's ONE+ battery platform. Sensible if pruning and light branch work is genuinely all you need, especially if you already own other ONE+ garden tools and can share a battery across them."
         pros={[
           'Battery and charger shared across Ryobi’s wide ONE+ 18V tool range',
           'Light enough to run one-handed for short jobs',
           'Low buy-in cost for occasional use',
         ]}
         cons={[
-          '25cm bar limits it to smaller branches, not logs',
+          '30cm bar limits it to smaller branches, not logs',
           'Battery and charger are often sold separately, check the listing',
           '18V will not keep up with anything log-sized',
         ]}
@@ -201,35 +201,37 @@ const schema = [
     <div id="makita-duc353" class="my-6">
       <PickCard
         rank={2}
-        name="Makita DUC353"
+        name="Makita DUC353Z"
         brand="Makita"
         bestFor="existing Makita LXT owners"
         rating={4.5}
         rrp="~£150 to £220, tool only, LXT batteries sold separately"
         reviewUrl={`${url}#makita-duc353`}
-        verdict="Runs on two 18V LXT batteries rather than a dedicated pack, so it sits in the 36V mid-tier. The 35cm bar handles more than the 18V-class saws above. Makes most sense if you are already invested in Makita's LXT ecosystem from other cordless tools."
+        verdict="The Z suffix in Makita's naming means this is sold as a bare tool, body only. It runs on two 18V LXT batteries rather than a dedicated pack, so it sits in the 36V mid-tier, and if you are not already on Makita's LXT platform you will need to budget for two batteries and a charger on top of the tool price. The 35cm bar handles more than the 18V-class saws above. Makes most sense if you are already invested in Makita's LXT ecosystem from other cordless tools."
         pros={[
           'Runs on Makita’s huge 18V LXT battery range, no separate platform to buy into',
           '35cm bar copes with more than 18V-class saws',
           'Reputable brand for trade-grade reliability',
         ]}
         cons={[
-          'Needs two batteries to run, cost adds up if you do not already own LXT packs',
+          'Sold as a bare tool, two batteries and a charger add to the cost if you do not already own LXT packs',
           'Noticeably heavier than the single-battery 18V options',
         ]}
       />
     </div>
 
+    <PriceGrid modelKey="makita-duc353z" />
+
     <div id="ego-cs1401e" class="my-6">
       <PickCard
         rank={3}
-        name="EGO Power+ CS1401E"
+        name="EGO Power+ CS1410E"
         brand="EGO"
         bestFor="firewood-sized rounds, no petrol"
         rating={4.5}
         rrp="~£200 to £300 as a kit with battery and charger"
         reviewUrl={`${url}#ego-cs1401e`}
-        verdict="A 56V ARC Lithium saw with a 35cm bar, EGO's higher-end cordless tier. This is roughly where UK owners report cordless starts to genuinely handle firewood-sized rounds without stepping up to petrol. The 56V battery is shared with EGO's mower and trimmer range, worth factoring in if you are already on that platform."
+        verdict="A 56V ARC Lithium saw with a 35cm bar, EGO's higher-end cordless tier. The bare tool is sold as the CS1410E, while the kit with battery and charger is the CS1411E, so check which listing you are looking at. This is roughly where UK owners report cordless starts to genuinely handle firewood-sized rounds without stepping up to petrol. The 56V battery is shared with EGO's mower and trimmer range, worth factoring in if you are already on that platform. EGO sells through Amazon UK and specialist dealers rather than the mainstream DIY sheds."
         pros={[
           'Closest of the three to light petrol cutting power, per EGO’s own spec sheet',
           '56V ARC Lithium batteries shared across EGO’s wider mower and trimmer range',
@@ -242,11 +244,6 @@ const schema = [
         ]}
       />
     </div>
-
-    <PriceGrid
-      model="EGO Power+ CS1401E 56V cordless chainsaw"
-      bq={{ url: 'https://www.diy.com/search?term=ego%20cs1401' }}
-    />
 
     <div class="prose-chainsaw">
       <p>

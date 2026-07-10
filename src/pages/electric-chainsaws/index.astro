@@ -41,8 +41,8 @@ const faqs = [
 ];
 
 const picks = [
-  { name: 'Bosch AKE 30/35', url: `${url}#bosch-ake-30-35` },
-  { name: 'Einhell GE-EC', url: `${url}#einhell-ge-ec` },
+  { name: 'Bosch UniversalChain 35', url: `${url}#bosch-ake-30-35` },
+  { name: 'Einhell corded (GC-EC series)', url: `${url}#einhell-ge-ec` },
   { name: 'Screwfix Titan TTL585CHN', url: `${url}#screwfix-titan-ttl585chn` },
 ];
 
@@ -140,20 +140,20 @@ const schema = [
     <div class="my-8 space-y-6">
       <PickCard
         rank={1}
-        name="Bosch AKE 30/35"
+        name="Bosch UniversalChain 35"
         brand="Bosch"
         bestFor="most gardens"
         rating={4}
-        pros={["Widely stocked so parts and chains are easy to replace", "Tool-less chain tensioning on current AKE models", "Recognisable brand with a proper UK service network"]}
+        pros={["Widely stocked so parts and chains are easy to replace", "SDS tool-less chain tensioning and auto chain oiling", "Recognisable brand with a proper UK service network"]}
         cons={["Heavier in the hand than the cheapest budget saws", "Still a light-duty saw, same 20 to 25cm practical limit as any corded model"]}
-        rrp="Typically £70-£90"
+        rrp="Typically around £129"
         reviewUrl={`${url}#bosch-ake-30-35`}
-        affiliateUrl={amazonSearch('Bosch AKE 35 corded electric chainsaw')}
-        verdict="Bosch's AKE range is the safe default for a UK garden. The number is the bar length in cm: AKE 30 has a 30cm bar, AKE 35 a 35cm bar. Bosch is the brand most likely to be in stock at a local shop if something needs replacing. Current models add a tool-less chain tensioner and auto chain oiling, which matters more day to day than the spec sheet suggests."
+        affiliateUrl={amazonSearch('Bosch UniversalChain 35 corded electric chainsaw')}
+        verdict="The UniversalChain 35 is Bosch's current 1800W corded saw, the direct successor to the older AKE 35 (which is now discontinued), with a 35cm bar. Bosch is the brand most likely to be in stock at a local shop if a chain or bar needs replacing. The SDS tool-less tensioner and auto chain oiling matter more day to day than the spec sheet suggests. It is stocked across several UK retailers, so it is the easiest of the three to compare on price."
       />
       <PickCard
         rank={2}
-        name="Einhell GE-EC"
+        name="Einhell corded (GC-EC series)"
         brand="Einhell"
         bestFor="cheaper mid-range buyers"
         rating={3.5}
@@ -161,8 +161,8 @@ const schema = [
         cons={["Fewer stockists than Bosch, so replacement chains can mean ordering online", "Owner feedback is more mixed than the two more established brands either side of it"]}
         rrp="Typically £55-£75"
         reviewUrl={`${url}#einhell-ge-ec`}
-        affiliateUrl={amazonSearch('Einhell GE-EC corded electric chainsaw')}
-        verdict="Einhell's GE-EC corded range sits between the Screwfix budget option and Bosch on both price and reputation. It is a sensible pick for a proper mid-range saw without the Bosch premium, provided you're comfortable ordering a replacement chain online rather than picking one up at a local shop."
+        affiliateUrl={amazonSearch('Einhell corded electric chainsaw')}
+        verdict="Einhell's corded GC-EC range sits between the Screwfix budget option and Bosch on both price and reputation. It is a sensible pick for a proper mid-range saw without the Bosch premium, provided you're comfortable ordering a replacement chain online rather than picking one up at a local shop. Check the exact model number and bar length on the listing before buying, since Einhell revises the range regularly."
       />
       <PickCard
         rank={3}
@@ -174,35 +174,30 @@ const schema = [
         cons={["Basic spec next to Bosch or Einhell, no premium features", "Only sold through Screwfix, so no shopping around for price", "Not intended for daily or heavy use"]}
         rrp="Typically £40-£50"
         reviewUrl={`${url}#screwfix-titan-ttl585chn`}
-        affiliateUrl={amazonSearch('Titan TTL585CHN corded electric chainsaw')}
-        verdict="Titan is Screwfix's own budget tool brand. The TTL585CHN corded saw has picked up a genuinely good reputation in UK trade and DIY forum threads, one of those unglamorous own-brand tools that just keeps working for light use. That makes it a fair way to spend under £50 on a first saw, as long as you don't expect it to do a petrol saw's job."
+        dealerUrl="https://www.screwfix.com/search?search=titan+chainsaw"
+        dealerLabel="View at Screwfix"
+        verdict="Titan is Screwfix's own budget tool brand, sold only through Screwfix (not Amazon or other retailers). The TTL585CHN corded saw has picked up a genuinely good reputation in UK trade and DIY forum threads, one of those unglamorous own-brand tools that just keeps working for light use. That makes it a fair way to spend under £50 on a first saw, as long as you don't expect it to do a petrol saw's job."
       />
     </div>
 
     <div class="prose-chainsaw">
-      <h3 id="bosch-ake-30-35">More on the Bosch AKE 30/35</h3>
+      <h3 id="bosch-ake-30-35">More on the Bosch UniversalChain 35</h3>
       <p>
-        The AKE number is the bar length in centimetres. Choose AKE 30 for smaller, tighter
-        pruning work. Choose AKE 35 for a bit more reach on slightly thicker branches. Both stay
-        well inside the 20 to 25cm practical limit for corded saws generally. Bosch is stocked
-        broadly across UK retailers. That makes it the easiest of the three to compare on price in
-        one place:
+        The UniversalChain 35 replaced the older AKE 35 in Bosch's UK lineup. It keeps the 35cm bar
+        and 1800W motor, well inside the 20 to 25cm practical limit for corded saws generally, and
+        adds SDS tool-less chain tensioning. Bosch is stocked broadly across UK retailers, which
+        makes it the easiest of the three to compare on price in one place:
       </p>
     </div>
 
-    <PriceGrid
-      model="Bosch AKE 35 corded electric chainsaw"
-      screwfix={{ url: 'https://www.screwfix.com/search?search=bosch+ake+35' }}
-      toolstation={{ url: 'https://www.toolstation.com/search?q=bosch+ake+35' }}
-      bq={{ url: 'https://www.diy.com/search?term=bosch%20ake%2035' }}
-    />
+    <PriceGrid modelKey="bosch-universalchain-35" />
 
     <div class="prose-chainsaw">
-      <h3 id="einhell-ge-ec">More on the Einhell GE-EC</h3>
+      <h3 id="einhell-ge-ec">More on the Einhell corded range</h3>
       <p>
-        Einhell's GE-EC corded chainsaws target the same job as the Bosch AKE range: garden
-        pruning and light clearance, at a lower price. The tradeoff is availability. A Bosch chain
-        or bar is a common stock item at a UK hardware shop. An Einhell replacement part more
+        Einhell's corded GC-EC chainsaws target the same job as the Bosch UniversalChain range:
+        garden pruning and light clearance, at a lower price. The tradeoff is availability. A Bosch
+        chain or bar is a common stock item at a UK hardware shop. An Einhell replacement part more
         often means ordering online and waiting a few days. Factor that in before relying on the
         saw for anything time-sensitive.
       </p>

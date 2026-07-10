@@ -12,11 +12,21 @@ interface Props {
   affiliateUrl?: string;
   image?: string;
   verdict: string;
+  // Dealer-channel models (Stihl, Husqvarna petrol) are NOT sold on Amazon or
+  // general online retail in the UK. For those, pass dealerUrl (+ dealerLabel)
+  // to render an honest non-affiliate "find a dealer" CTA instead of a tagged
+  // Amazon link that would land on used/grey-import/parts listings.
+  dealerUrl?: string;
+  dealerLabel?: string;
 }
 import { AFFILIATE_REL, amazonSearch } from '../lib/affiliate';
-const { rank, name, brand, bestFor, rating, pros, cons, rrp, reviewUrl, affiliateUrl, image, verdict } = Astro.props as Props;
-// Always offer a buy CTA: fall back to a tagged Amazon UK search for the model.
-const buyUrl = affiliateUrl || amazonSearch(`${name} chainsaw`);
+const { rank, name, brand, bestFor, rating, pros, cons, rrp, reviewUrl, affiliateUrl, image, verdict, dealerUrl, dealerLabel } = Astro.props as Props;
+const isDealer = Boolean(dealerUrl);
+// Amazon path is affiliate (rel sponsored). Dealer path is a plain reference
+// link (rel nofollow), never marked sponsored since we earn nothing on it.
+const buyUrl = isDealer ? dealerUrl! : (affiliateUrl || amazonSearch(`${name} chainsaw`));
+const buyRel = isDealer ? 'nofollow noopener noreferrer' : AFFILIATE_REL;
+const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check price on Amazon';
 ---
 <article class="border border-steel-200 rounded-xl bg-white overflow-hidden shadow-sm">
   <div class="grid md:grid-cols-[200px_1fr] gap-0">
@@ -55,8 +65,8 @@ const buyUrl = affiliateUrl || amazonSearch(`${name} chainsaw`);
       </div>
       <div class="flex flex-wrap gap-2">
         <a href={reviewUrl} class="inline-flex items-center gap-1 text-sm font-semibold text-hazard-600 hover:text-hazard-700 underline underline-offset-2">Read full review →</a>
-        <a href={buyUrl} rel={AFFILIATE_REL} target="_blank" class="ml-auto inline-flex items-center gap-1 text-sm font-bold bg-hazard-500 hover:bg-hivis-400 text-graphite-900 px-3 py-1.5 rounded min-h-[44px]">
-          Check price on Amazon →
+        <a href={buyUrl} rel={buyRel} target="_blank" class="ml-auto inline-flex items-center gap-1 text-sm font-bold bg-hazard-500 hover:bg-hivis-400 text-graphite-900 px-3 py-1.5 rounded min-h-[44px]">
+          {buyLabel} →
         </a>
       </div>
     </div>

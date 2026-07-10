@@ -1,35 +1,51 @@
 ---
-// 5-retailer price comparison table (part of the core USP). Amazon always has a
-// buy path via a tagged search-link fallback; every other retailer column is
-// OMITTED ENTIRELY unless a real URL is supplied - never fabricate a price or a
-// product URL for a retailer we have not actually checked.
-import { AFFILIATE_REL, amazonSearch } from '../lib/affiliate';
+// Multi-retailer UK price comparison (core USP artifact). Data-driven from
+// src/data/priceGrid.ts so every price + product URL lives in one verifiable
+// place and can be refreshed on a schedule.
+//
+// HONESTY RULES (non-negotiable, this ships to a live buying-guide):
+//  - Every retailer URL is a REAL, verified product-page deep link, never a
+//    search page and never fabricated. A retailer that does not genuinely stock
+//    the model is simply omitted.
+//  - Prices are dated indicative snapshots, not a live feed. A static site
+//    cannot show a truly live price, so we show the figure we actually read on
+//    the page, stamp the date it was checked, and deep-link to the live price.
+//  - Amazon links carry the affiliate tag + rel="sponsored" (we earn a small
+//    commission). Other retailers are NOT affiliate here, so they get a plain
+//    rel="nofollow" - calling them "sponsored" would be untrue.
+import { AFFILIATE_REL, amazonSearch, amazonLink } from '../lib/affiliate';
+import { PRICE_GRID } from '../data/priceGrid';
 
-interface RetailerLink { url?: string; price?: string }
-interface Props {
-  model: string;
-  amazon?: RetailerLink;
-  screwfix?: RetailerLink;
-  toolstation?: RetailerLink;
-  bq?: RetailerLink;
-  manomano?: RetailerLink;
-}
-const { model, amazon, screwfix, toolstation, bq, manomano } = Astro.props as Props;
+interface Props { modelKey: string }
+const { modelKey } = Astro.props as Props;
+const entry = PRICE_GRID[modelKey];
+if (!entry) throw new Error(`PriceGrid: no data for modelKey "${modelKey}" in src/data/priceGrid.ts`);
 
-const RETAILER_REL = 'nofollow sponsored noopener noreferrer';
+const RETAILER_REL = 'nofollow noopener noreferrer';
+const checkedLabel = new Date(entry.checked + 'T00:00:00Z').toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC',
+});
 
-const candidates = [
-  { name: 'Amazon UK', url: amazon?.url || amazonSearch(model), price: amazon?.price, rel: AFFILIATE_REL, isFallback: !amazon?.url },
-  toolstation?.url ? { name: 'Toolstation', url: toolstation.url, price: toolstation.price, rel: RETAILER_REL, isFallback: false } : null,
-  screwfix?.url ? { name: 'Screwfix', url: screwfix.url, price: screwfix.price, rel: RETAILER_REL, isFallback: false } : null,
-  bq?.url ? { name: 'B&Q', url: bq.url, price: bq.price, rel: RETAILER_REL, isFallback: false } : null,
-  manomano?.url ? { name: 'ManoMano', url: manomano.url, price: manomano.price, rel: RETAILER_REL, isFallback: false } : null,
-];
-const retailers = candidates.filter((r): r is NonNullable<typeof r> => r !== null);
+// Amazon rows are tagged (affiliate): a verified ASIN builds a deep dp link,
+// otherwise a tagged search fallback. Non-Amazon rows use their verified
+// product URL verbatim and a plain (non-affiliate) rel.
+const rows = entry.rows.map((r) => {
+  const isAmazon = r.retailer === 'Amazon UK';
+  const url = isAmazon
+    ? (r.asin ? amazonLink(r.asin) : amazonSearch(entry.model))
+    : r.url;
+  return {
+    ...r,
+    url,
+    rel: isAmazon ? AFFILIATE_REL : RETAILER_REL,
+    cta: isAmazon ? (r.asin ? 'View on Amazon' : 'Search on Amazon') : 'View product',
+  };
+}).filter((r) => r.url);
 ---
 <div class="my-8 border border-steel-200 rounded-xl overflow-hidden bg-white">
-  <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 text-sm font-semibold font-heading">
-    Where to buy: {model}
+  <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+    <span class="text-sm font-semibold font-heading">Where to buy: {entry.model}</span>
+    <span class="text-xs text-steel-200">Prices checked {checkedLabel}</span>
   </div>
   <div class="overflow-x-auto">
     <table class="w-full text-sm">
@@ -37,17 +53,19 @@ const retailers = candidates.filter((r): r is NonNullable<typeof r> => r !== nul
         <tr class="bg-surface-100 text-left">
           <th scope="col" class="px-4 py-2 font-semibold text-graphite-900 text-xs uppercase tracking-wide">Retailer</th>
           <th scope="col" class="px-4 py-2 font-semibold text-graphite-900 text-xs uppercase tracking-wide">Price</th>
+          <th scope="col" class="px-4 py-2 font-semibold text-graphite-900 text-xs uppercase tracking-wide">What you get</th>
           <th scope="col" class="px-4 py-2"><span class="sr-only">Buy link</span></th>
         </tr>
       </thead>
       <tbody>
-        {retailers.map((r) => (
+        {rows.map((r) => (
           <tr class="border-t border-steel-200 hover:bg-surface-100">
-            <td class="px-4 py-3 font-medium text-graphite-900">{r.name}</td>
-            <td class="px-4 py-3 font-mono-spec text-graphite-900">{r.price ?? 'Check price'}</td>
+            <td class="px-4 py-3 font-medium text-graphite-900">{r.retailer}</td>
+            <td class="px-4 py-3 font-mono-spec text-graphite-900 whitespace-nowrap">{r.price ?? 'Check price'}</td>
+            <td class="px-4 py-3 text-steel-600 text-xs">{r.note ?? '-'}</td>
             <td class="px-4 py-3 text-right">
               <a href={r.url} rel={r.rel} target="_blank" class="inline-block bg-hazard-500 hover:bg-hivis-400 text-graphite-900 text-xs font-bold px-3 py-1.5 rounded min-h-[36px]">
-                {r.isFallback ? 'Search on Amazon' : 'View deal'} →
+                {r.cta} &rarr;
               </a>
             </td>
           </tr>
@@ -55,5 +73,11 @@ const retailers = candidates.filter((r): r is NonNullable<typeof r> => r !== nul
       </tbody>
     </table>
   </div>
-  <p class="px-4 py-2 text-xs text-steel-400 border-t border-steel-200">Prices and stock change often. We link out and let the retailer show the live price rather than quoting a figure that can go stale.</p>
+  {entry.note && (
+    <p class="px-4 py-2 text-xs text-steel-600 border-t border-steel-200 bg-hazard-50">{entry.note}</p>
+  )}
+  <p class="px-4 py-2 text-xs text-steel-400 border-t border-steel-200">
+    Indicative prices from the dates shown, not a live feed. Stock and prices change often, so we deep-link each
+    listing and let the retailer show the current price. As an Amazon Associate we earn from qualifying Amazon purchases.
+  </p>
 </div>

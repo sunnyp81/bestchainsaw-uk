@@ -23,7 +23,7 @@ const crumbs = [
 const faqs: { q: string; a: string }[] = [
   {
     q: 'What cc chainsaw do I need for firewood?',
-    a: "35 to 45cc is the sweet spot for most UK firewood processing. Saws like the Stihl MS 211 or Husqvarna 120 Mark II and 435 II sit in this range with a 14 to 16in bar and comfortably work through a season's rounds. A smaller 30 to 32cc saw such as the Stihl MS 170 is enough if you're only cutting the odd log or two a year. Save 50cc and up for regular felling of larger trees. That's more saw than routine firewood needs.",
+    a: "35 to 45cc is the sweet spot for most UK firewood processing. Saws like the Stihl MS 212 or Husqvarna 120 Mark II and 435 II sit in this range with a 14 to 16in bar and comfortably work through a season's rounds. A smaller 30 to 32cc saw such as the Stihl MS 170 is enough if you're only cutting the odd log or two a year. Save 50cc and up for regular felling of larger trees. That's more saw than routine firewood needs.",
   },
   {
     q: 'Petrol vs cordless for firewood, which is better?',
@@ -40,7 +40,7 @@ const faqs: { q: string; a: string }[] = [
 ];
 
 const picks = [
-  { name: 'Stihl MS 211', url: `${url}#stihl-ms-211` },
+  { name: 'Stihl MS 212', url: `${url}#stihl-ms-211` },
   { name: 'Husqvarna 120 Mark II', url: `${url}#husqvarna-120-mark-ii` },
   { name: 'Husqvarna 435 II', url: `${url}#husqvarna-435-ii` },
 ];
@@ -97,7 +97,7 @@ const schema = [
             <td class="font-mono-spec">35 to 45cc</td>
             <td class="font-mono-spec">14 to 16in (35 to 40cm)</td>
             <td>Most UK firewood processing and general garden clearance, the sweet spot for homeowners</td>
-            <td>Stihl MS 211, Husqvarna 120 Mark II, Husqvarna 435 II</td>
+            <td>Stihl MS 212, Husqvarna 120 Mark II, Husqvarna 435 II</td>
           </tr>
           <tr>
             <td class="font-mono-spec">50cc and up</td>
@@ -117,17 +117,23 @@ const schema = [
       <p>
         Expect to pay somewhere around <strong>£120 to £350</strong> typically for a decent
         homeowner-grade petrol saw from Stihl or Husqvarna, with the smaller 30 to 32cc entry
-        models nearer the bottom of that band and the 35 to 45cc firewood saws (like the MS 211 or
+        models nearer the bottom of that band and the 35 to 45cc firewood saws (like the MS 212 or
         435 II) nearer the top. Step into the 50cc-plus, semi-professional class and prices climb
         well past £350, sometimes considerably, before you're anywhere near a proper felling saw.
         Cheap unbranded petrol saws exist well under £120. Parts, servicing and safety-critical
         components like the chain brake are usually the first things cut on those, so check them
         before you buy on price alone.
       </p>
+      <p>
+        One buy-path note: Stihl and Husqvarna petrol saws are sold through approved dealers or
+        the brands' own websites in the UK, not through Amazon, B&amp;Q or Screwfix. That is
+        normal for these two brands, but it does mean you can't price-compare them across shops
+        the way you can with the more widely stocked mid-market brands below.
+      </p>
 
       <h2>Three petrol chainsaws that suit most UK buyers</h2>
       <p>
-        The Stihl MS 211, Husqvarna 120 Mark II and Husqvarna 435 II cover most of what UK buyers
+        The Stihl MS 212, Husqvarna 120 Mark II and Husqvarna 435 II cover most of what UK buyers
         actually need, from a first, occasional-use saw up to a proper firewood workhorse. We
         picked them on published manufacturer specs, widespread UK dealer availability and
         consistent feedback from owner reviews and forums, not staged testing.
@@ -137,7 +143,7 @@ const schema = [
     <div class="space-y-5 my-8">
       <PickCard
         rank={1}
-        name="Stihl MS 211"
+        name="Stihl MS 212"
         brand="Stihl"
         bestFor="most UK firewood and general garden work"
         rating={4.5}
@@ -152,6 +158,8 @@ const schema = [
         ]}
         rrp="£250 to £320"
         reviewUrl={`${url}#stihl-ms-211`}
+        dealerUrl="https://www.stihl.co.uk/en/dealer-locator"
+        dealerLabel="Find a Stihl dealer"
         verdict="A 35.2cc all-rounder that sits right in the middle of the useful range: enough engine for a season of firewood and the odd small tree, without the weight and price of a felling saw."
       />
       <PickCard
@@ -171,6 +179,8 @@ const schema = [
         ]}
         rrp="£180 to £230"
         reviewUrl={`${url}#husqvarna-120-mark-ii`}
+        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
+        dealerLabel="Find a Husqvarna dealer"
         verdict="A genuine step up from the smallest 30cc saws while staying light and easy to start, the model that keeps turning up as a recommended first petrol saw in UK owner forums."
       />
       <PickCard
@@ -186,18 +196,20 @@ const schema = [
         ]}
         cons={[
           'More saw than most people need for occasional pruning',
-          'Sits above the MS 211 and 120 Mark II on price',
+          'Sits above the MS 212 and 120 Mark II on price',
         ]}
         rrp="£270 to £340"
         reviewUrl={`${url}#husqvarna-435-ii`}
-        verdict="More headroom than the MS 211 or 120 Mark II, worth the extra weight and price if your rounds run larger or you're cutting for longer stretches at a time."
+        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
+        dealerLabel="Find a Husqvarna dealer"
+        verdict="More headroom than the MS 212 or 120 Mark II, worth the extra weight and price if your rounds run larger or you're cutting for longer stretches at a time."
       />
     </div>
 
     <div class="prose-chainsaw">
-      <h3 id="stihl-ms-211">Stihl MS 211: the middle-ground firewood saw</h3>
+      <h3 id="stihl-ms-211">Stihl MS 212: the middle-ground firewood saw</h3>
       <p>
-        The 35.2cc MS 211 sits right in the middle of the useful range for UK homeowners. It's a
+        The 35.2cc MS 212 sits right in the middle of the useful range for UK homeowners. It's a
         low-vibration, 2-MIX engine with a pre-separation air filter that extends the time between
         cleans, and it's rated by Stihl for cutting firewood and felling small trees rather than
         just light pruning. With a 16in bar it'll take on most rounds a UK garden or smallholding
@@ -213,21 +225,25 @@ const schema = [
       </p>
       <h3 id="husqvarna-435-ii">Husqvarna 435 II: for bigger rounds and bigger gardens</h3>
       <p>
-        At 40cc, the 435 II has more headroom than either the MS 211 or the 120 Mark II, useful if
+        At 40cc, the 435 II has more headroom than either the MS 212 or the 120 Mark II, useful if
         your firewood rounds run larger or your garden is big enough that you're cutting for longer
         stretches. Husqvarna's LowVib dampening is a genuine comfort feature over a long session,
         and the saw takes bar sizes up to 16 to 18in depending on the kit, though most UK owners run
         it at 16in for firewood work.
       </p>
 
-      <h2>Where to buy: Stihl MS 211</h2>
+      <h2>A petrol saw you can actually price-compare online</h2>
+      <p>
+        The Stihl and Husqvarna picks above are dealer-channel, bought through an approved dealer
+        or the brand's own site rather than general retailers, so there is no honest multi-retailer
+        price grid to show for them. Here instead is a petrol saw that genuinely is stocked online
+        across multiple retailers, the Hyundai HYC6200X. Worth noting it's a larger 62cc saw, above
+        the 35 to 45cc homeowner sweet spot covered earlier, simply because that's what happens to
+        be well stocked online. The cc guidance above still stands when you're choosing by task.
+      </p>
     </div>
 
-    <PriceGrid
-      model="Stihl MS 211"
-      screwfix={{ url: 'https://www.screwfix.com/search?search=stihl+ms+211' }}
-      bq={{ url: 'https://www.diy.com/search?term=stihl+ms+211' }}
-    />
+    <PriceGrid modelKey="hyundai-hyc6200x" />
 
     <div class="prose-chainsaw">
       <h2>Starting and maintenance: the trade-off for more power</h2>

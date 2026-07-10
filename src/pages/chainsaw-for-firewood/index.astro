@@ -40,9 +40,9 @@ const faqs = [
 ];
 
 const picks = [
-  { name: 'Stihl MS 211', url: `${url}#stihl-ms-211` },
+  { name: 'Stihl MS 212', url: `${url}#stihl-ms-211` },
   { name: 'Husqvarna 120 Mark II', url: `${url}#husqvarna-120-mark-ii` },
-  { name: 'EGO CS1400', url: `${url}#ego-cs1400` },
+  { name: 'EGO Power+ CS1410E', url: `${url}#ego-cs1400` },
 ];
 
 const schema = [
@@ -144,7 +144,7 @@ const schema = [
             <td>Lighter, compact petrol for occasional rounds</td>
           </tr>
           <tr>
-            <td>Stihl MS 211</td>
+            <td>Stihl MS 212</td>
             <td>Petrol</td>
             <td class="font-mono-spec">35.2cc, 1.7kW</td>
             <td class="font-mono-spec">14 to 16in</td>
@@ -165,7 +165,7 @@ const schema = [
             <td>A step up in power from the 120 Mark II, same size class</td>
           </tr>
           <tr>
-            <td>EGO CS1400</td>
+            <td>EGO Power+ CS1410E</td>
             <td>Cordless (56V)</td>
             <td class="font-mono-spec">56V battery, 13.5m/s chain</td>
             <td class="font-mono-spec">14in</td>
@@ -178,7 +178,7 @@ const schema = [
     <div class="my-8 space-y-6">
       <PickCard
         rank={1}
-        name="Stihl MS 211"
+        name="Stihl MS 212"
         brand="Stihl"
         bestFor="regular firewood volume"
         rating={4.5}
@@ -186,8 +186,9 @@ const schema = [
         cons={["4.3kg dry weight plus fuel and bar adds up over a long session", "Needs two-stroke fuel mixed and stored correctly, plus a winter lay-up routine", "More saw than you need if you only process a trailer load a year"]}
         rrp="Typically £250-£350"
         reviewUrl={`${url}#stihl-ms-211`}
-        affiliateUrl={amazonSearch('Stihl MS 211 chainsaw')}
-        verdict="The 35.2cc MS 211 is the classic step-up saw for anyone processing more than the odd trailer load: enough engine and bar to keep cutting through a session without babying it, without stepping up to a felling-class saw you don't need."
+        dealerUrl="https://www.stihl.co.uk/en/dealer-locator"
+        dealerLabel="Find a Stihl dealer"
+        verdict="The 35.2cc MS 212 is the classic step-up saw for anyone processing more than the odd trailer load: enough engine and bar to keep cutting through a session without babying it, without stepping up to a felling-class saw you don't need."
       />
       <PickCard
         rank={2}
@@ -199,12 +200,13 @@ const schema = [
         cons={["1.4kW is on the light side for anything beyond mid-sized rounds", "14in bar caps the log diameter you can cut in one pass", "A homeowner saw, not built for daily heavy use"]}
         rrp="Typically £160-£200"
         reviewUrl={`${url}#husqvarna-120-mark-ii`}
-        affiliateUrl={amazonSearch('Husqvarna 120 Mark II chainsaw')}
+        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
+        dealerLabel="Find a Husqvarna dealer"
         verdict="38.2cc and a 14in bar make the 120 Mark II an easy way into petrol power for someone processing firewood a few weekends a year rather than every weekend. The 135 Mark II sits just above it with a bit more power in the same size class, worth a look if the 120 feels underpowered for your rounds."
       />
       <PickCard
         rank={3}
-        name="EGO CS1400"
+        name="EGO Power+ CS1410E"
         brand="EGO"
         bestFor="quiet, occasional firewood jobs"
         rating={4.5}
@@ -212,19 +214,20 @@ const schema = [
         cons={["Runtime depends on the battery: expect to swap or recharge partway through a big pile", "14in (35cm) bar caps the log diameter you can comfortably cut in one pass", "Kit price with battery and charger sits close to a budget petrol saw"]}
         rrp="Typically £280-£320 for the battery and charger kit"
         reviewUrl={`${url}#ego-cs1400`}
-        affiliateUrl={amazonSearch('EGO CS1400E chainsaw')}
-        verdict="The CS1400 will not out-cut a 35cc-plus petrol saw all day, but for evenings and weekends working through a modest log store, no fuel, no exhaust and a near-silent idle are a genuine draw, and it shares batteries with the rest of EGO's outdoor power range if you already own one."
+        affiliateUrl={amazonSearch('EGO Power+ CS1410E chainsaw')}
+        verdict="The CS1410E will not out-cut a 35cc-plus petrol saw all day, but for evenings and weekends working through a modest log store, no fuel, no exhaust and a near-silent idle are a genuine draw, and it shares batteries with the rest of EGO's outdoor power range if you already own one."
       />
     </div>
 
     <div class="prose-chainsaw">
-      <h3 id="stihl-ms-211">More on the Stihl MS 211</h3>
+      <h3 id="stihl-ms-211">More on the Stihl MS 212</h3>
       <p>
-        The MS 211 is a 35.2cc, 1.7kW homeowner saw that Stihl sells with a 14 to 16in bar
+        The MS 212 is a 35.2cc, 1.7kW homeowner saw that Stihl sells with a 14 to 16in bar
         option. UK retailers and forums repeatedly point to this size as the sensible middle
         ground for firewood: enough engine to avoid bogging down in hardwood rounds, without the
         weight or price of a felling-class saw. This is the class of saw worth budgeting for once
-        you process more than the odd trailer load a year.
+        you process more than the odd trailer load a year. Like other Stihl petrol saws, it is
+        sold through approved dealers rather than general online retailers.
       </p>
 
       <h3 id="husqvarna-120-mark-ii">More on the Husqvarna 120 Mark II</h3>
@@ -234,14 +237,16 @@ const schema = [
         a less experienced user. It suits lighter, less frequent firewood sessions rather than a
         full day of continuous cutting. The 135 Mark II uses the same 14in bar and body size with
         a bit more power (1.6kW). It is a reasonable step up if the 120 struggles with your
-        typical log diameter.
+        typical log diameter. Like other Husqvarna petrol saws, it is bought through an approved
+        dealer rather than general online retail.
       </p>
 
-      <h3 id="ego-cs1400">More on the EGO CS1400</h3>
+      <h3 id="ego-cs1400">More on the EGO Power+ CS1410E</h3>
       <p>
-        The CS1400 runs on EGO's 56V ARC Lithium platform with a 35cm (14in) bar and a 13.5m/s
-        chain speed. It is sold as a bare tool, or as a kit with a 2.5Ah battery and charger. It
-        removes every hassle petrol brings for occasional firewood work: no fuel mix, no
+        The CS1410E runs on EGO's 56V ARC Lithium platform with a 35cm (14in) bar and a 13.5m/s
+        chain speed. It is sold as a bare tool, or as a kit with a 2.5Ah battery and charger,
+        through Amazon UK and specialist dealers. It removes every hassle petrol brings for
+        occasional firewood work: no fuel mix, no
         starting cord, no exhaust smell. The cost is needing a charged battery on hand for
         anything beyond a modest pile.
       </p>
