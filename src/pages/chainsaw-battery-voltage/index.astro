@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Chainsaw Battery Voltage Explained: 18V vs 36V vs 40V vs 56V (UK)';
+const description = 'What chainsaw battery voltage actually means for cutting power and runtime, and which class (18V, 36-40V, 56V+) suits pruning, firewood or bigger jobs.';
+const datePublished = '2026-07-10';
+const url = '/chainsaw-battery-voltage/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Battery voltage guide', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs.
+const faqs: { q: string; a: string }[] = [];
+
+// TODO(content agent): verify every figure against real manufacturer spec sheets before publishing.
+const voltageClasses = [
+  { tier: '18V', typicalBar: '10 to 12 in', bestFor: 'Light pruning, branches under 10cm' },
+  { tier: '36 to 40V', typicalBar: '14 to 16 in', bestFor: 'General garden use, firewood up to ~25cm' },
+  { tier: '56V+', typicalBar: '16 to 18 in', bestFor: 'Heavier garden work, occasional felling' },
+];
+
+const schema = [
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Battery guide</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw battery voltage explained</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      Voltage is a rough proxy for cutting power, but bar length, chain speed and battery amp
+      hours matter just as much. Here is what each class is realistically good for.
+    </p>
+
+    <!-- TODO(content agent): replace with the real, sourced voltage comparison + full prose. -->
+    <div class="prose-chainsaw my-10">
+      <table>
+        <thead>
+          <tr><th>Voltage class</th><th>Typical bar</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          {voltageClasses.map((v) => (
+            <tr>
+              <td class="font-mono-spec">{v.tier}</td>
+              <td class="font-mono-spec">{v.typicalBar}</td>
+              <td>{v.bestFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

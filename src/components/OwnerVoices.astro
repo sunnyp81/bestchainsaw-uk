@@ -1,0 +1,37 @@
+---
+import { OWNER_VOICES } from '../data/ownerVoices';
+interface Props { keys?: string[]; modelKey?: string; heading?: string }
+const { keys, modelKey, heading = 'What owners actually say' } = Astro.props as Props;
+const ids = keys ?? (modelKey ? [modelKey] : []);
+const entries = ids.map((k) => OWNER_VOICES[k]).filter(Boolean);
+if (entries.length === 0) return null;
+const allSources = [...new Set(entries.flatMap((e) => e.sources))];
+---
+<section class="my-12">
+  <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-2 font-heading">{heading}</h2>
+  <p class="text-sm text-steel-400 mb-6">Recurring feedback drawn from real owner reviews and forums. Attributed to source, not our own testing.</p>
+
+  <div class="space-y-6">
+    {entries.map((e) => (
+      <div class="border border-steel-200 rounded-xl bg-white p-5">
+        {entries.length > 1 && <h3 class="text-lg font-bold text-graphite-900 mb-2 font-heading">{e.model}</h3>}
+        <p class="text-steel-600 leading-relaxed mb-4">{e.consensus}</p>
+        <ul class="space-y-3">
+          {e.voices.map((v) => (
+            <li class="flex gap-3">
+              <span class={`shrink-0 mt-0.5 text-xs font-bold px-2 py-0.5 rounded ${v.kind === 'praise' ? 'bg-hazard-100 text-hazard-700' : 'bg-hivis-300/60 text-graphite-900'}`}>
+                {v.kind === 'praise' ? 'LIKED' : 'GRIPE'}
+              </span>
+              <p class="text-sm text-steel-600 leading-relaxed">
+                <span class="italic">"{v.text}"</span>
+                <cite class="not-italic text-xs text-steel-400 block mt-0.5">{v.source}</cite>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <p class="text-xs text-steel-400 mt-4">Sources: {allSources.join(', ')}. Owner opinions are summarised and attributed; they reflect their authors, not Best Chainsaw.</p>
+</section>

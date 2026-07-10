@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import { articleSchema, howToSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+
+// This exact slug (/replace-bar/) has real earnings history - do not rename or redirect it away.
+const title = 'How to Replace a Chainsaw Bar (Step by Step, UK)';
+const description = 'A step-by-step guide to replacing a chainsaw guide bar safely, including how to pick the right replacement bar and what to check before you cut again.';
+const datePublished = '2026-07-10';
+const url = '/replace-bar/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'How to replace a bar', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs.
+const faqs: { q: string; a: string }[] = [];
+// TODO(content agent): populate with real, verified steps; howToSchema activates automatically.
+const steps: { name: string; text: string }[] = [];
+
+const schema = [
+  ...(steps.length ? [howToSchema({ name: title, description, steps })] : []),
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Maintenance</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">How to replace a chainsaw bar</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      A worn, bent or wrong-length bar is a common reason a saw stops cutting straight. This
+      guide covers picking the right replacement and swapping it safely, step by step.
+    </p>
+
+    <div class="my-8">
+      <HazardTape text="Chain off, saw off, gloves on: always disconnect the battery or spark plug lead before touching the bar or chain." />
+    </div>
+
+    <!-- TODO(content agent): full step-by-step prose with real, verified steps (populate the steps array above
+         so howToSchema emits), sizing/tensioning guidance, sourced FAQs. Keep this exact slug live. -->
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

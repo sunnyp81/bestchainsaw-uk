@@ -1,0 +1,39 @@
+---
+import { POWER_TYPE_HUBS, GUIDE_LINKS, SAFETY_LINK, SITE } from '../lib/site';
+import HazardTape from './HazardTape.astro';
+---
+<footer class="border-t border-steel-200 bg-surface-100 mt-20">
+  <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+    <div>
+      <h3 class="font-heading font-bold text-graphite-900 mb-3">By power type</h3>
+      <ul class="space-y-2 text-steel-600">
+        {POWER_TYPE_HUBS.map((h) => (<li><a href={`/${h.slug}/`} class="hover:text-hazard-600">{h.label} chainsaws</a></li>))}
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-heading font-bold text-graphite-900 mb-3">Guides</h3>
+      <ul class="space-y-2 text-steel-600">
+        {GUIDE_LINKS.map((g) => (<li><a href={`/${g.slug}/`} class="hover:text-hazard-600">{g.label}</a></li>))}
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-heading font-bold text-graphite-900 mb-3">Safety</h3>
+      <ul class="space-y-2 text-steel-600">
+        <li><a href={`/${SAFETY_LINK.slug}/`} class="hover:text-hazard-600">{SAFETY_LINK.label}</a></li>
+        <li class="text-xs text-steel-400">EN381 PPE: chain-brake, gloves, leg protection, eye and ear protection.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-heading font-bold text-graphite-900 mb-3">{SITE.name}</h3>
+      <ul class="space-y-2 text-steel-600">
+        <li><a href="/about/" class="hover:text-hazard-600">About + how we research</a></li>
+        <li><a href="/about/#affiliate-disclosure" class="hover:text-hazard-600">Affiliate disclosure</a></li>
+        <li><a href={`mailto:${SITE.email}`} class="hover:text-hazard-600">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <HazardTape text="EN381 rated PPE is recommended whenever you operate a chainsaw, whichever saw you choose." />
+  <div class="border-t border-steel-200 py-6 text-center text-xs text-steel-600 bg-surface-50">
+    &copy; {new Date().getFullYear()} {SITE.publisher}. Independent guides, we may earn a commission on qualifying purchases.
+  </div>
+</footer>

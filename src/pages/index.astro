@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FitCheck from '../components/FitCheck.astro';
+import HowWeResearch from '../components/HowWeResearch.astro';
+import FAQ from '../components/FAQ.astro';
+import { personSchema, webApplicationSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+
+// orgSchema/websiteSchema/speakableSchema are already injected globally by BaseLayout.
+const title = 'Best Chainsaw UK - Independent Chainsaw Buying Guides & Fit Check';
+const description = 'Independent UK chainsaw buying guides, research-led from manufacturer specs, verified owner reviews and HSE/EN381 safety standards, plus a free Fit Check tool that matches your task to the right saw.';
+
+const hubs = [
+  { slug: 'electric-chainsaws', label: 'Electric chainsaws', tagline: 'Corded, mains-powered. The cheapest, lightest way to cut near a power source.' },
+  { slug: 'cordless-chainsaws', label: 'Cordless chainsaws', tagline: 'Battery-powered. No cable, no fuel, the default choice for most UK gardens now.' },
+  { slug: 'petrol-chainsaws', label: 'Petrol chainsaws', tagline: 'For felling, thick rounds and all-day cutting away from power.' },
+];
+
+// TODO(content agent): replace with real, sourced FAQs once wave-1 content lands.
+const faqs: { q: string; a: string }[] = [];
+
+const schema = [
+  personSchema(),
+  webApplicationSchema({
+    name: 'Chainsaw Fit Check',
+    description: 'Free rule-based tool that matches a cutting task, branch diameter and experience level to a recommended chainsaw power type, bar length and PPE tier.',
+    url: '/#fit-check',
+  }),
+  itemListSchema({
+    name: 'Chainsaw power types',
+    url: '/',
+    items: hubs.map((h, i) => ({ name: h.label, url: `/${h.slug}/`, position: i + 1 })),
+  }),
+  faqSchema(faqs),
+  breadcrumbSchema([{ name: 'Home', url: '/' }]),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <FitCheck />
+
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-8 text-center font-heading">Browse by power type</h2>
+    <div class="grid sm:grid-cols-3 gap-5">
+      {hubs.map((h) => (
+        <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-graphite-900 group-hover:text-hazard-600 mb-2 font-heading">{h.label}</h3>
+          <p class="text-steel-600 text-sm leading-relaxed">{h.tagline}</p>
+          <span class="inline-block mt-4 text-hazard-600 font-semibold text-sm">Read the guide →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-surface-100 border-y border-steel-200 py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-8 text-center font-heading">More guides</h2>
+      <div class="grid sm:grid-cols-3 gap-5 text-center">
+        <a href="/chainsaw-safety/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Chainsaw safety</strong><span class="block mt-1 text-sm text-steel-600">EN381 PPE and safe technique</span></a>
+        <a href="/first-chainsaw/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Your first chainsaw</strong><span class="block mt-1 text-sm text-steel-600">What to buy as a beginner</span></a>
+        <a href="/chainsaw-for-firewood/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Chainsaws for firewood</strong><span class="block mt-1 text-sm text-steel-600">Best picks for processing logs</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 py-16">
+    <HowWeResearch />
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4">
+    <FAQ {faqs} />
+  </div>
+
+  <!-- TODO(content agent): flesh out homepage with real editorial content, hero copy refinement and sourced FAQs. -->
+</BaseLayout>

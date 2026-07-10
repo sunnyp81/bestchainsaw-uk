@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import { articleSchema, faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Buying Your First Chainsaw: A Beginner’s Guide (UK)';
+const description = 'What a first-time chainsaw buyer in the UK actually needs to know: power type, safety features, training and the mistakes beginners make.';
+const datePublished = '2026-07-10';
+const url = '/first-chainsaw/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Your first chainsaw', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs.
+const faqs: { q: string; a: string }[] = [];
+// TODO(content agent): populate with real ranked beginner picks once sourced; itemListSchema activates automatically.
+const picks: { name: string; url: string }[] = [];
+
+const schema = [
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  faqSchema(faqs),
+  ...(picks.length ? [itemListSchema({ name: 'Best first chainsaws for beginners UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Beginners</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Buying your first chainsaw</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      A first chainsaw should be forgiving, not powerful. This guide covers the power type,
+      safety features and (genuinely important) training that make a beginner's first saw a safe
+      one, not just a cheap one.
+    </p>
+    <Disclosure />
+
+    <!-- TODO(content agent): full guide prose, PickCard beginner picks, sourced FAQs. -->
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <HowWeResearch />
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

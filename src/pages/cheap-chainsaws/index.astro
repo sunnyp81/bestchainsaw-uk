@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Best Cheap Chainsaws UK 2026 - Budget Picks That Are Still Safe';
+const description = 'Independent, research-led guide to the best cheap chainsaws in the UK: where it is safe to save money and where it is not, with budget picks across electric, cordless and petrol.';
+const datePublished = '2026-07-10';
+const url = '/cheap-chainsaws/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Cheap chainsaws', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs.
+const faqs: { q: string; a: string }[] = [];
+// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
+const picks: { name: string; url: string }[] = [];
+
+const schema = [
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  ...(picks.length ? [itemListSchema({ name: 'Best cheap chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Budget picks</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best cheap chainsaws that are still safe to use</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      A cheap chainsaw is only a good buy if it still has a working chain brake and real safety
+      features. This guide covers where you can genuinely save money and where cutting corners is
+      dangerous, with budget picks across electric, cordless and petrol.
+    </p>
+    <Disclosure />
+
+    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <HowWeResearch />
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

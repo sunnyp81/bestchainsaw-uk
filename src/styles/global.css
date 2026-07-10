@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: 'Archivo', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Primary/CTA. Supporting 50/100/400/700 tints derived for hover/bg/border use. */
+  --color-hazard-50:  #FEF1EA;
+  --color-hazard-100: #FCDFCF;
+  --color-hazard-400: #F47A3D;
+  --color-hazard-500: #F1580F;
+  --color-hazard-600: #C8460B;
+  --color-hazard-700: #9C3608;
+
+  /* Sparing accent: PPE / warning band only, never decorative filler. */
+  --color-hivis-300: #F7DE59;
+  --color-hivis-400: #F4D000;
+  --color-hivis-500: #D9B800;
+
+  --color-graphite-700: #2B2F33;
+  --color-graphite-800: #23262A;
+  --color-graphite-900: #1B1E21;
+
+  --color-steel-200: #D6DADD;
+  --color-steel-400: #8A9299;
+  --color-steel-600: #4A5259;
+
+  --color-surface-50:  #F5F5F4;
+  --color-surface-100: #ECECEA;
+
+  /* Kickback/safety callouts ONLY, never decorative. */
+  --color-danger-600: #C1121F;
+  --color-danger-700: #970E18;
+}
+
+html { scroll-behavior: smooth; }
+:focus-visible { outline: 2px solid var(--color-hazard-600); outline-offset: 2px; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-graphite-900);
+  background: var(--color-surface-50);
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); }
+.font-mono-spec { font-family: var(--font-mono); }
+
+/* Hazard tape band: CSS-only diagonal orange/black stripe motif framing a solid
+   graphite bar. Carries the EN381/PPE or a general safety callout line. Usable
+   once per page (see components/HazardTape.astro). */
+.hazard-tape {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-hazard-500) 0px,
+    var(--color-hazard-500) 22px,
+    var(--color-graphite-900) 22px,
+    var(--color-graphite-900) 44px
+  );
+}
+.hazard-tape-inner {
+  @apply mx-auto max-w-6xl bg-graphite-900 text-hivis-400 text-center text-sm md:text-base font-semibold uppercase tracking-wide px-4 py-2 rounded;
+}
+
+.prose-chainsaw h2 { @apply text-2xl md:text-3xl font-bold mt-12 mb-4 text-graphite-900 scroll-mt-24 font-heading; }
+.prose-chainsaw h3 { @apply text-xl md:text-2xl font-semibold mt-8 mb-3 text-graphite-900 font-heading; }
+.prose-chainsaw p  { @apply text-base md:text-lg leading-relaxed mb-4 text-steel-600; }
+.prose-chainsaw ul { @apply list-disc pl-6 mb-4 text-steel-600 space-y-1; }
+.prose-chainsaw ol { @apply list-decimal pl-6 mb-4 text-steel-600 space-y-1; }
+.prose-chainsaw a  { @apply text-hazard-600 underline underline-offset-2 hover:text-hazard-700; }
+.prose-chainsaw table { @apply w-full text-sm border-collapse my-6; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (min-width: 768px) { .prose-chainsaw table { display: table; overflow-x: visible; } }
+.prose-chainsaw th { @apply text-left px-3 py-2 bg-hazard-50 border border-steel-200 font-semibold; }
+.prose-chainsaw td { @apply px-3 py-2 border border-steel-200 align-top; }
+/* Opt-in for numeric spec cells (bar length, cc, voltage, price) inside a table, e.g. <td class="font-mono-spec">. */
+.prose-chainsaw blockquote { @apply border-l-4 border-hazard-400 bg-hazard-50 rounded-r-lg px-5 py-4 my-6 italic text-steel-600; }
+.prose-chainsaw blockquote p { @apply mb-1; }
+.prose-chainsaw blockquote cite { @apply not-italic text-xs text-steel-400 block mt-1; }

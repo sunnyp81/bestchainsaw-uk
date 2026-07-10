@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Best Electric Chainsaws UK 2026 - Corded Buying Guide';
+const description = 'Independent, research-led guide to the best corded electric chainsaws for UK gardens: who they suit, bar length, safety features and how they compare to cordless and petrol.';
+const datePublished = '2026-07-10';
+const url = '/electric-chainsaws/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Electric chainsaws', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs.
+const faqs: { q: string; a: string }[] = [];
+// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
+const picks: { name: string; url: string }[] = [];
+
+const schema = [
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  ...(picks.length ? [itemListSchema({ name: 'Best electric chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Electric chainsaws</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best electric chainsaws for UK gardens</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      Corded electric chainsaws are the cheapest, lightest way into a first saw, provided you are
+      working within reach of a socket. This guide covers who they suit, typical bar lengths and
+      specs, and how they stack up against cordless and petrol.
+    </p>
+    <Disclosure />
+
+    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <HowWeResearch />
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

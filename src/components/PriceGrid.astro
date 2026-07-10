@@ -1,0 +1,59 @@
+---
+// 5-retailer price comparison table (part of the core USP). Amazon always has a
+// buy path via a tagged search-link fallback; every other retailer column is
+// OMITTED ENTIRELY unless a real URL is supplied - never fabricate a price or a
+// product URL for a retailer we have not actually checked.
+import { AFFILIATE_REL, amazonSearch } from '../lib/affiliate';
+
+interface RetailerLink { url?: string; price?: string }
+interface Props {
+  model: string;
+  amazon?: RetailerLink;
+  screwfix?: RetailerLink;
+  toolstation?: RetailerLink;
+  bq?: RetailerLink;
+  manomano?: RetailerLink;
+}
+const { model, amazon, screwfix, toolstation, bq, manomano } = Astro.props as Props;
+
+const RETAILER_REL = 'nofollow sponsored noopener noreferrer';
+
+const candidates = [
+  { name: 'Amazon UK', url: amazon?.url || amazonSearch(model), price: amazon?.price, rel: AFFILIATE_REL, isFallback: !amazon?.url },
+  toolstation?.url ? { name: 'Toolstation', url: toolstation.url, price: toolstation.price, rel: RETAILER_REL, isFallback: false } : null,
+  screwfix?.url ? { name: 'Screwfix', url: screwfix.url, price: screwfix.price, rel: RETAILER_REL, isFallback: false } : null,
+  bq?.url ? { name: 'B&Q', url: bq.url, price: bq.price, rel: RETAILER_REL, isFallback: false } : null,
+  manomano?.url ? { name: 'ManoMano', url: manomano.url, price: manomano.price, rel: RETAILER_REL, isFallback: false } : null,
+];
+const retailers = candidates.filter((r): r is NonNullable<typeof r> => r !== null);
+---
+<div class="my-8 border border-steel-200 rounded-xl overflow-hidden bg-white">
+  <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 text-sm font-semibold font-heading">
+    Where to buy: {model}
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="bg-surface-100 text-left">
+          <th class="px-4 py-2 font-semibold text-graphite-900">Retailer</th>
+          <th class="px-4 py-2 font-semibold text-graphite-900">Price</th>
+          <th class="px-4 py-2"><span class="sr-only">Buy link</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {retailers.map((r) => (
+          <tr class="border-t border-steel-200">
+            <td class="px-4 py-3 font-medium text-graphite-900">{r.name}</td>
+            <td class="px-4 py-3 font-mono-spec text-graphite-900">{r.price ?? 'Check price'}</td>
+            <td class="px-4 py-3 text-right">
+              <a href={r.url} rel={r.rel} target="_blank" class="inline-block bg-hazard-500 hover:bg-hivis-400 text-graphite-900 text-xs font-bold px-3 py-1.5 rounded min-h-[36px]">
+                {r.isFallback ? 'Search on Amazon' : 'View deal'} →
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="px-4 py-2 text-xs text-steel-400 border-t border-steel-200">Prices and stock change often. We link out and let the retailer show the live price rather than quoting a figure that can go stale.</p>
+</div>

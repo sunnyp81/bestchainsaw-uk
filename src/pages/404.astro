@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page Not Found - Best Chainsaw UK';
+const description = 'That page has moved or no longer exists. Start from our power-type guides, safety hub or the Fit Check tool.';
+---
+<BaseLayout {title} {description} noindex={true}>
+  <article class="max-w-4xl mx-auto px-4 py-16 text-center">
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">404</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">This page has moved or no longer exists</h1>
+    <p class="mt-4 text-lg text-steel-600 leading-relaxed">
+      Try the Fit Check tool on the homepage, or one of the guides below.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 text-left">
+      <a href="/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">Chainsaw Fit Check</strong><span class="block mt-1 text-sm text-steel-600">Match your task to a bar length and power type</span></a>
+      <a href="/electric-chainsaws/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">Electric chainsaws</strong><span class="block mt-1 text-sm text-steel-600">Corded picks for UK gardens</span></a>
+      <a href="/cordless-chainsaws/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">Cordless chainsaws</strong><span class="block mt-1 text-sm text-steel-600">Battery picks and voltage guide</span></a>
+      <a href="/petrol-chainsaws/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">Petrol chainsaws</strong><span class="block mt-1 text-sm text-steel-600">Felling and all-day cutting</span></a>
+      <a href="/chainsaw-safety/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">Chainsaw safety</strong><span class="block mt-1 text-sm text-steel-600">EN381 PPE and safe technique</span></a>
+      <a href="/about/" class="block rounded-xl border border-steel-200 p-5 hover:border-hazard-500 transition-colors"><strong class="text-graphite-900 font-heading">About</strong><span class="block mt-1 text-sm text-steel-600">Who writes Best Chainsaw and how we research</span></a>
+    </div>
+    <p class="mt-10 text-steel-600">Or head back to the <a href="/" class="text-hazard-600 font-semibold underline">homepage</a>.</p>
+  </article>
+</BaseLayout>

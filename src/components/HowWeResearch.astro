@@ -1,0 +1,23 @@
+---
+// Honest E-E-A-T methodology block. We are research-led, not a test lab, and we
+// never claim hands-on/staged testing anywhere on this site (see repo CLAUDE.md).
+interface Props { heading?: string }
+const { heading = 'How we choose' } = Astro.props as Props;
+---
+<section class="my-10 rounded-xl border border-steel-200 bg-surface-100 p-5 md:p-6">
+  <h2 class="text-xl md:text-2xl font-bold text-graphite-900 mb-3 font-heading">{heading}</h2>
+  <p class="text-steel-600 leading-relaxed mb-3">
+    We do not run a test lab and we do not stage saws cutting logs for a camera. Best Chainsaw is
+    research led: recommendations are built from published manufacturer specifications, verified
+    owner and community reviews (Arbtalk, forums, Amazon UK and retailer reviews), UK retail
+    pricing, and HSE/EN381 safety standards, cross-checked so the numbers on this page match the
+    numbers on the box. Where a figure is the maker's claim rather than an independently measured
+    result, we say so.
+  </p>
+  <p class="text-steel-600 leading-relaxed">
+    Rankings weigh bar length and power for the task, safety features, build and value at UK
+    prices. We update picks when models are discontinued or superseded. We earn affiliate
+    commission on some links, but it never decides the order of a list.
+    <a href="/about/" class="text-hazard-600 underline underline-offset-2">More on our method</a>.
+  </p>
+</section>

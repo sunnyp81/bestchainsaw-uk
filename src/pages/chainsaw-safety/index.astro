@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FAQ from '../../components/FAQ.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Chainsaw Safety UK: EN381 PPE, Kickback and Safe Technique';
+const description = 'HSE and EN381-aligned chainsaw safety for UK users: required PPE tiers, kickback risk, safe technique and when you legally need training.';
+const datePublished = '2026-07-10';
+const url = '/chainsaw-safety/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Chainsaw safety', url },
+];
+
+// TODO(content agent): replace with real, sourced FAQs, citing HSE/EN381 documents directly.
+const faqs: { q: string; a: string }[] = [];
+
+const schema = [
+  articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Safety</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw safety: PPE, kickback and technique</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      Every chainsaw, whatever the power type, carries kickback risk. This guide covers the
+      EN381 PPE tiers, HSE guidance on safe technique, and when UK law or common sense means you
+      need proper training before you cut.
+    </p>
+
+    <div class="my-8">
+      <HazardTape />
+    </div>
+
+    <!-- TODO(content agent): full safety guide prose (kickback mechanics, PPE tiers by class, HSE training/legal
+         references, chain brake maintenance), citing HSE/EN381 sources directly. Sourced FAQs. -->
+    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    </div>
+
+    <FAQ {faqs} />
+  </article>
+</BaseLayout>

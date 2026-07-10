@@ -1,0 +1,7 @@
+<!-- MANUAL: replace with final favicon to match the finished logo. Lean placeholder:
+     graphite square, orange diagonal stripe (echoes the hazard-tape motif). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Best Chainsaw">
+  <rect width="32" height="32" rx="6" fill="#1B1E21"/>
+  <path d="M4 22L22 4" stroke="#F1580F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M10 26L26 10" stroke="#F4D000" stroke-width="3" stroke-linecap="round"/>
+</svg>

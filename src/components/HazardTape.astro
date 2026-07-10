@@ -1,0 +1,11 @@
+---
+// Reusable "hazard tape" safety band: CSS-only diagonal orange/black stripe
+// motif (see .hazard-tape in global.css) framing a solid graphite bar. This is
+// the site's one distinctive visual move - use it once per page to carry the
+// EN381/PPE note or a general safety callout line. Do not use decoratively.
+interface Props { text?: string }
+const { text = 'Always wear EN381 rated PPE: chain-brake, gloves, leg protection, eye and ear protection.' } = Astro.props as Props;
+---
+<div class="hazard-tape p-1.5 md:p-2" role="note">
+  <p class="hazard-tape-inner">{text}</p>
+</div>

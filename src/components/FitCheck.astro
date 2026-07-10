@@ -1,0 +1,124 @@
+---
+// Homepage hero: deterministic, rule-based decision tool. Client-side only, no
+// backend/API call. Always shows the EN381 PPE tier note regardless of inputs.
+import HazardTape from './HazardTape.astro';
+---
+<section id="fit-check" class="bg-graphite-900 text-surface-50">
+  <div class="max-w-4xl mx-auto px-4 py-14 md:py-20">
+    <p class="text-sm font-semibold text-hivis-400 uppercase tracking-wide mb-3 font-heading">Free tool</p>
+    <h1 class="text-3xl md:text-5xl font-bold font-heading leading-tight">Chainsaw Fit Check</h1>
+    <p class="mt-4 text-base md:text-lg text-steel-200 max-w-2xl leading-relaxed">
+      Answer three questions and we will match your task to a sensible bar length and power
+      type, plus the PPE you need whatever you buy. Rule-based, not a sales quiz - no specific
+      saw is recommended by name.
+    </p>
+
+    <form id="fit-check-form" class="mt-8 bg-graphite-800 border border-graphite-700 rounded-xl p-5 md:p-6 grid gap-5 sm:grid-cols-3" novalidate>
+      <div>
+        <label for="fc-task" class="block text-sm font-medium text-surface-50 mb-1.5">What are you cutting?</label>
+        <select id="fc-task" name="task" required class="w-full rounded-md border border-steel-400 bg-graphite-900 text-surface-50 px-3 py-2.5 text-sm focus:border-hazard-500 focus:ring-2 focus:ring-hazard-500">
+          <option value="pruning">Pruning</option>
+          <option value="firewood">Small logs &amp; firewood</option>
+          <option value="felling">Garden felling</option>
+          <option value="hedge">Hedge &amp; branch clearance</option>
+        </select>
+      </div>
+      <div>
+        <label for="fc-diameter" class="block text-sm font-medium text-surface-50 mb-1.5">Trunk/branch diameter (cm)</label>
+        <input id="fc-diameter" name="diameter" type="number" inputmode="numeric" min="1" max="150" step="1" required value="20" class="w-full rounded-md border border-steel-400 bg-graphite-900 text-surface-50 px-3 py-2.5 text-sm font-mono-spec focus:border-hazard-500 focus:ring-2 focus:ring-hazard-500" />
+      </div>
+      <div>
+        <label for="fc-experience" class="block text-sm font-medium text-surface-50 mb-1.5">Experience level</label>
+        <select id="fc-experience" name="experience" required class="w-full rounded-md border border-steel-400 bg-graphite-900 text-surface-50 px-3 py-2.5 text-sm focus:border-hazard-500 focus:ring-2 focus:ring-hazard-500">
+          <option value="beginner">Beginner</option>
+          <option value="some-experience">Some experience</option>
+          <option value="experienced">Experienced</option>
+        </select>
+      </div>
+      <div class="sm:col-span-3">
+        <button type="submit" class="w-full sm:w-auto bg-hazard-500 hover:bg-hivis-400 text-graphite-900 font-bold px-6 py-3 rounded-md min-h-[44px]">Get my recommendation</button>
+      </div>
+    </form>
+
+    <div id="fit-check-result" class="mt-6" aria-live="polite"></div>
+
+    <div class="mt-8">
+      <HazardTape text="Always wear EN381 rated PPE: chain-brake, gloves, leg protection, eye and ear protection, whichever saw you choose." />
+    </div>
+  </div>
+</section>
+
+<script>
+  // Deterministic rule-based fit logic - no AI/API call. Task overrides on the
+  // heavy end (felling), diameter overrides on the light end (anything >25cm is
+  // treated as heavy regardless of stated task, for basic user-input safety).
+  function recommend(task, diameterCm, experience) {
+    var isHeavy = task === 'felling' || diameterCm > 25;
+    var isMedium = !isHeavy && (task === 'firewood' || diameterCm >= 15);
+
+    var powerType, reasoning, barRange, pageHref, pageLabel;
+
+    if (isHeavy) {
+      powerType = 'Petrol, 45cc or larger';
+      barRange = '16 to 18 inch';
+      reasoning = 'Felling and stems over 25cm need the sustained torque, chain speed and run time that only a 45cc+ petrol saw gives you. Battery and mains saws bog down or overheat on cuts this size.';
+      pageHref = '/petrol-chainsaws/';
+      pageLabel = 'Petrol chainsaws guide';
+    } else if (isMedium) {
+      if (experience === 'beginner') {
+        powerType = '36 to 40V cordless battery';
+        reasoning = 'Firewood sized rounds up to 25cm are within a 36 to 40V battery saw\'s capability, and the auto-off chain brake plus lower kickback energy make it the safer starting point than petrol.';
+      } else {
+        powerType = '36 to 40V cordless battery, or a small petrol saw';
+        reasoning = 'At 15 to 25cm you have a genuine choice: a 36 to 40V battery saw for quiet, low-fuss firewood processing, or a small petrol saw if you are cutting all day and would rather swap fuel than batteries.';
+      }
+      barRange = '14 to 16 inch';
+      pageHref = '/cordless-chainsaws/';
+      pageLabel = 'Cordless chainsaws guide';
+    } else {
+      powerType = experience === 'beginner' ? 'Corded electric' : 'Corded electric, or 18 to 36V cordless';
+      reasoning = 'Pruning, hedges and branches under 15cm do not need petrol power. A corded electric saw is the cheapest, lightest and quietest option near a power source; an 18 to 36V cordless gives the same light duty performance with no cable.';
+      barRange = '12 to 14 inch';
+      pageHref = '/electric-chainsaws/';
+      pageLabel = 'Electric chainsaws guide';
+    }
+
+    return { powerType: powerType, reasoning: reasoning, barRange: barRange, pageHref: pageHref, pageLabel: pageLabel };
+  }
+
+  var form = document.getElementById('fit-check-form');
+  var result = document.getElementById('fit-check-result');
+
+  function render() {
+    if (!form || !result) return;
+    var data = new FormData(form);
+    var task = String(data.get('task') || 'pruning');
+    var diameter = Number(data.get('diameter')) || 0;
+    var experience = String(data.get('experience') || 'beginner');
+    var rec = recommend(task, diameter, experience);
+
+    result.innerHTML =
+      '<div class="bg-surface-50 text-graphite-900 border-2 border-hazard-500 rounded-xl p-5 md:p-6">' +
+        '<p class="text-xs font-bold uppercase tracking-wide text-hazard-600 mb-2">Your fit check result</p>' +
+        '<dl class="grid sm:grid-cols-2 gap-4 mb-4">' +
+          '<div><dt class="text-xs uppercase tracking-wide text-steel-400 mb-0.5">Recommended power type</dt><dd class="font-heading font-bold text-lg">' + rec.powerType + '</dd></div>' +
+          '<div><dt class="text-xs uppercase tracking-wide text-steel-400 mb-0.5">Recommended bar length</dt><dd class="font-mono-spec font-bold text-lg">' + rec.barRange + '</dd></div>' +
+        '</dl>' +
+        '<p class="text-sm leading-relaxed text-steel-600 mb-4">' + rec.reasoning + '</p>' +
+        '<p class="text-sm leading-relaxed text-graphite-900 bg-hivis-300/40 border border-hivis-500 rounded-md px-3 py-2 mb-4">' +
+          '<strong>EN381 PPE, every time:</strong> chain-brake, cut-resistant gloves, leg protection (Class 1 minimum), and eye and ear protection. This applies whichever saw you buy.' +
+        '</p>' +
+        '<a href="' + rec.pageHref + '" class="inline-flex items-center gap-1 text-sm font-bold text-hazard-600 hover:text-hazard-700 underline underline-offset-2">Read the ' + rec.pageLabel + ' →</a>' +
+      '</div>';
+  }
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      render();
+    });
+  }
+
+  // Show a result immediately using the default field values, so the tool isn't empty on load.
+  render();
+</script>

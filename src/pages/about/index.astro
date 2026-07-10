@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import { personSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../lib/site';
+
+const title = 'About Best Chainsaw - Who We Are and How We Research';
+const description = 'Best Chainsaw is written and researched by Sunny Patel from manufacturer specs, verified owner reviews and HSE/EN381 safety standards. No staged testing claims.';
+const url = '/about/';
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'About', url },
+];
+
+// Organization (full) is already injected globally by BaseLayout's orgSchema() call
+// (now wired with founder + knowsAbout). This page adds the Person entity and its
+// own breadcrumb.
+const schema = [
+  personSchema(),
+  breadcrumbSchema(crumbs),
+].filter(Boolean);
+---
+<BaseLayout {title} {description} {schema}>
+  <article class="max-w-3xl mx-auto px-4 py-10">
+    <Breadcrumbs items={crumbs} />
+    <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">About</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">About Best Chainsaw</h1>
+    <p class="mt-5 text-lg text-steel-600 leading-relaxed">
+      Best Chainsaw is an independent UK buying-guide site, written and researched by
+      {SITE.editor}. We are not a test lab and do not claim hands-on or staged testing anywhere
+      on this site: recommendations are built from published manufacturer specifications,
+      verified owner and community reviews (Arbtalk and other forums, Amazon UK and retailer
+      reviews), UK retail pricing, and HSE/EN381 safety standards.
+    </p>
+
+    <!-- TODO(content agent): full About prose (site mission, editorial standards, correction policy). -->
+    <div class="my-10 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
+      Placeholder shell. Full About page content pending.
+    </div>
+
+    <HowWeResearch heading="How we research" />
+
+    <section id="affiliate-disclosure" class="scroll-mt-24 my-10">
+      <h2 class="text-xl md:text-2xl font-bold text-graphite-900 mb-3 font-heading">Affiliate disclosure</h2>
+      <p class="text-steel-600 leading-relaxed mb-3">
+        Best Chainsaw is reader-supported. Some links on this site are Amazon UK affiliate links
+        (tag <code class="font-mono-spec text-sm">chainsaw0f6-21</code>), and if you buy through
+        one we may earn a commission, at no extra cost to you. Commission never decides which
+        product ranks first; our picks are set before any link is added.
+      </p>
+      <Disclosure />
+    </section>
+
+    <!-- MANUAL: SITE.sameAs is intentionally empty until real, verified profiles (Companies
+         House / Trustpilot / socials) exist. Do not fabricate. -->
+  </article>
+</BaseLayout>
