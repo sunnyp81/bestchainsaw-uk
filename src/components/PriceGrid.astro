@@ -35,14 +35,14 @@ const retailers = candidates.filter((r): r is NonNullable<typeof r> => r !== nul
     <table class="w-full text-sm">
       <thead>
         <tr class="bg-surface-100 text-left">
-          <th class="px-4 py-2 font-semibold text-graphite-900">Retailer</th>
-          <th class="px-4 py-2 font-semibold text-graphite-900">Price</th>
-          <th class="px-4 py-2"><span class="sr-only">Buy link</span></th>
+          <th scope="col" class="px-4 py-2 font-semibold text-graphite-900 text-xs uppercase tracking-wide">Retailer</th>
+          <th scope="col" class="px-4 py-2 font-semibold text-graphite-900 text-xs uppercase tracking-wide">Price</th>
+          <th scope="col" class="px-4 py-2"><span class="sr-only">Buy link</span></th>
         </tr>
       </thead>
       <tbody>
         {retailers.map((r) => (
-          <tr class="border-t border-steel-200">
+          <tr class="border-t border-steel-200 hover:bg-surface-100">
             <td class="px-4 py-3 font-medium text-graphite-900">{r.name}</td>
             <td class="px-4 py-3 font-mono-spec text-graphite-900">{r.price ?? 'Check price'}</td>
             <td class="px-4 py-3 text-right">

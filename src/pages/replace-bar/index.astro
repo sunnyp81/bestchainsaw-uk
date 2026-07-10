@@ -3,11 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import HazardTape from '../../components/HazardTape.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, howToSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-// This exact slug (/replace-bar/) has real earnings history - do not rename or redirect it away.
-const title = 'How to Replace a Chainsaw Bar (Step by Step, UK)';
-const description = 'A step-by-step guide to replacing a chainsaw guide bar safely, including how to pick the right replacement bar and what to check before you cut again.';
+// This exact slug (/replace-bar/) has real earnings history from the 2019 site - do not
+// rename or redirect it away. It also absorbs /electric-sharpener-reviews-top-3/'s intent
+// (sharpening), which 301s here; the sharpening section below covers that query.
+const title = 'How to Replace a Chainsaw Bar and Chain (UK Guide)';
+const description = 'Replace a chainsaw bar and chain safely in about ten minutes: fitting, correct tensioning, and how to keep the chain cutting cleanly between changes.';
 const datePublished = '2026-07-10';
 const url = '/replace-bar/';
 
@@ -16,10 +20,59 @@ const crumbs = [
   { name: 'How to replace a bar', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real, verified steps; howToSchema activates automatically.
-const steps: { name: string; text: string }[] = [];
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'How do I know if my chainsaw chain needs replacing?',
+    a: 'Look for stretched links that will not hold tension, cutters that are chipped or worn back so far that sharpening no longer restores a clean bite, cracked or bent drive links, or depth gauges filed level with the cutters. It is time for a new chain, not another file pass, once a fresh sharpen no longer helps or it keeps coming loose soon after tensioning.',
+  },
+  {
+    q: 'Which way does a chainsaw chain go on?',
+    a: 'The cutters, the hook-shaped teeth, must face forward along the top of the bar, angled towards the tip, in the direction the chain travels when cutting. Fit it backwards and the saw will judder against the wood instead of biting into it. Most new chains also have a directional arrow stamped into the drive links so you can check which way round they go before you fit them.',
+  },
+  {
+    q: 'How tight should a chainsaw chain be?',
+    a: 'A properly tensioned chain sits snug against the underside of the bar but still lifts a few millimetres, around 3mm, when pulled gently away by hand, and pulls round the bar smoothly with no binding. Treat that as a rough guide only. Exact tension specs vary between saw models, so check the manual or Stihl UK and Husqvarna UK official guidance for the precise figure on your saw, particularly on newer tool-less tensioning systems.',
+  },
+  {
+    q: 'What oil should I use for the bar and chain?',
+    a: 'Use a proper bar and chain oil, not old engine oil or a general-purpose lubricant. It needs to cling to a moving chain rather than fling off. Stihl and Husqvarna both sell their own UK bar oils. A biodegradable option is worth the small extra cost if you are cutting near soil, water or livestock, since some of it always ends up on the ground either way.',
+  },
+];
+
+const steps: { name: string; text: string }[] = [
+  {
+    name: 'Make it safe',
+    text: "Switch the saw off and let it cool if you've been running it, remove the battery or the spark plug lead so it cannot start, and put on cut-resistant gloves before you touch the bar or chain.",
+  },
+  {
+    name: 'Release the chain brake and open the side cover',
+    text: 'Push the front hand guard forward to release the chain brake, then use the combination tool that came with your saw to loosen and remove the nuts holding the side cover in place.',
+  },
+  {
+    name: 'Remove the old bar and chain',
+    text: 'Lift the side cover away, slide the worn bar forward off the bar studs to free it from the tensioning pin, then lift the bar and chain off together and set the old chain aside.',
+  },
+  {
+    name: 'Fit the new bar and chain',
+    text: "Slide the new bar onto the bar studs. Loop the new chain around the drive sprocket first, then feed it into the bar's guide groove, keeping the cutters facing forward along the top of the bar, not backward.",
+  },
+  {
+    name: 'Refit the side cover loosely',
+    text: 'Put the side cover back on and start the retaining nuts by hand. Leave them loose for now. The bar still needs to move freely for the next step.',
+  },
+  {
+    name: 'Tension the chain',
+    text: 'Turn the tensioning screw, or the adjuster wheel on tool-less models, until the chain sits snug against the underside of the bar. A correctly tensioned chain lifts roughly 3mm off the bar when pulled gently by hand and still turns freely with no binding.',
+  },
+  {
+    name: 'Tighten the side-cover nuts fully',
+    text: 'Hold the bar tip up, tighten the side-cover nuts fully with the saw\'s tool, then check once more that the chain still pulls round the bar by hand without binding.',
+  },
+  {
+    name: 'Check the chain oil before you cut',
+    text: 'Top up the chain oil reservoir if it is low. A new chain and bar groove need lubrication from the very first cut. Never run a freshly fitted chain dry.',
+  },
+];
 
 const schema = [
   ...(steps.length ? [howToSchema({ name: title, description, steps })] : []),
@@ -32,22 +85,102 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Maintenance</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">How to replace a chainsaw bar</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">How to replace a chainsaw bar and chain (UK guide)</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      A worn, bent or wrong-length bar is a common reason a saw stops cutting straight. This
-      guide covers picking the right replacement and swapping it safely, step by step.
+      Replacing a chainsaw bar and chain takes about ten minutes if you go in order: release the
+      chain brake, remove the side-cover nuts, fit the new chain with the top cutters facing
+      forward along the top of the bar, then tension it so it sits snug against the bar but still
+      turns by hand. Get those steps right and the saw is ready to cut again straight away.
     </p>
+    <ReviewedStamp date={datePublished} />
 
     <div class="my-8">
-      <HazardTape text="Chain off, saw off, gloves on: always disconnect the battery or spark plug lead before touching the bar or chain." />
+      <HazardTape text="Chain off, saw off, cool, gloves on: always remove the battery or spark plug lead before touching the bar or chain. See our full chainsaw safety guide for PPE and kickback risk." />
     </div>
 
-    <!-- TODO(content agent): full step-by-step prose with real, verified steps (populate the steps array above
-         so howToSchema emits), sizing/tensioning guidance, sourced FAQs. Keep this exact slug live. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw">
+      <h2>What you will need</h2>
+      <p>Gather these five things before you start. None of it is specialist kit.</p>
+      <ul>
+        <li>A replacement bar and chain matched to your saw, same pitch, gauge and drive link count as the original (check the old bar or your saw's manual, not just the bar length)</li>
+        <li>Cut-resistant gloves</li>
+        <li>The combination tool or spanner/screwdriver that came with your saw</li>
+        <li>Bar and chain oil, topped up and ready</li>
+        <li>A flat, stable surface to work on</li>
+      </ul>
+      <p>
+        Our <a href="/#fit-check">Fit Check tool</a> matches a task to the right power type, bar
+        length and PPE tier for anyone still deciding what to buy rather than replace.
+      </p>
+
+      <h2>How to replace a chainsaw bar and chain</h2>
+      <p>
+        Work through these steps in order. The whole job is mechanical, not fiddly, and most of
+        it is just making sure the chain goes on the right way round and comes out tensioned
+        correctly.
+      </p>
+      <ol>
+        {steps.map((s) => (
+          <li><strong>{s.name}.</strong> {s.text}</li>
+        ))}
+      </ol>
+
+      <h2>Chain tensioning: how tight is right</h2>
+      <p>
+        Tension is the step most people get wrong, in both directions. A chain that is too loose
+        can jump the bar or derail mid-cut. A chain that is too tight drags, wears the bar groove
+        and drive sprocket faster, and puts extra load on the clutch and chain brake.
+      </p>
+      <p>
+        A properly tensioned chain sits close against the underside of the bar but still lifts a
+        few millimetres, roughly 3mm, when you pull it gently away by hand, and it pulls round
+        the full length of the bar smoothly with no tight spots. Treat that 3mm lift as a working
+        rule, not an exact spec. Exact tension specifications vary by saw model, especially
+        between older screw-tensioned bars and newer tool-less systems. Check the manual or the
+        manufacturer's own guidance for the precise figure on your saw, for example
+        <a href="https://www.stihl.co.uk/" target="_blank" rel="noopener noreferrer">Stihl UK</a>
+        or <a href="https://www.husqvarna.com/uk/" target="_blank" rel="noopener noreferrer">Husqvarna UK</a>,
+        the authoritative source for your exact model.
+      </p>
+      <p>
+        A new chain also stretches slightly in its first few cuts as it beds in. Check tension
+        again after the first tank of fuel or first battery charge, and retighten if it has gone
+        slack.
+      </p>
+
+      <h2>Keeping the chain sharp between changes</h2>
+      <p>
+        This bar-and-chain job is also the point to think about sharpening. A blunt or
+        mistensioned chain is a common reason people end up here in the first place. Chains dull
+        faster in dirty or knotty wood, and fastest of all when the bar tip so much as grazes
+        soil, a stone, or a fence staple buried in a log. That kind of contact takes the edge off
+        every cutter in a single pass.
+      </p>
+      <p>
+        The basic idea behind filing is straightforward, even if the tool feels fiddly at first.
+        Each cutter has a top plate that needs to stay at a consistent angle, roughly 30 degrees
+        off square to the bar on most chains, filed from the inside of the cutter outward. A
+        round file held at that angle, with a few consistent strokes per cutter, keeps the chain
+        cutting straight rather than pulling to one side. Manufacturer guides such as Stihl UK's
+        and Husqvarna UK's cover the exact file size and angle for your specific chain, and both
+        vary by chain pitch.
+      </p>
+      <p>
+        Sharpness is only half the story though. A blunt or badly tensioned chain is a real
+        cause of poor, ragged cuts and of kickback risk. A chain that will not bite cleanly
+        tends to bounce or grab instead of cutting through. Check tension every time you sharpen,
+        not just when you fit a new chain.
+      </p>
+
+      <p>
+        This kind of hands-on maintenance matters most for
+        <a href="/petrol-chainsaws/">petrol chainsaw</a> owners. Felling and heavy firewood work
+        blunts and stretches a chain far faster than occasional trimming with a lighter cordless
+        saw.
+      </p>
     </div>
 
+    <HowWeResearch />
     <FAQ {faqs} />
   </article>
 </BaseLayout>

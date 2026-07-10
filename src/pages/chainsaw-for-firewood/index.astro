@@ -4,10 +4,14 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import PickCard from '../../components/PickCard.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonSearch } from '../../lib/affiliate';
 
-const title = 'Best Chainsaw for Firewood UK 2026 - Processing Logs Efficiently';
-const description = 'Independent, research-led guide to the best chainsaws for processing firewood in the UK: bar length, power type and what actually speeds up a log pile.';
+const title = 'Best Chainsaw for Firewood UK 2026: Petrol or Cordless';
+const description = 'Independent, research-led guide to the best chainsaw for UK firewood: bar-to-log sizing, petrol vs cordless, real UK models and sharpening frequency.';
 const datePublished = '2026-07-10';
 const url = '/chainsaw-for-firewood/';
 
@@ -16,14 +20,34 @@ const crumbs = [
   { name: 'Chainsaws for firewood', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs = [
+  {
+    q: 'What size chainsaw do I need for firewood?',
+    a: "A 35 to 45cc petrol saw with a 14 to 16in bar covers most UK log rounds for regular firewood processing. A 40V or higher cordless saw with the same 14 to 16in bar range suits smaller, occasional firewood jobs with less noise and no fuel to mix. Go bigger only if you are routinely felling or cutting rounds well over 35cm. Most domestic firewood does not need it. See our <a href=\"/petrol-chainsaws/\">petrol chainsaws guide</a> and <a href=\"/cordless-chainsaws/\">cordless chainsaws guide</a> for the full breakdown of each route, or run your own numbers through the <a href=\"/#fit-check\">Fit Check tool</a>.",
+  },
+  {
+    q: 'Should I get a cordless or petrol chainsaw for firewood?',
+    a: 'Petrol wins on raw volume and all-day use: a 35cc-plus saw keeps cutting through a full session without stopping to recharge, and fuel is quicker to top up than a battery. Cordless wins on quiet, occasional jobs: no fuel to mix or store, no exhaust, no pull-start, and it is genuinely pleasant to use for an evening or a weekend working through a modest log store. If you process firewood most weekends across the season, buy petrol. If it is a handful of times a year, or you work somewhere noise matters, a 40V-plus cordless saw is the better fit.',
+  },
+  {
+    q: 'How big a log can a chainsaw cut?',
+    a: 'A chainsaw manages a log a little smaller than its bar length in one straight pass, because the bar loses a few centimetres at its mounting point. A 14in (35cm) bar is comfortable up to around 25 to 30cm of diameter, and a 16in (40cm) bar up to around 35cm. Beyond that, cut from both sides and meet in the middle, or split the round with wedges first rather than reaching for a longer bar you will rarely use.',
+  },
+  {
+    q: 'How often do I need to sharpen a chainsaw used for firewood?',
+    a: "More often than most people expect: it depends heavily on what you are cutting. Clean, split, off-the-ground timber is gentle on a chain: expect two or three tanks of fuel, or the cordless equivalent in battery charges, between touch-ups. Dirty, knotty or ground-contact wood, scrounged fence posts or storm-blown branches left lying on soil, fells a chain much faster because grit acts like sandpaper on the cutters. Stop and touch up the chain rather than pushing on if it is throwing fine dust instead of proper chips, or if you find yourself leaning into the cut to keep it moving. See our <a href=\"/replace-bar/\">guide to replacing a chainsaw bar</a> if the bar itself, not just the chain, is worn or bent.",
+  },
+];
+
+const picks = [
+  { name: 'Stihl MS 211', url: `${url}#stihl-ms-211` },
+  { name: 'Husqvarna 120 Mark II', url: `${url}#husqvarna-120-mark-ii` },
+  { name: 'EGO CS1400', url: `${url}#ego-cs1400` },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
-  ...(picks.length ? [itemListSchema({ name: 'Best chainsaws for firewood UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  itemListSchema({ name: 'Best chainsaws for firewood UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) }),
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
@@ -34,15 +58,234 @@ const schema = [
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Firewood</p>
     <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best chainsaw for processing firewood</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      Firewood processing is repetitive, sustained cutting through rounds, usually 15 to 25cm
-      across. This guide covers the power type and bar length that actually speeds up a log pile
-      without over-buying.
+      The best chainsaw for firewood in the UK is usually a 35 to 45cc petrol saw with a 14 to
+      16in bar for regular use. A 40V-plus cordless saw suits smaller, quieter, occasional
+      firewood jobs just as well with no fuel to mix and less noise. Match the saw to how much
+      wood you actually process rather than to brand loyalty or the biggest job you might one
+      day face.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw">
+      <h2>Match the bar to your logs, not the other way round</h2>
+      <p>
+        The rule of thumb is straightforward: pick a bar roughly 5cm (2in) longer than your
+        typical log diameter. That length lets the tip clear the far side of the log without
+        plunging the nose in. A longer bar than that does not cut wood you do not have, it only
+        adds weight, tires your arms faster across a long session, and usually forces a bigger,
+        heavier engine than the job needs.
+      </p>
+      <table>
+        <thead>
+          <tr><th scope="col">Typical round diameter</th><th scope="col">Sensible bar length</th><th scope="col">Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono-spec">Up to 20cm (~8in)</td>
+            <td class="font-mono-spec">12 to 14in (30 to 35cm)</td>
+            <td>Bar clears the log in one pass with room to spare</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">20 to 30cm (~8 to 12in)</td>
+            <td class="font-mono-spec">14 to 16in (35 to 40cm)</td>
+            <td>The common range for UK firewood, whether it is your own tree or delivered rounds</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">30cm+ (~12in+)</td>
+            <td class="font-mono-spec">16 to 18in, or split first</td>
+            <td>Quarter oversized rounds with wedges before you reach for a longer, heavier saw</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Most UK firewood sits in that 15 to 30cm band. This covers garden tree off-cuts and
+        delivered hardwood rounds alike. That is why 14 to 16in is the bar length that keeps
+        coming up across this guide.
+      </p>
+
+      <h2>Petrol or cordless for firewood specifically</h2>
+      <p>
+        Petrol wins on volume and all-day use. A 35cc-plus saw has the sustained torque to keep
+        cutting through rounds for a full session. A five-minute fuel top-up beats waiting for a
+        battery to recharge when you are processing a trailer load in one go. Petrol is also the
+        more practical choice working somewhere without easy access to spare charged batteries.
+      </p>
+      <p>
+        Cordless wins on quiet, occasional work. A 40V-plus battery saw needs no fuel mixing, no
+        pull-start and no carburettor to gum up over an idle summer: pull the trigger and it
+        cuts. It is also genuinely pleasant for an evening or a weekend working through a modest
+        log store. It is the easier saw to keep inside reasonable daytime hours near neighbours
+        too. Runtime is the tradeoff. Expect to swap or recharge a battery partway through a big
+        pile. A petrol saw simply gets refuelled and carries on instead.
+      </p>
+      <p>
+        A petrol saw sat unused most of the year loses time to stale fuel and a fiddly restart.
+        A cordless saw asked to process a full trailer load in an afternoon has you swapping
+        batteries more than you would like. Match the saw to how often you actually process wood
+        rather than to the biggest job you might occasionally face.
+      </p>
+
+      <h2>Five real UK models worth knowing</h2>
+      <p>
+        These are widely stocked UK models discussed from published manufacturer specifications
+        and UK owner and forum feedback rather than our own hands-on testing.
+      </p>
+      <table>
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Power</th><th scope="col">Engine/battery</th><th scope="col">Bar length</th><th scope="col">Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stihl MS 181</td>
+            <td>Petrol</td>
+            <td class="font-mono-spec">31.8cc, 1.5kW</td>
+            <td class="font-mono-spec">14 to 16in</td>
+            <td>Lighter, compact petrol for occasional rounds</td>
+          </tr>
+          <tr>
+            <td>Stihl MS 211</td>
+            <td>Petrol</td>
+            <td class="font-mono-spec">35.2cc, 1.7kW</td>
+            <td class="font-mono-spec">14 to 16in</td>
+            <td>Regular firewood volume</td>
+          </tr>
+          <tr>
+            <td>Husqvarna 120 Mark II</td>
+            <td>Petrol</td>
+            <td class="font-mono-spec">38.2cc, 1.4kW</td>
+            <td class="font-mono-spec">14in</td>
+            <td>Lower-cost petrol entry point</td>
+          </tr>
+          <tr>
+            <td>Husqvarna 135 Mark II</td>
+            <td>Petrol</td>
+            <td class="font-mono-spec">38cc, 1.6kW</td>
+            <td class="font-mono-spec">14in, up to 16in</td>
+            <td>A step up in power from the 120 Mark II, same size class</td>
+          </tr>
+          <tr>
+            <td>EGO CS1400</td>
+            <td>Cordless (56V)</td>
+            <td class="font-mono-spec">56V battery, 13.5m/s chain</td>
+            <td class="font-mono-spec">14in</td>
+            <td>Quiet, occasional, no fuel to mix</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="my-8 space-y-6">
+      <PickCard
+        rank={1}
+        name="Stihl MS 211"
+        brand="Stihl"
+        bestFor="regular firewood volume"
+        rating={4.5}
+        pros={["35.2cc/1.7kW engine has the torque to keep moving through a full session, not just a few rounds", "16in (40cm) bar option copes with most UK hardwood diameters in one pass", "ErgoStart reduces pull-cord effort, useful in cold weather"]}
+        cons={["4.3kg dry weight plus fuel and bar adds up over a long session", "Needs two-stroke fuel mixed and stored correctly, plus a winter lay-up routine", "More saw than you need if you only process a trailer load a year"]}
+        rrp="Typically £250-£350"
+        reviewUrl={`${url}#stihl-ms-211`}
+        affiliateUrl={amazonSearch('Stihl MS 211 chainsaw')}
+        verdict="The 35.2cc MS 211 is the classic step-up saw for anyone processing more than the odd trailer load: enough engine and bar to keep cutting through a session without babying it, without stepping up to a felling-class saw you don't need."
+      />
+      <PickCard
+        rank={2}
+        name="Husqvarna 120 Mark II"
+        brand="Husqvarna"
+        bestFor="a lower-cost petrol option"
+        rating={4}
+        pros={["X-Torq engine keeps fuel use and emissions down for a saw this size", "35cm (14in) bar and 4.7kg weight are easy to control for less experienced users", "Among the cheapest genuine-brand petrol saws sold in the UK"]}
+        cons={["1.4kW is on the light side for anything beyond mid-sized rounds", "14in bar caps the log diameter you can cut in one pass", "A homeowner saw, not built for daily heavy use"]}
+        rrp="Typically £160-£200"
+        reviewUrl={`${url}#husqvarna-120-mark-ii`}
+        affiliateUrl={amazonSearch('Husqvarna 120 Mark II chainsaw')}
+        verdict="38.2cc and a 14in bar make the 120 Mark II an easy way into petrol power for someone processing firewood a few weekends a year rather than every weekend. The 135 Mark II sits just above it with a bit more power in the same size class, worth a look if the 120 feels underpowered for your rounds."
+      />
+      <PickCard
+        rank={3}
+        name="EGO CS1400"
+        brand="EGO"
+        bestFor="quiet, occasional firewood jobs"
+        rating={4.5}
+        pros={["No fuel mixing, no choke, no pull-cord: pull the trigger and it cuts", "56V platform and a 13.5m/s chain speed is genuinely capable for a battery saw", "Quiet enough to use in the evening without annoying neighbours"]}
+        cons={["Runtime depends on the battery: expect to swap or recharge partway through a big pile", "14in (35cm) bar caps the log diameter you can comfortably cut in one pass", "Kit price with battery and charger sits close to a budget petrol saw"]}
+        rrp="Typically £280-£320 for the battery and charger kit"
+        reviewUrl={`${url}#ego-cs1400`}
+        affiliateUrl={amazonSearch('EGO CS1400E chainsaw')}
+        verdict="The CS1400 will not out-cut a 35cc-plus petrol saw all day, but for evenings and weekends working through a modest log store, no fuel, no exhaust and a near-silent idle are a genuine draw, and it shares batteries with the rest of EGO's outdoor power range if you already own one."
+      />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h3 id="stihl-ms-211">More on the Stihl MS 211</h3>
+      <p>
+        The MS 211 is a 35.2cc, 1.7kW homeowner saw that Stihl sells with a 14 to 16in bar
+        option. UK retailers and forums repeatedly point to this size as the sensible middle
+        ground for firewood: enough engine to avoid bogging down in hardwood rounds, without the
+        weight or price of a felling-class saw. This is the class of saw worth budgeting for once
+        you process more than the odd trailer load a year.
+      </p>
+
+      <h3 id="husqvarna-120-mark-ii">More on the Husqvarna 120 Mark II</h3>
+      <p>
+        The Husqvarna 120 Mark II is a 38.2cc, 1.4kW entry petrol saw with a 35cm (14in) bar. Its
+        X-Torq engine and LowVib dampening make it noticeably easier to run than a bigger saw for
+        a less experienced user. It suits lighter, less frequent firewood sessions rather than a
+        full day of continuous cutting. The 135 Mark II uses the same 14in bar and body size with
+        a bit more power (1.6kW). It is a reasonable step up if the 120 struggles with your
+        typical log diameter.
+      </p>
+
+      <h3 id="ego-cs1400">More on the EGO CS1400</h3>
+      <p>
+        The CS1400 runs on EGO's 56V ARC Lithium platform with a 35cm (14in) bar and a 13.5m/s
+        chain speed. It is sold as a bare tool, or as a kit with a 2.5Ah battery and charger. It
+        removes every hassle petrol brings for occasional firewood work: no fuel mix, no
+        starting cord, no exhaust smell. The cost is needing a charged battery on hand for
+        anything beyond a modest pile.
+      </p>
+
+      <h2>How often you will actually need to sharpen</h2>
+      <p>
+        Firewood is harder on a chain than most pruning work. Much of it is not clean timber cut
+        fresh off a tree. Clean, split, off-the-ground rounds are gentle on a chain. Expect two
+        or three tanks of fuel between touch-ups, or the cordless equivalent in battery charges.
+        Dirty or knotty wood is a different story. Scrounged fence posts, storm-blown branches
+        left lying on soil, and logs dragged across bare ground all pick up grit that acts like
+        sandpaper on the cutters. Wood like that needs the chain touched up with a file every
+        tank, not every few tanks.
+      </p>
+      <p>
+        The tell-tale sign is the waste: a sharp chain throws proper chips, a dull one throws
+        fine dust and needs you to lean into the cut to keep it moving. Either is a cue to stop
+        and file, rather than push on and risk the bar binding. A worn, bent or wrong-length bar
+        is a separate job, covered in our <a href="/replace-bar/">guide to replacing a chainsaw bar</a>.
+      </p>
+
+      <h2>Buying or servicing ahead of the season</h2>
+      <p>
+        UK demand for firewood and log burner use rises noticeably from autumn into winter. Wood
+        burners and open fires come back into regular use after being idle over summer. That is
+        a real, recurring seasonal pattern in how the saw and wood pile get used rather than a
+        claim about search interest. The practical upshot is timing. Buy a saw, or book a
+        service and a fresh chain, in late summer to avoid the pre-winter retailer rush and the
+        wait for a service slot once everyone else has the same idea in October.
+      </p>
+    </div>
+
+    <div class="my-8">
+      <HazardTape text="Processing rounds means repetitive cuts and pinching logs: keep the tip clear of buried nails, staples and the ground, check the chain brake before every cut, and wear EN381 rated PPE throughout." />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>Where to go next</h2>
+      <ul>
+        <li>Cutting mostly firewood-sized rounds all season? See our full <a href="/petrol-chainsaws/">petrol chainsaws guide</a>.</li>
+        <li>Weighing up battery power more broadly? Our <a href="/cordless-chainsaws/">cordless chainsaws guide</a> covers voltage classes and runtime beyond firewood.</li>
+        <li>Not sure what you need for your actual logs? Run it through the free <a href="/#fit-check">Fit Check tool</a> on the homepage.</li>
+        <li>Before you cut anything: read <a href="/chainsaw-safety/">chainsaw safety: PPE, kickback and technique</a>.</li>
+      </ul>
     </div>
 
     <HowWeResearch />

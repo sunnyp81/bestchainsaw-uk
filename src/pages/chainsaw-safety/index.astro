@@ -3,10 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import HazardTape from '../../components/HazardTape.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Chainsaw Safety UK: EN381 PPE, Kickback and Safe Technique';
-const description = 'HSE and EN381-aligned chainsaw safety for UK users: required PPE tiers, kickback risk, safe technique and when you legally need training.';
+const title = 'Chainsaw Safety UK: Licence, PPE and Kickback Guide';
+const description = 'No licence is required for domestic UK chainsaw use. HSE certification rules, EN381 PPE, kickback causes and UK noise hours, explained plainly.';
 const datePublished = '2026-07-10';
 const url = '/chainsaw-safety/';
 
@@ -15,8 +17,24 @@ const crumbs = [
   { name: 'Chainsaw safety', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs, citing HSE/EN381 documents directly.
-const faqs: { q: string; a: string }[] = [];
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'Do I need a licence for a chainsaw in the UK?',
+    a: 'No. There is no licence, permit or certificate required by law to buy or use a chainsaw on your own domestic property in the UK, for example pruning your own trees or cutting firewood for your own use. A certificate of competence is only required when a chainsaw is used at work, such as by an employed or self-employed tree surgeon, forestry worker or landscaper. That certificate is commonly an NPTC or Lantra CS30/CS31 award. See <a href="https://www.hse.gov.uk/treework/safety-topics/chainsaw-operator.htm" target="_blank" rel="noopener">HSE\'s chainsaw operator guidance</a> for the work-use position.',
+  },
+  {
+    q: 'What PPE do I need for a chainsaw?',
+    a: 'At minimum: a chainsaw with a working chain brake, EN381-5 cut-resistant leg protection rated to your saw\'s chain speed class, EN381-7 cut-resistant gloves, eye protection such as a mesh visor or safety glasses, EN352 hearing protection, and sturdy, reinforced footwear. This applies whether or not the law requires it for your specific use. HSE\'s <a href="https://www.hse.gov.uk/treework/safety-topics/chainppe.htm" target="_blank" rel="noopener">chainsaw PPE guidance</a> sets out the full specification.',
+  },
+  {
+    q: 'What causes chainsaw kickback and how do I avoid it?',
+    a: 'Kickback happens when the moving chain in the top quarter of the bar tip, the kickback zone, strikes wood or another object and stalls suddenly. That throws the bar up and back towards the operator. Cutting with the bar tip is the main cause. It is prevented mainly by three habits: never letting the bar tip contact material while the chain runs, using a saw with a working chain brake and a low-kickback chain, and holding the saw with both hands, thumb wrapped under the front handle, with stable footing.',
+  },
+  {
+    q: 'What are the noise rules for using a chainsaw in a UK garden?',
+    a: 'There is no chainsaw-specific noise statute. Persistent or excessive noise can be treated as a statutory nuisance under the Environmental Protection Act 1990. Local councils enforce that on a complaint basis, and the exact rules depend on your council. UK gardening and arborist forums widely follow a considerate-use norm of roughly 8am to 6pm on weekdays, 8am to 1pm on Saturday, and avoiding Sunday altogether. That is etiquette, not a specific by-law.',
+  },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
@@ -28,21 +46,195 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Safety</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw safety: PPE, kickback and technique</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw safety: licence, PPE and kickback</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      Every chainsaw, whatever the power type, carries kickback risk. This guide covers the
-      EN381 PPE tiers, HSE guidance on safe technique, and when UK law or common sense means you
-      need proper training before you cut.
+      No licence or certificate is legally required to use a chainsaw on your own domestic property
+      in the UK. HSE is the Health and Safety Executive. HSE requires proof of competence only when
+      a chainsaw is used at work. That proof is commonly an NPTC or Lantra CS30/CS31 certificate.
+      That legal gap does not close the practical one. Everyone using a chainsaw should still wear
+      EN381 rated PPE, trained or not, because the law asks less of a hobbyist than a kicking chain
+      does.
     </p>
+    <ReviewedStamp date={datePublished} />
 
     <div class="my-8">
       <HazardTape />
     </div>
 
-    <!-- TODO(content agent): full safety guide prose (kickback mechanics, PPE tiers by class, HSE training/legal
-         references, chain brake maintenance), citing HSE/EN381 sources directly. Sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="my-10 rounded-xl border-2 border-hazard-500 bg-white p-5 md:p-6">
+      <p class="text-xs font-bold uppercase tracking-wide text-hazard-600 mb-2">Go to the source</p>
+      <p class="text-steel-600 leading-relaxed">
+        This page is a plain-English summary for buyers. The bodies who actually set and enforce
+        chainsaw safety law are the regulators, not us. Read their guidance directly for anything
+        that affects a work decision:
+      </p>
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a class="text-hazard-600 underline underline-offset-2 font-semibold" href="https://www.hse.gov.uk/treework/index.htm" target="_blank" rel="noopener">HSE: tree work and chainsaw safety</a>
+          <span class="text-steel-400 text-sm"> (Great Britain)</span>
+        </li>
+        <li>
+          <a class="text-hazard-600 underline underline-offset-2 font-semibold" href="https://www.hseni.gov.uk/articles/chainsaw-safety-think-safe-saw-safe-operator-and-safe-site-sos" target="_blank" rel="noopener">HSENI: chainsaw safety guidance</a>
+          <span class="text-steel-400 text-sm"> (Northern Ireland)</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>The chainsaw licence myth, explained</h2>
+      <p>
+        There is no general chainsaw licence in UK law. Nothing is issued when you buy a saw.
+        Nothing needs renewing. Nobody checks anything before you use one in your own garden. This
+        is one of the most searched chainsaw questions in the UK, and the confusion makes sense
+        because work use is treated differently.
+      </p>
+
+      <h3>Domestic use: no licence needed</h3>
+      <p>
+        No certificate is required to own or use a chainsaw on your own property for your own
+        purposes. That covers pruning trees, clearing branches, felling a small tree you own, and
+        processing firewood for your own use. You do not need to register the saw, book a test, or
+        prove anything to anyone. That is true whatever size or power type of saw you buy.
+      </p>
+
+      <h3>Work use: HSE requires proof of competence</h3>
+      <p>
+        The position changes as soon as a chainsaw is used at work. Work use covers employees,
+        self-employed contractors, and even unpaid volunteers working under someone else's
+        instruction. The Provision and Use of Work Equipment Regulations require employers and the
+        self-employed to ensure chainsaw operators receive training adequate for the task.
+      </p>
+      <p>
+        HSE's own <a href="https://www.hse.gov.uk/treework/safety-topics/chainsaw-operator.htm" target="_blank" rel="noopener">chainsaw operator guidance</a>
+        confirms operators must be competent for the work they do. A recognised certificate of
+        competence becomes the practical requirement before you can be paid to use a chainsaw, or
+        use one as part of a job.
+      </p>
+
+      <h3>What NPTC, CS30 and CS31 actually are</h3>
+      <p>
+        NPTC is not a licensing body in the driving-licence sense. NPTC is the awarding
+        organisation, through City &amp; Guilds, that issues the Certificate of Competence once
+        training has been assessed. Lantra Awards is the other common awarding route.
+      </p>
+      <p>
+        The certificates are broken into task-specific units. CS30 covers chainsaw maintenance and
+        cross-cutting. CS31 covers felling and processing small trees up to 380mm in diameter.
+        Further units exist for more specialised work, such as CS38 for aerial work and CS39 for
+        chainsaw use from a rope and harness. People often call these units a "chainsaw ticket" or a
+        "chainsaw licence" informally. They are a work-use competence certificate, not a legal
+        requirement to own or use a saw at home.
+      </p>
+
+      <h3>Why train anyway, even when it is not required</h3>
+      <p>
+        Training is not pointless for domestic users just because it is optional. A short course
+        teaches the starting position, the two-handed grip, how to test a chain brake, and how to
+        read a cut before you make it. These skills take a few hours to learn properly, and they are
+        hard to pick up safely by trial and error.
+      </p>
+      <p>
+        The line between domestic and work use can also move. Cutting firewood to sell, doing a
+        favour for a neighbour for payment, and volunteering for a community project can all tip you
+        into work use. The training that was optional then becomes the standard you are expected to
+        meet.
+      </p>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>EN381 PPE: what you actually need</h2>
+      <p>
+        EN381 is the European standard family for chainsaw protective clothing and equipment. It
+        rates protection by chain speed class: Class 0 up to 16 metres per second, Class 1 up to 20
+        m/s, Class 2 up to 24 m/s, and Class 3 up to 28 m/s.
+      </p>
+      <p>
+        Your saw's manual or spec sheet gives its chain speed. Your leg protection should be rated
+        to match that speed, not bought as one size fits all. EN381 is gradually being superseded by
+        the equivalent EN ISO 11393 standard, but the classes and the intent carry across.
+      </p>
+      <p>This is the kit that actually reduces injury risk in practice, whatever saw you buy:</p>
+      <ul>
+        <li><strong>A saw with a working chain brake.</strong> The single most important safety feature on the saw itself. Test that it engages before every session, not just when you buy it.</li>
+        <li><strong>Cut-resistant leg protection</strong> (EN381-5), sold as chainsaw trousers or chaps. These are packed with long loose fibres that pull out and jam a moving chain almost instantly if it contacts your leg. Type A covers the front and sides of the leg. Type C wraps all the way round and is the safer choice for kneeling or aerial work.</li>
+        <li><strong>Chainsaw-rated gloves</strong> (EN381-7), cut-resistant at minimum on the hand nearest the bar, ideally on both.</li>
+        <li><strong>Eye protection</strong>, either a mesh visor (EN1731) or safety glasses/goggles (EN166), against flying chips, sawdust and small debris.</li>
+        <li><strong>Hearing protection</strong> (EN352), rated for the noise level of the saw you are using. Chainsaws routinely run well above the level that causes hearing damage with sustained exposure.</li>
+        <li><strong>Sturdy, reinforced footwear</strong> with a protective toe cap and cut-resistant panelling at the front, historically EN381-3 and now largely covered by EN ISO 17249.</li>
+      </ul>
+      <p>
+        A combined helmet system brings a hard hat, mesh visor and ear defenders together in one
+        unit. It is standard kit for anyone using a saw regularly, and a sensible one-off purchase
+        even for occasional garden use.
+      </p>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>Kickback: what causes it, and how it is prevented</h2>
+      <p>
+        Kickback is the sudden, forceful snap of the bar up and back towards the operator. It is the
+        main mechanism behind serious chainsaw injuries. It is also well understood and largely
+        preventable. That makes it a reason to buy a saw with a chain brake and use it properly, not
+        a reason to be frightened of chainsaws in general.
+      </p>
+      <p>
+        The top quarter of the bar tip is known as the kickback zone. The chain in that zone can
+        strike wood, or get pinched, at the wrong angle. It then stops suddenly and transfers that
+        force back through the bar, throwing the bar upward and toward the operator in a fraction of
+        a second. Cutting with the bar tip is the main cause, not cutting with the body of the bar.
+        Most safety guidance reduces to one idea: keep the top quarter of the bar tip away from
+        anything while the chain is moving.
+      </p>
+      <div class="border-l-4 border-danger-600 bg-surface-100 rounded-r-lg px-5 py-4 my-6">
+        <p class="text-graphite-900 leading-relaxed">
+          <strong>What actually prevents it:</strong> a chain brake (a steel band that clamps the
+          drive sprocket almost instantly when triggered), a low-kickback chain, and a proper
+          two-handed grip with your thumb wrapped under the front handle rather than over it. Add
+          stable footing and a clear cutting zone, and the vast majority of kickback incidents are
+          avoided before they start.
+        </p>
+      </div>
+      <p>
+        None of this requires expert skill. It requires a saw fitted with the right safety features,
+        and a habit of watching where the bar tip is at all times. Combine that with the EN381 PPE
+        above, and kickback moves from being the scary thing about chainsaws to a known, managed
+        risk.
+      </p>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>UK noise hours: the considerate-use norm</h2>
+      <p>
+        Safety is not the only thing to get right with a chainsaw. Timing matters too, even though
+        it is not a safety issue in the same sense. There is no chainsaw-specific noise law in the
+        UK.
+      </p>
+      <p>
+        Persistent or excessive noise, including from garden power tools, can be treated as a
+        statutory nuisance under the Environmental Protection Act 1990. Your local council
+        investigates complaints and decides whether the noise meets that bar. There is no single
+        national cut-off time written into statute. It depends on your council's judgement, and
+        ultimately on whether the noise unreasonably interferes with a neighbour's use of their
+        home.
+      </p>
+      <p>
+        UK gardening and arborist forums widely follow a considerate-use norm borrowed from the
+        construction industry. It is roughly 8am to 6pm on weekdays, 8am to 1pm on Saturday, and
+        avoiding Sunday and bank holidays altogether. Treat that as etiquette that keeps neighbours
+        on side, not as a specific by-law. Check your own council's noise nuisance guidance if you
+        are ever in doubt.
+      </p>
+    </div>
+
+    <HowWeResearch />
+
+    <div class="prose-chainsaw">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/first-chainsaw/">Buying your first chainsaw in the UK</a>, sizing, chain brake basics and what a beginner actually needs.</li>
+        <li><a href="/replace-bar/">How to replace a chainsaw bar</a>, including how to disconnect power safely before you touch the chain.</li>
+        <li><a href="/#fit-check">The Fit Check tool</a>, a free, rule-based way to match your task to the right bar length, power type and PPE tier.</li>
+      </ul>
     </div>
 
     <FAQ {faqs} />

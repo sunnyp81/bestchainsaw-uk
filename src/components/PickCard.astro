@@ -36,7 +36,7 @@ const buyUrl = affiliateUrl || amazonSearch(`${name} chainsaw`);
           <p class="text-sm text-steel-400">{brand}</p>
         </div>
         <div class="text-right shrink-0">
-          <div class="text-hivis-500 text-lg" aria-label={`${rating} out of 5`}>
+          <div class="text-hazard-600 text-lg" aria-label={`${rating} out of 5`}>
             {'★'.repeat(Math.round(rating))}<span class="text-steel-200">{'★'.repeat(5 - Math.round(rating))}</span>
           </div>
           {rrp && <div class="text-sm font-semibold text-graphite-900 mt-1 font-mono-spec">{rrp}</div>}

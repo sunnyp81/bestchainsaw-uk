@@ -4,10 +4,13 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import PickCard from '../../components/PickCard.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Best Cheap Chainsaws UK 2026 - Budget Picks That Are Still Safe';
-const description = 'Independent, research-led guide to the best cheap chainsaws in the UK: where it is safe to save money and where it is not, with budget picks across electric, cordless and petrol.';
+const title = 'Are Cheap Chainsaws Worth It? Honest UK Guide';
+const description = 'Whether a cheap chainsaw is worth it in the UK depends on power type and use. An honest guide to budget electric, petrol and cordless saws.';
 const datePublished = '2026-07-10';
 const url = '/cheap-chainsaws/';
 
@@ -16,14 +19,32 @@ const crumbs = [
   { name: 'Cheap chainsaws', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'Is a cheap chainsaw any good?',
+    a: 'It depends on the power type and the job. A budget corded electric bought for light pruning, like the Screwfix Titan TTL585CHN at roughly £40 to £50, is a genuinely good buy and well trusted in UK forums. A cheap petrol or cordless saw bought for real firewood or felling work is a different story: reliability and chain safety matter more there, and that is a poor place to go ultra-budget.',
+  },
+  {
+    q: "What's a trustworthy budget chainsaw in the UK?",
+    a: "Budget corded electrics from an established retailer's own brand, such as Screwfix's Titan range, have a solid reputation among UK DIY and gardening forums for light, occasional pruning. They are not felling saws, but within that limited job they are considered reliable. They are also backed by a real retailer for returns and support, unlike unbranded marketplace listings.",
+  },
+  {
+    q: 'Should I buy a cheap petrol chainsaw?',
+    a: "Only if 'cheap' means a genuine budget model from an established brand, not an unbranded generic marketplace listing. Petrol saws are used for harder, sustained cutting where chain brake reliability, build quality and parts support actually matter, so an unbranded no-name petrol saw is one of the worst places to cut costs on chainsaw kit.",
+  },
+  {
+    q: 'Is it worth spending more on a chainsaw?',
+    a: 'Usually not on the saw itself if your use is light and occasional: a budget corded electric covers that job fine. It is almost always worth spending on EN381 rated safety gear (trousers or chaps, boots, gloves, a helmet with visor) before spending an extra £50 to £100 on the saw, since that kit is what actually reduces injury risk if something goes wrong.',
+  },
+];
+
+const picks = [
+  { name: 'Screwfix Titan TTL585CHN (corded electric)', url: `${url}#titan-ttl585chn` },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
-  ...(picks.length ? [itemListSchema({ name: 'Best cheap chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  ...(picks.length ? [itemListSchema({ name: 'Cheap chainsaws worth buying in the UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
@@ -32,17 +53,155 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Budget picks</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best cheap chainsaws that are still safe to use</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Are cheap chainsaws worth it in the UK?</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      A cheap chainsaw is only a good buy if it still has a working chain brake and real safety
-      features. This guide covers where you can genuinely save money and where cutting corners is
-      dangerous, with budget picks across electric, cordless and petrol.
+      Whether a cheap chainsaw is worth it depends entirely on what kind of saw it is and what you
+      are cutting. A budget corded electric bought for light, occasional pruning is a genuinely
+      sound buy, and UK forums treat models like the Screwfix Titan TTL585CHN (roughly £40 to £50)
+      as legitimately bombproof for that job. A cheap petrol saw bought to do real firewood or
+      felling work is usually a false economy: that is exactly where reliability, chain safety and
+      parts support matter most, and cutting corners there costs more than it saves.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw">
+      <h2>The one cheap chainsaw that's genuinely worth it</h2>
+      <p>
+        Not every cheap chainsaw deserves the scepticism that surrounds the category. A budget
+        corded electric bought for light, occasional pruning, hedge trimming or the odd fallen
+        branch is a completely reasonable buy. It is the one place where going cheap does not mean
+        going wrong. The trade-off is straightforward: no petrol, no battery, and no real cutting
+        power for anything thick or sustained. In exchange, you get a genuinely low price and a
+        saw that is simple to start and put away.
+      </p>
+      <p>
+        The clearest example is the Screwfix Titan TTL585CHN, an own-brand corded electric
+        chainsaw that sells for roughly £40 to £50. It has no pretensions to being a firewood or
+        felling saw. For light, occasional-use pruning it has built up a genuinely solid
+        reputation on UK DIY and gardening forums, regularly described as bombproof for that job.
+        That reputation matters more than the price tag: it means real owners keep using it
+        without it failing, not just that it was cheap to buy. See our full
+        <a href="/electric-chainsaws/">electric chainsaws</a> guide for more budget and mid-range
+        corded picks.
+      </p>
+
+      <div id="titan-ttl585chn" class="not-prose scroll-mt-24">
+        <PickCard
+          rank={1}
+          name="Titan TTL585CHN"
+          brand="Titan (Screwfix)"
+          bestFor="light, occasional pruning on a tight budget"
+          rating={4}
+          rrp="Approx. £40 to £50"
+          reviewUrl="/electric-chainsaws/"
+          verdict="A no-frills corded electric that does exactly one job, light pruning, and is genuinely well regarded for doing it reliably. Not a firewood or felling saw, and it should never be sold as one."
+          pros={[
+            'Cheap to buy and cheap to replace if it is ever outgrown',
+            'Light enough for one-handed pruning and easy to start, no fuel or pull-cord',
+            'Consistently described as reliable by UK owners for light, occasional use',
+          ]}
+          cons={[
+            'Corded, so you are limited to extension lead reach',
+            'Not built for anything beyond light, occasional pruning',
+            'Own-brand parts and support are thinner than a name-brand saw',
+          ]}
+        />
+      </div>
+
+      <h2>Why UK chainsaw forums are wary of unbranded cheap petrol and cordless saws</h2>
+      <p>
+        The scepticism starts as soon as you move away from an established retailer's own brand
+        and into the unbranded petrol and cordless saws sold on marketplaces under interchangeable,
+        often meaningless brand names. UK chainsaw forums and owner communities are consistently
+        wary of these, for reasons that hold up. Build quality is inconsistent between batches.
+        Spare parts and even basic accessories like a replacement bar or chain are often impossible
+        to source once the listing disappears. Safety-critical parts, most importantly the chain
+        brake, are the component owners trust least on the cheapest unbranded imports. A chain
+        brake that does not engage reliably is not a minor fault: it is the one part of the saw
+        that is supposed to stop a kickback turning into a serious injury.
+      </p>
+      <p>
+        None of this means every budget cordless saw is suspect. Established brands sell genuinely
+        affordable entry-level cordless models with proper parts support and a real UK returns
+        process behind them, covered in our <a href="/cordless-chainsaws/">cordless chainsaws</a>
+        guide. The distinction that matters is not the price on its own. It is whether there is an
+        accountable brand and a real support chain behind the saw.
+      </p>
+
+      <h2>Going too cheap for firewood or felling work: the real risk</h2>
+      <p>
+        Light pruning and processing firewood are different jobs, and the money you can safely save
+        on the first does not carry over to the second. Firewood and felling work means sustained
+        cutting through rounds, repeated chain tensioning, and, on a petrol saw, an engine that has
+        to start reliably in the cold every single time. This is where an ultra-cheap saw stops
+        being a bargain and starts being a liability. Poor chain tensioning and a chain that will
+        not hold an edge slow the job down and increase kickback risk. A saw that will not start
+        reliably is worse than useless halfway through a log pile.
+      </p>
+      <p>
+        A straightforward money argument also applies here. A saw bought for real firewood or
+        felling work gets used hard and often, so reliability failures cost you in downtime and
+        repair bills that can exceed the saw's value. Ultra-cheap unbranded saws hold no resale
+        value and have no real parts support, so there is nothing to fall back on when something
+        breaks. Our full <a href="/petrol-chainsaws/">petrol chainsaws</a> guide covers the engine
+        sizes and bar lengths that actually hold up to that kind of work, at prices that are still
+        realistic rather than professional-grade.
+      </p>
+
+      <h2>Spend on safety gear before you spend more on the saw</h2>
+      <p>
+        PPE is the one place to redirect budget rather than cut it, not the saw. An extra £50 to
+        £100 on the saw buys you marginally more power or a slightly better chain brake. The same
+        money spent on EN381 rated chainsaw trousers or chaps, boots, gloves and a helmet with
+        visor and ear defenders buys you the protection that actually determines what happens if
+        something goes wrong. This is not a scare tactic. It is how the HSE and EN381 standard are
+        structured: the saw's own chain brake is one layer of protection, and it is not designed to
+        be the only one.
+      </p>
+
+      <HazardTape text="Buy the saw you can afford, but never skip EN381 rated trousers, boots, gloves and a visor to afford a slightly bigger saw." />
+
+      <p class="mt-6">
+        This matters most for anyone buying their first saw, where the temptation is to spend the
+        whole budget on the tool and treat PPE as optional. It is not optional. See our
+        <a href="/first-chainsaw/">first chainsaw guide</a> for the full beginner buying order
+        before you spend anything.
+      </p>
+
+      <h2>Cheap chainsaw verdict at a glance</h2>
+      <p>Here is the honest split by chainsaw type, in one table.</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Chainsaw type</th>
+            <th scope="col">Is cheap worth it?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Corded electric, established brand (e.g. Screwfix Titan)</td>
+            <td>Yes, for light, occasional pruning. A genuinely trusted budget option.</td>
+          </tr>
+          <tr>
+            <td>Cordless, established brand entry model</td>
+            <td>Often yes, but check the real cost with a battery and charger included.</td>
+          </tr>
+          <tr>
+            <td>Unbranded, no-name petrol or cordless marketplace listing</td>
+            <td>No. Build quality, chain brake reliability and parts support are the risk.</td>
+          </tr>
+          <tr>
+            <td>Any saw bought for real firewood or felling work</td>
+            <td>No, this is where going cheap becomes a false economy.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Still not sure which power type or bar length actually fits your task? The free
+        <a href="/#fit-check">Fit Check tool</a> on our homepage matches it in under a minute,
+        before you spend anything.
+      </p>
     </div>
 
     <HowWeResearch />

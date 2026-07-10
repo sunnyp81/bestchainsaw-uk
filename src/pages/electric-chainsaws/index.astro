@@ -4,10 +4,15 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import PickCard from '../../components/PickCard.astro';
+import PriceGrid from '../../components/PriceGrid.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonSearch } from '../../lib/affiliate';
 
-const title = 'Best Electric Chainsaws UK 2026 - Corded Buying Guide';
-const description = 'Independent, research-led guide to the best corded electric chainsaws for UK gardens: who they suit, bar length, safety features and how they compare to cordless and petrol.';
+const title = 'Best Corded Electric Chainsaws UK 2026 - Buying Guide';
+const description = 'Corded, mains-powered chainsaws explained: real UK prices, named models like the Titan TTL585CHN, and how they differ from cordless and petrol saws.';
 const datePublished = '2026-07-10';
 const url = '/electric-chainsaws/';
 
@@ -16,14 +21,34 @@ const crumbs = [
   { name: 'Electric chainsaws', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs = [
+  {
+    q: "What's the difference between a corded and a cordless electric chainsaw?",
+    a: "A corded electric chainsaw plugs into the mains and only works within reach of a socket and an extension lead. A cordless (battery) chainsaw runs off a removable battery pack, so it goes anywhere in the garden but costs more upfront and needs charging between jobs. Retailers and reviewers often blur the two together under \"electric chainsaw\". They are not the same tool. Pick corded if you always work near a socket and want the lowest upfront cost. Pick cordless if you need to move around or don't have easy power access. See our <a href=\"/cordless-chainsaws/\">cordless chainsaw guide</a> for the battery side of that comparison.",
+  },
+  {
+    q: 'Is a cheap electric chainsaw any good?',
+    a: "Some are. The budget corded saws worth buying still have a working chain brake and a recognisable brand behind them. Screwfix's own Titan range and entry-level Bosch or Einhell models fit that description, typically £40 to £90. What you give up at the cheap end is bar length, motor power and finish, not the basic safety features that actually matter. Our <a href=\"/cheap-chainsaws/\">cheap chainsaws guide</a> covers where it's safe to save money and where it isn't, across all power types.",
+  },
+  {
+    q: 'What can a corded electric chainsaw actually cut?',
+    a: "A corded electric chainsaw cuts branches and trunks up to about 20 to 25cm in diameter comfortably. That covers most pruning, hedge clearance and tidying smaller garden trees. Push a corded saw much past that and the motor bogs down and the cut takes far longer than it should. A cordless or petrol saw with a longer bar copes better for anything bigger, or for processing rounds into firewood away from a socket. See our <a href=\"/chainsaw-for-firewood/\">chainsaws for firewood guide</a>.",
+  },
+  {
+    q: 'Do I still need PPE with an electric chainsaw?',
+    a: "Yes. A corded electric saw has a lighter chain and less torque than a petrol saw. That generally means lower kickback risk. Lower is not zero. It is still a moving chain capable of a serious injury in under a second. EN381 rated PPE applies whatever powers the saw: cut-resistant gloves, cut-resistant leg protection, eye and ear protection, and a properly maintained chain brake. Get the full breakdown in our <a href=\"/chainsaw-safety/\">chainsaw safety guide</a>.",
+  },
+];
+
+const picks = [
+  { name: 'Bosch AKE 30/35', url: `${url}#bosch-ake-30-35` },
+  { name: 'Einhell GE-EC', url: `${url}#einhell-ge-ec` },
+  { name: 'Screwfix Titan TTL585CHN', url: `${url}#screwfix-titan-ttl585chn` },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
-  ...(picks.length ? [itemListSchema({ name: 'Best electric chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  itemListSchema({ name: 'Best corded electric chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) }),
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
@@ -32,17 +57,195 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Electric chainsaws</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best electric chainsaws for UK gardens</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best Corded Electric Chainsaws UK</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      Corded electric chainsaws are the cheapest, lightest way into a first saw, provided you are
-      working within reach of a socket. This guide covers who they suit, typical bar lengths and
-      specs, and how they stack up against cordless and petrol.
+      A corded electric chainsaw plugs into a standard UK socket. It only cuts where an extension
+      lead can reach. It is a light-duty tool, useful up to about 20 to 25cm of trunk or branch
+      diameter. Past that diameter it becomes a poor choice. A corded electric chainsaw is not a
+      cordless battery chainsaw. This guide covers mains-only, plug-in saws only.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="my-8 rounded-xl border border-steel-200 bg-white p-5 md:p-6">
+      <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Corded, not cordless</p>
+      <p class="text-steel-600 leading-relaxed">
+        Corded means the saw has a mains cable and plugs into a 13A socket. Nothing more, nothing
+        less. Cordless means the saw runs on a rechargeable battery pack with no cable. The two
+        terms get used loosely online. UK search results often conflate them. Corded and cordless
+        are different tools with different tradeoffs: see our <a href="/cordless-chainsaws/">cordless chainsaws guide</a> for the battery side.
+      </p>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>Who a corded electric chainsaw actually suits</h2>
+      <p>
+        A corded electric saw suits a small to medium garden. Typical jobs include pruning,
+        cutting back overgrown branches, trimming a hedge line back to wood, and tidying a small
+        tree. It suits work kept within reach of the house or a shed socket. It suits occasional
+        use rather than daily work. Pick it up a handful of times a year, run it for twenty
+        minutes, and put it away.
+      </p>
+      <p>
+        A corded saw skips the petrol maintenance hassle entirely: no fuel to mix, no two-stroke
+        oil to buy, no pull-start, and no carburettor to gum up over an unused winter. It produces
+        no exhaust fumes or smell while you work. Maintenance is mostly keeping the chain sharp
+        and topped up with bar oil. A corded saw also runs quieter than a petrol saw and does not
+        need revving between cuts, which suits gardens with close neighbours. UK law sets no
+        single nationwide chainsaw curfew. Most councils' noise nuisance guidance still points
+        toward reasonable daytime hours: not before around 8am, not much past early evening, and
+        a lighter touch on Sundays. A corded electric saw is the easiest power type to keep inside
+        those norms.
+      </p>
+      <p>
+        A corded saw also suits a beginner. A beginner has less to go wrong mechanically and no
+        engine to learn to start or maintain. A corded saw does not suit anyone who works more
+        than an extension lead's length from a socket. It does not suit daily cutting or
+        firewood-sized rounds.
+      </p>
+
+      <h2>What a corded electric chainsaw can and can't cut</h2>
+      <p>
+        A corded electric saw cuts comfortably up to about 20 to 25cm of trunk or branch diameter.
+        That range covers most domestic pruning and hedge and shrub clearance jobs. The smaller,
+        lighter motor is a genuine advantage inside that range: less weight to hold at awkward
+        angles, less kickback force if something goes wrong, and no engine vibration to fight.
+      </p>
+      <p>
+        A corded saw's motor bogs down past that diameter or under repeated cutting. The chain
+        slows and the cut takes far longer than it should. Slow cutting hurts control, not just
+        patience. A corded saw is also the wrong tool for anything away from a socket, by design.
+        Felling, processing logs at the far end of the garden, and a full day of firewood work all
+        point to a different power type. Our <a href="/chainsaw-for-firewood/">chainsaws for firewood guide</a> covers the firewood case directly.
+      </p>
+
+      <h2>Real UK prices for corded electric chainsaws</h2>
+      <p>
+        Budget-to-mid corded electric chainsaws typically run about £40 to £90 in the UK. That
+        range covers everything from basic own-brand saws to recognised DIY brands with a longer
+        bar and a tool-less chain tensioner. This is a typical band, not a live scraped price.
+        Retail prices move daily. The only reliable number is whatever the retailer shows today.
+        Every model below links out to a live price instead of a number we typed in.
+      </p>
+
+      <h2>Three corded electric models worth knowing</h2>
+      <p>
+        These three models are widely available in the UK. We discuss them generically from
+        published specifications and UK owner and forum feedback, not from our own hands-on
+        testing (see "How we choose" below). Use them as a starting point for what budget and
+        mid-range corded actually look like. Check current stock and price before buying.
+      </p>
+    </div>
+
+    <div class="my-8 space-y-6">
+      <PickCard
+        rank={1}
+        name="Bosch AKE 30/35"
+        brand="Bosch"
+        bestFor="most gardens"
+        rating={4}
+        pros={["Widely stocked so parts and chains are easy to replace", "Tool-less chain tensioning on current AKE models", "Recognisable brand with a proper UK service network"]}
+        cons={["Heavier in the hand than the cheapest budget saws", "Still a light-duty saw, same 20 to 25cm practical limit as any corded model"]}
+        rrp="Typically £70-£90"
+        reviewUrl={`${url}#bosch-ake-30-35`}
+        affiliateUrl={amazonSearch('Bosch AKE 35 corded electric chainsaw')}
+        verdict="Bosch's AKE range is the safe default for a UK garden. The number is the bar length in cm: AKE 30 has a 30cm bar, AKE 35 a 35cm bar. Bosch is the brand most likely to be in stock at a local shop if something needs replacing. Current models add a tool-less chain tensioner and auto chain oiling, which matters more day to day than the spec sheet suggests."
+      />
+      <PickCard
+        rank={2}
+        name="Einhell GE-EC"
+        brand="Einhell"
+        bestFor="cheaper mid-range buyers"
+        rating={3.5}
+        pros={["Usually undercuts Bosch for a similar spec", "Decent build quality for the price point"]}
+        cons={["Fewer stockists than Bosch, so replacement chains can mean ordering online", "Owner feedback is more mixed than the two more established brands either side of it"]}
+        rrp="Typically £55-£75"
+        reviewUrl={`${url}#einhell-ge-ec`}
+        affiliateUrl={amazonSearch('Einhell GE-EC corded electric chainsaw')}
+        verdict="Einhell's GE-EC corded range sits between the Screwfix budget option and Bosch on both price and reputation. It is a sensible pick for a proper mid-range saw without the Bosch premium, provided you're comfortable ordering a replacement chain online rather than picking one up at a local shop."
+      />
+      <PickCard
+        rank={3}
+        name="Screwfix Titan TTL585CHN"
+        brand="Titan (Screwfix own-brand)"
+        bestFor="occasional light use on a tight budget"
+        rating={4}
+        pros={["The cheapest of the three, often by some margin", "Genuine reputation on UK trade and DIY forums as a surprisingly tough, no-frills saw for occasional work", "Screwfix's click-and-collect network makes replacement parts easy to get hold of"]}
+        cons={["Basic spec next to Bosch or Einhell, no premium features", "Only sold through Screwfix, so no shopping around for price", "Not intended for daily or heavy use"]}
+        rrp="Typically £40-£50"
+        reviewUrl={`${url}#screwfix-titan-ttl585chn`}
+        affiliateUrl={amazonSearch('Titan TTL585CHN corded electric chainsaw')}
+        verdict="Titan is Screwfix's own budget tool brand. The TTL585CHN corded saw has picked up a genuinely good reputation in UK trade and DIY forum threads, one of those unglamorous own-brand tools that just keeps working for light use. That makes it a fair way to spend under £50 on a first saw, as long as you don't expect it to do a petrol saw's job."
+      />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h3 id="bosch-ake-30-35">More on the Bosch AKE 30/35</h3>
+      <p>
+        The AKE number is the bar length in centimetres. Choose AKE 30 for smaller, tighter
+        pruning work. Choose AKE 35 for a bit more reach on slightly thicker branches. Both stay
+        well inside the 20 to 25cm practical limit for corded saws generally. Bosch is stocked
+        broadly across UK retailers. That makes it the easiest of the three to compare on price in
+        one place:
+      </p>
+    </div>
+
+    <PriceGrid
+      model="Bosch AKE 35 corded electric chainsaw"
+      screwfix={{ url: 'https://www.screwfix.com/search?search=bosch+ake+35' }}
+      toolstation={{ url: 'https://www.toolstation.com/search?q=bosch+ake+35' }}
+      bq={{ url: 'https://www.diy.com/search?term=bosch%20ake%2035' }}
+    />
+
+    <div class="prose-chainsaw">
+      <h3 id="einhell-ge-ec">More on the Einhell GE-EC</h3>
+      <p>
+        Einhell's GE-EC corded chainsaws target the same job as the Bosch AKE range: garden
+        pruning and light clearance, at a lower price. The tradeoff is availability. A Bosch chain
+        or bar is a common stock item at a UK hardware shop. An Einhell replacement part more
+        often means ordering online and waiting a few days. Factor that in before relying on the
+        saw for anything time-sensitive.
+      </p>
+      <h3 id="screwfix-titan-ttl585chn">More on the Screwfix Titan TTL585CHN</h3>
+      <p>
+        The Titan TTL585CHN is Screwfix's entry corded chainsaw. It does not compete on features.
+        It competes on price. UK forum and owner sentiment repeatedly rates it reliable for what
+        it is. That reputation covers light, occasional garden use specifically. It does not cover
+        daily running or pushing the saw toward the upper end of what a corded saw can handle.
+        Check that the chain brake is present and working before first use. That check applies to
+        every saw on this page, regardless of price.
+      </p>
+
+      <h2>Safety: EN381 PPE still applies</h2>
+      <p>
+        A corded electric chainsaw's lighter chain and lower torque generally mean lower kickback
+        risk than a petrol saw of similar bar length. Lower risk is not the same as safe risk.
+        Kickback remains the main way chainsaw injuries happen, regardless of power source. EN381
+        rated PPE stays compulsory whatever powers the saw: cut-resistant gloves, cut-resistant
+        leg protection (chaps or trousers), eye and ear protection, and a helmet with a visor for
+        overhead work. A working chain brake matters as much on a budget corded saw as it does on
+        a full-price petrol one.
+      </p>
+    </div>
+
+    <div class="my-8">
+      <HazardTape />
+    </div>
+
+    <div class="prose-chainsaw">
+      <p>
+        Our <a href="/chainsaw-safety/">chainsaw safety guide</a> covers full PPE tiers, kickback
+        mechanics, and safe technique in detail. Read it before you make a first cut with any saw,
+        corded or otherwise.
+      </p>
+
+      <h2>Where to go next</h2>
+      <ul>
+        <li>Not sure corded is right for you? Compare it properly against battery power in our <a href="/cordless-chainsaws/">cordless chainsaws guide</a>.</li>
+        <li>Working to a tighter budget across any power type? See <a href="/cheap-chainsaws/">cheap chainsaws that are still safe to use</a>.</li>
+        <li>Want a straight answer on bar length, power type and PPE for your actual job? Run it through the free <a href="/#fit-check">Fit Check tool</a> on the homepage.</li>
+        <li>Before you cut anything: read <a href="/chainsaw-safety/">chainsaw safety: PPE, kickback and technique</a>.</li>
+      </ul>
     </div>
 
     <HowWeResearch />

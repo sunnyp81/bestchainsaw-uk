@@ -4,10 +4,14 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import PickCard from '../../components/PickCard.astro';
+import PriceGrid from '../../components/PriceGrid.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Best Cordless Chainsaws UK 2026 - Battery Buying Guide';
-const description = 'Independent, research-led guide to the best cordless battery chainsaws for UK gardens: voltage classes, bar length, runtime and who they suit.';
+const title = 'Best Cordless Chainsaws UK 2026: Battery Buying Guide';
+const description = 'Cordless chainsaw buying guide for the UK: battery voltage tiers, typical prices, real run-time and three models worth checking.';
 const datePublished = '2026-07-10';
 const url = '/cordless-chainsaws/';
 
@@ -16,14 +20,34 @@ const crumbs = [
   { name: 'Cordless chainsaws', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs = [
+  {
+    q: 'What voltage chainsaw do I need?',
+    a: '<p>For pruning and branches under about 10cm, an 18 to 20V saw is enough. For general garden work and small logs up to roughly 25cm, look at 36 to 40V. For bigger rounds or more frequent cutting, 56V and up closes in on light petrol performance. See our <a href="/chainsaw-battery-voltage/">battery voltage guide</a> for the full breakdown by class.</p>',
+  },
+  {
+    q: 'Is 40V enough for firewood?',
+    a: '<p>For most UK garden firewood, yes. A 40V-class saw with a 35cm bar comfortably handles seasoned logs up to roughly that diameter. For consistently thicker rounds, or an all-day processing session, a 56V-plus cordless saw or a petrol saw gets through the pile faster and with fewer battery swaps.</p>',
+  },
+  {
+    q: 'How long does the battery last?',
+    a: '<p>Run-time depends on the battery’s amp-hour (Ah) rating and what you are cutting, not just voltage. A 4.0Ah 36V battery typically manages somewhere around 40 to 60 cuts through seasoned logs before it needs a recharge, fewer in thicker or wetter wood. A spare battery, not a bigger one, is the usual fix if you regularly cut more than that in one session.</p>',
+  },
+  {
+    q: 'Can I use a different brand’s battery?',
+    a: '<p>Generally, no. Cordless chainsaw batteries are tied to their maker’s own platform, Ryobi ONE+, EGO’s ARC Lithium, Makita LXT, Husqvarna’s own battery series, and so on, and a pack from one brand will not fit or run a saw from another. The one time this helps is buying a bare tool within a platform you already own, where an existing battery from another tool on that same platform will work.</p>',
+  },
+];
+
+const picks = [
+  { name: 'Ryobi ONE+ RY18CSA', url: `${url}#ryobi-ry18csa` },
+  { name: 'Makita DUC353', url: `${url}#makita-duc353` },
+  { name: 'EGO Power+ CS1401E', url: `${url}#ego-cs1401e` },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
-  ...(picks.length ? [itemListSchema({ name: 'Best cordless chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  itemListSchema({ name: 'Best cordless chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) }),
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
@@ -32,22 +56,216 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Cordless chainsaws</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best cordless battery chainsaws for UK gardens</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best cordless chainsaws UK: voltage, price and picks explained</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      Battery chainsaws now cover most of what a homeowner needs, from pruning to firewood, with
-      no cable and no fuel to mix. This guide covers voltage classes, bar length, realistic
-      runtime and who each tier suits. See our
-      <a href="/chainsaw-battery-voltage/" class="text-hazard-600 underline underline-offset-2">battery voltage guide</a>
-      for a deeper breakdown of 18V through 56V+ platforms.
+      A cordless chainsaw runs on a rechargeable lithium-ion battery, so there is no cable trailing
+      across the garden and no petrol to mix. Voltage roughly sets how much cutting power the motor
+      can deliver, while the battery’s amp-hour (Ah) rating sets how long it runs before you need
+      to recharge or swap packs. 18 to 36V suits pruning and small logs, and 40V and above starts
+      to close the gap on light petrol saws for general garden work.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw">
+      <h2>Voltage tiers, in plain English</h2>
+      <p>
+        Cordless chainsaw voltage splits into three practical tiers: 18 to 20V for light pruning,
+        36 to 40V for general garden use, and 56V and up for heavier, more frequent cutting.
+        Manufacturers do not share one voltage scale, so treat the number on the box as a rough
+        tier rather than an exact spec you can compare brand to brand. The short version:
+      </p>
+      <ul>
+        <li><strong>18 to 20V:</strong> light pruning and branches under about 10cm. Small and light enough to swing one-handed.</li>
+        <li><strong>36 to 40V:</strong> the mid-range most UK gardens actually need, handling branches and small logs up to roughly 25cm.</li>
+        <li><strong>56V and up</strong> (a small number of platforms go as high as 80V): closes in on light petrol performance, for bigger rounds and more frequent use.</li>
+      </ul>
+      <p>
+        Bar length, chain speed and battery amp-hours all affect real cutting performance too, which
+        is why two 36V saws from different brands can feel noticeably different in use. Our
+        <a href="/chainsaw-battery-voltage/">battery voltage guide</a> has the full breakdown of
+        what each class actually handles.
+      </p>
+
+      <h2>Cordless vs corded electric: not the same thing</h2>
+      <p>
+        Cordless and corded electric chainsaws both get filed under "electric chainsaw", but they
+        suit different jobs. A corded saw plugs into the mains and never runs out of charge, but
+        you are tied to an extension lead and limited to wherever the socket reaches. A cordless
+        saw runs on a battery, so you can work anywhere in the garden, at the cost of a finite
+        run-time and the extra weight of the battery pack itself.
+      </p>
+
+      <h2>Who a cordless chainsaw suits</h2>
+      <p>
+        Cordless is the right call if you are working somewhere a cable cannot reach, want a saw
+        that starts the same way every time (no choke, no two-stroke fuel to mix, no flooded
+        carburettor), and would rather not deal with the noise and fumes of petrol. It suits
+        seasonal pruning, hedge and branch clearance, and processing occasional firewood. If you
+        are felling regularly, working all day, or cutting thick rounds back-to-back, a petrol
+        saw’s continuous run-time still wins for that specific job.
+      </p>
+
+      <h2>What cordless chainsaws typically cost in the UK</h2>
+      <p>
+        Prices below are typical UK retail bands, not live scraped prices, and they move with
+        stock and season. A "bare tool" listing often excludes the battery and charger, which can
+        add £50 to £100 or more if you do not already own one on that platform, and premium or
+        trade-focused brands often price the bare tool alone close to these bands too, since you
+        are paying for the wider battery platform, not just the one saw.
+      </p>
+      <table>
+        <thead>
+          <tr><th scope="col">Tier</th><th scope="col">Typical price</th><th scope="col">What it covers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono-spec">18V budget</td>
+            <td class="font-mono-spec">~£60 to £120</td>
+            <td>Kit with battery and charger, entry-level pruning saws</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">36 to 40V mid-range</td>
+            <td class="font-mono-spec">~£100 to £200</td>
+            <td>Kit with battery and charger, the most common garden tier</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">56V+ higher-end</td>
+            <td class="font-mono-spec">~£150 to £300</td>
+            <td>Kit with battery and charger, approaching light petrol power</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>How long does the battery actually last</h2>
+      <p>
+        A 4.0Ah 36V battery is a common mid-tier pack, and typically manages somewhere around 40
+        to 60 cuts through seasoned logs before it needs a recharge, depending on wood diameter,
+        hardness and moisture content. Green or wet wood, and thicker rounds, both drain a battery
+        faster than dry, thin branches do. If you are processing a full trailer load of firewood
+        in one sitting, a second battery (or borrowing a mains-corded saw for that one job) avoids
+        standing around waiting for a charge.
+      </p>
+
+      <h2>Buy for the task, not the badge</h2>
+      <p>
+        The most common regret in UK chainsaw forums is not buying too small, it is buying too
+        big. A heavier, higher-voltage saw is harder to control one-handed, tires you out faster
+        over a session, and often ends up sitting on a shelf because it is overkill for pruning
+        and hedge work. Match the saw to what you will actually cut most often, and size up only
+        if you genuinely process logs or fell small trees on a regular basis.
+      </p>
+      <p>
+        Our <a href="/#fit-check">Fit Check tool</a> matches a task and branch diameter to a
+        sensible power type and bar length in under a minute.
+      </p>
+    </div>
+
+    <div class="my-8">
+      <HazardTape />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>Three cordless chainsaws worth a look</h2>
+      <p>
+        These cover the three tiers above: an 18V entry point, and two 36 to 56V options for
+        general garden work and heavier sessions. Specs are from manufacturer listings, and
+        verdicts weigh those specs against recurring points from UK owner and retailer reviews,
+        not hands-on testing by us.
+      </p>
+    </div>
+
+    <div id="ryobi-ry18csa" class="my-6">
+      <PickCard
+        rank={1}
+        name="Ryobi ONE+ RY18CSA"
+        brand="Ryobi"
+        bestFor="light pruning on a budget"
+        rating={4}
+        rrp="~£70 to £120, battery often sold separately"
+        reviewUrl={`${url}#ryobi-ry18csa`}
+        verdict="An 18V, 25cm-bar saw built around Ryobi's ONE+ battery platform. Sensible if pruning and light branch work is genuinely all you need, especially if you already own other ONE+ garden tools and can share a battery across them."
+        pros={[
+          'Battery and charger shared across Ryobi’s wide ONE+ 18V tool range',
+          'Light enough to run one-handed for short jobs',
+          'Low buy-in cost for occasional use',
+        ]}
+        cons={[
+          '25cm bar limits it to smaller branches, not logs',
+          'Battery and charger are often sold separately, check the listing',
+          '18V will not keep up with anything log-sized',
+        ]}
+      />
+    </div>
+
+    <div id="makita-duc353" class="my-6">
+      <PickCard
+        rank={2}
+        name="Makita DUC353"
+        brand="Makita"
+        bestFor="existing Makita LXT owners"
+        rating={4.5}
+        rrp="~£150 to £220, tool only, LXT batteries sold separately"
+        reviewUrl={`${url}#makita-duc353`}
+        verdict="Runs on two 18V LXT batteries rather than a dedicated pack, so it sits in the 36V mid-tier. The 35cm bar handles more than the 18V-class saws above. Makes most sense if you are already invested in Makita's LXT ecosystem from other cordless tools."
+        pros={[
+          'Runs on Makita’s huge 18V LXT battery range, no separate platform to buy into',
+          '35cm bar copes with more than 18V-class saws',
+          'Reputable brand for trade-grade reliability',
+        ]}
+        cons={[
+          'Needs two batteries to run, cost adds up if you do not already own LXT packs',
+          'Noticeably heavier than the single-battery 18V options',
+        ]}
+      />
+    </div>
+
+    <div id="ego-cs1401e" class="my-6">
+      <PickCard
+        rank={3}
+        name="EGO Power+ CS1401E"
+        brand="EGO"
+        bestFor="firewood-sized rounds, no petrol"
+        rating={4.5}
+        rrp="~£200 to £300 as a kit with battery and charger"
+        reviewUrl={`${url}#ego-cs1401e`}
+        verdict="A 56V ARC Lithium saw with a 35cm bar, EGO's higher-end cordless tier. This is roughly where UK owners report cordless starts to genuinely handle firewood-sized rounds without stepping up to petrol. The 56V battery is shared with EGO's mower and trimmer range, worth factoring in if you are already on that platform."
+        pros={[
+          'Closest of the three to light petrol cutting power, per EGO’s own spec sheet',
+          '56V ARC Lithium batteries shared across EGO’s wider mower and trimmer range',
+          'Tool-less chain tensioning and auto-oiling are common owner-reported conveniences',
+        ]}
+        cons={[
+          'Highest up-front cost of the three, especially as a full kit',
+          'Heavier than the 18V and Makita 36V options',
+          'Battery is EGO-platform only',
+        ]}
+      />
+    </div>
+
+    <PriceGrid model="EGO Power+ CS1401E 56V cordless chainsaw" />
+
+    <div class="prose-chainsaw">
+      <p>
+        Husqvarna’s 120i sits in the same 36V mid-tier bracket as the Makita, with a 35cm bar. If
+        you already run a Husqvarna battery-platform trimmer or mower, the same logic as the
+        Makita pick applies, the saw itself is cheaper once you are not also buying batteries for
+        the first time.
+      </p>
     </div>
 
     <HowWeResearch />
+
+    <div class="prose-chainsaw">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/chainsaw-battery-voltage/">Chainsaw battery voltage explained</a>, the full 18V to 56V+ breakdown</li>
+        <li><a href="/electric-chainsaws/">Best electric chainsaws UK</a>, the corded, mains-powered alternative</li>
+        <li><a href="/chainsaw-safety/">Chainsaw safety</a>, EN381 PPE tiers and kickback technique</li>
+        <li><a href="/#fit-check">Chainsaw Fit Check</a>, match your task to a power type and bar length in under a minute</li>
+      </ul>
+    </div>
+
     <FAQ {faqs} />
   </article>
 </BaseLayout>

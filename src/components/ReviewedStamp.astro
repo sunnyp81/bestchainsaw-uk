@@ -1,0 +1,17 @@
+---
+// Visible freshness signal: renders the page's real datePublished (already used in
+// articleSchema) as human-readable text so it counts as an on-page freshness signal,
+// not just hidden JSON-LD. Never pass a fabricated or rolling date, always the same
+// ISO string already declared as `datePublished` on the page.
+interface Props { date: string }
+const { date } = Astro.props as Props;
+const formatted = new Date(`${date}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+<p class="text-sm text-steel-400 mt-3">
+  Guide reviewed for accuracy: <span class="font-mono-spec text-steel-600">{formatted}</span>
+</p>

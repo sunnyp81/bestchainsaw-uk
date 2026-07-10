@@ -4,10 +4,14 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import PickCard from '../../components/PickCard.astro';
+import PriceGrid from '../../components/PriceGrid.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Best Petrol Chainsaws UK 2026 - Buying Guide';
-const description = 'Independent, research-led guide to the best petrol chainsaws for UK gardens and smallholdings: engine size, bar length, felling capability and who needs one.';
+const title = 'Best Petrol Chainsaw UK 2026: cc Guide & Real Prices';
+const description = 'Independent UK guide to petrol chainsaws: which cc you need for firewood or felling, real prices, named models and fuel mix basics.';
 const datePublished = '2026-07-10';
 const url = '/petrol-chainsaws/';
 
@@ -16,14 +20,34 @@ const crumbs = [
   { name: 'Petrol chainsaws', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked PickCard picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'What cc chainsaw do I need for firewood?',
+    a: "35 to 45cc is the sweet spot for most UK firewood processing. Saws like the Stihl MS 211 or Husqvarna 120 Mark II and 435 II sit in this range with a 14 to 16in bar and comfortably work through a season's rounds. A smaller 30 to 32cc saw such as the Stihl MS 170 is enough if you're only cutting the odd log or two a year. Save 50cc and up for regular felling of larger trees. That's more saw than routine firewood needs.",
+  },
+  {
+    q: 'Petrol vs cordless for firewood, which is better?',
+    a: "Cordless now covers most UK firewood piles: a good 36 to 56V battery saw handles most homeowners' needs with less noise, no fuel mixing and less maintenance, and modern battery saws have closed a lot of the power gap. Petrol still wins if you're cutting all day, working somewhere you can't recharge, or regularly into bigger rounds where sustained torque matters more than convenience. See our <a href=\"/chainsaw-for-firewood/\">guide to chainsaws for firewood</a> for the full comparison, or <a href=\"/cordless-chainsaws/\">cordless chainsaws</a> if quieter and lower-maintenance suits you better.",
+  },
+  {
+    q: 'What fuel mix does a chainsaw need?',
+    a: "50:1 petrol to two-stroke oil is the standard mix: 20ml of oil per litre of petrol, and it covers almost every modern petrol chainsaw including every Stihl and Husqvarna model on this page. Use fresh UK unleaded (95 to 98 RON) and a proper TC-rated two-stroke oil, and only mix enough for around a month's use since old fuel degrades and causes starting problems. Check your specific model's manual too. A small number of saws use a different ratio.",
+  },
+  {
+    q: 'How noisy is a petrol chainsaw?',
+    a: 'Loud. Manufacturer spec sheets put sound pressure at the operator\'s ear at around 100dB(A) for a typical homeowner-class petrol saw, noticeably louder than an equivalent cordless or electric model, which is why ear defenders are non-negotiable PPE (see our <a href="/chainsaw-safety/">chainsaw safety guide</a>). It\'s a neighbours issue too: most UK councils treat roughly 8am to 6pm on weekdays and 8am to 1pm on Saturday as reasonable hours for noisy garden work, and avoiding Sundays altogether is the considerate norm rather than a hard law.',
+  },
+];
+
+const picks = [
+  { name: 'Stihl MS 211', url: `${url}#stihl-ms-211` },
+  { name: 'Husqvarna 120 Mark II', url: `${url}#husqvarna-120-mark-ii` },
+  { name: 'Husqvarna 435 II', url: `${url}#husqvarna-435-ii` },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
-  ...(picks.length ? [itemListSchema({ name: 'Best petrol chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  itemListSchema({ name: 'Best petrol chainsaws UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) }),
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
@@ -32,20 +56,217 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Petrol chainsaws</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best petrol chainsaws for felling and big jobs</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Best petrol chainsaws UK: from firewood to felling</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      For felling, thick rounds and cutting all day away from a power source, petrol is still the
-      only realistic choice. This guide covers engine size (cc), bar length, and who genuinely
-      needs a petrol saw rather than a battery one.
+      A petrol chainsaw runs on a two-stroke engine, sized in cc (cubic centimetres), built for
+      regular firewood processing, felling and storm-clearance work where mains power or a battery
+      simply won't keep up all day. Something in the 35 to 45cc range with a 14 to 16in bar covers
+      most UK firewood and garden use. Step up to 50cc and above only once you're regularly felling
+      larger trees or clearing genuinely big timber.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full buying-guide prose, PickCard picks, PriceGrid comparisons, comparison table, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw">
+      <h2>What cc chainsaw do you actually need?</h2>
+      <p>
+        Engine size is the single most useful spec on a petrol chainsaw box. It tells you roughly
+        how much timber the saw can chew through and for how long before it's straining. A 50cc saw
+        is heavier, thirstier and more tiring to run one-handed through an afternoon of
+        fence-post-sized rounds than a 40cc saw built for exactly that job, so bigger isn't
+        automatically better. Match the cc to what you're actually cutting most weeks, not the
+        biggest tree you might theoretically fell once a year.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Engine size</th>
+            <th scope="col">Bar length</th>
+            <th scope="col">Typical UK use</th>
+            <th scope="col">Example models</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-mono-spec">Up to ~32cc</td>
+            <td class="font-mono-spec">14in (35cm)</td>
+            <td>Occasional light pruning and small branches, tight budget or infrequent use</td>
+            <td>Stihl MS 170, Stihl MS 181</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">35 to 45cc</td>
+            <td class="font-mono-spec">14 to 16in (35 to 40cm)</td>
+            <td>Most UK firewood processing and general garden clearance, the sweet spot for homeowners</td>
+            <td>Stihl MS 211, Husqvarna 120 Mark II, Husqvarna 435 II</td>
+          </tr>
+          <tr>
+            <td class="font-mono-spec">50cc and up</td>
+            <td class="font-mono-spec">16 to 20in (40 to 50cm)</td>
+            <td>Felling larger trees, heavy storm-clearance, frequent or semi-professional use</td>
+            <td>Stihl MS 271, Husqvarna 555</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Not sure which row you're in? Answer three quick questions in the
+        <a href="/#fit-check">Fit Check tool</a> on the homepage and it'll point you at a power type,
+        bar length and PPE tier based on your actual task, not the biggest saw in the shop.
+      </p>
+
+      <h2>Real UK prices for a petrol chainsaw</h2>
+      <p>
+        Expect to pay somewhere around <strong>£120 to £350</strong> typically for a decent
+        homeowner-grade petrol saw from Stihl or Husqvarna, with the smaller 30 to 32cc entry
+        models nearer the bottom of that band and the 35 to 45cc firewood saws (like the MS 211 or
+        435 II) nearer the top. Step into the 50cc-plus, semi-professional class and prices climb
+        well past £350, sometimes considerably, before you're anywhere near a proper felling saw.
+        Cheap unbranded petrol saws exist well under £120. Parts, servicing and safety-critical
+        components like the chain brake are usually the first things cut on those, so check them
+        before you buy on price alone.
+      </p>
+
+      <h2>Three petrol chainsaws that suit most UK buyers</h2>
+      <p>
+        The Stihl MS 211, Husqvarna 120 Mark II and Husqvarna 435 II cover most of what UK buyers
+        actually need, from a first, occasional-use saw up to a proper firewood workhorse. We
+        picked them on published manufacturer specs, widespread UK dealer availability and
+        consistent feedback from owner reviews and forums, not staged testing.
+      </p>
     </div>
 
-    <HowWeResearch />
+    <div class="space-y-5 my-8">
+      <PickCard
+        rank={1}
+        name="Stihl MS 211"
+        brand="Stihl"
+        bestFor="most UK firewood and general garden work"
+        rating={4.5}
+        pros={[
+          "35.2cc engine comfortably handles a season's firewood",
+          'Up to 16in bar covers most rounds and the odd small tree',
+          'Parts and servicing widely available at UK Stihl dealers',
+        ]}
+        cons={[
+          'Pull-start and fuel mixing add a bit of ritual over a battery saw',
+          'Heavier in the hand than an equivalent cordless model',
+        ]}
+        rrp="£250 to £320"
+        reviewUrl={`${url}#stihl-ms-211`}
+        verdict="A 35.2cc all-rounder that sits right in the middle of the useful range: enough engine for a season of firewood and the odd small tree, without the weight and price of a felling saw."
+      />
+      <PickCard
+        rank={2}
+        name="Husqvarna 120 Mark II"
+        brand="Husqvarna"
+        bestFor="first-time petrol buyers on a tighter budget"
+        rating={4}
+        pros={[
+          '38.2cc X-Torq engine is a genuine step up from entry 30cc saws',
+          'Lighter and more forgiving to start than bigger Husqvarna models',
+          'Widely stocked at UK garden machinery dealers',
+        ]}
+        cons={[
+          'Air-injection filter still needs regular cleaning',
+          'Not built for repeated felling beyond small trees',
+        ]}
+        rrp="£180 to £230"
+        reviewUrl={`${url}#husqvarna-120-mark-ii`}
+        verdict="A genuine step up from the smallest 30cc saws while staying light and easy to start, the model that keeps turning up as a recommended first petrol saw in UK owner forums."
+      />
+      <PickCard
+        rank={3}
+        name="Husqvarna 435 II"
+        brand="Husqvarna"
+        bestFor="bigger gardens and heavier firewood rounds"
+        rating={4.5}
+        pros={[
+          '40cc X-Torq engine gives more headroom than the 120 Mark II',
+          'LowVib dampening noticeably reduces hand and arm fatigue over a session',
+          'Supports bar sizes up to 16 to 18in depending on the kit fitted',
+        ]}
+        cons={[
+          'More saw than most people need for occasional pruning',
+          'Sits above the MS 211 and 120 Mark II on price',
+        ]}
+        rrp="£270 to £340"
+        reviewUrl={`${url}#husqvarna-435-ii`}
+        verdict="More headroom than the MS 211 or 120 Mark II, worth the extra weight and price if your rounds run larger or you're cutting for longer stretches at a time."
+      />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h3 id="stihl-ms-211">Stihl MS 211: the middle-ground firewood saw</h3>
+      <p>
+        The 35.2cc MS 211 sits right in the middle of the useful range for UK homeowners. It's a
+        low-vibration, 2-MIX engine with a pre-separation air filter that extends the time between
+        cleans, and it's rated by Stihl for cutting firewood and felling small trees rather than
+        just light pruning. With a 16in bar it'll take on most rounds a UK garden or smallholding
+        throws at it without the extra weight of a felling-class saw.
+      </p>
+      <h3 id="husqvarna-120-mark-ii">Husqvarna 120 Mark II: the budget-friendly first petrol saw</h3>
+      <p>
+        The 120 Mark II's 38.2cc X-Torq engine puts it a clear step above the smallest 30cc-class
+        saws while staying light and easy enough to start for someone buying their first petrol
+        chainsaw. It's consistently one of the more affordable Husqvarna petrol models stocked by
+        UK garden machinery dealers, which is why it turns up so often as a recommended starter saw
+        in owner forums and reviews.
+      </p>
+      <h3 id="husqvarna-435-ii">Husqvarna 435 II: for bigger rounds and bigger gardens</h3>
+      <p>
+        At 40cc, the 435 II has more headroom than either the MS 211 or the 120 Mark II, useful if
+        your firewood rounds run larger or your garden is big enough that you're cutting for longer
+        stretches. Husqvarna's LowVib dampening is a genuine comfort feature over a long session,
+        and the saw takes bar sizes up to 16 to 18in depending on the kit, though most UK owners run
+        it at 16in for firewood work.
+      </p>
+
+      <h2>Where to buy: Stihl MS 211</h2>
+    </div>
+
+    <PriceGrid
+      model="Stihl MS 211"
+      screwfix={{ url: 'https://www.screwfix.com/search?search=stihl+ms+211' }}
+      bq={{ url: 'https://www.diy.com/search?term=stihl+ms+211' }}
+    />
+
+    <div class="prose-chainsaw">
+      <h2>Starting and maintenance: the trade-off for more power</h2>
+      <p>
+        A petrol saw needs more upkeep than an electric or cordless one: fuel mixing, filter
+        cleaning, chain tensioning and a proper starting routine, not just pull the trigger. Go in
+        knowing that before you buy, not the first time it won't start.
+      </p>
+      <ul>
+        <li><strong>Fuel mixing</strong>: petrol saws run on a 50:1 petrol to two-stroke oil mix (see the FAQ below), mixed fresh every few weeks rather than left to sit in the tank.</li>
+        <li><strong>Air filter</strong>: sawdust clogs the air filter faster than most owners expect. A dirty filter is one of the most common causes of hard starting and lost power.</li>
+        <li><strong>Chain tension</strong>: check and adjust before every session. A loose chain wears the bar and is a genuine safety issue, not just a performance one.</li>
+        <li><strong>Starting technique</strong>: choke, primer bulb and a firm pull are all part of the routine. Cold starts in particular take some getting used to compared with a trigger-start cordless saw.</li>
+        <li><strong>Noise and fumes</strong>: two-stroke engines are loud and produce exhaust fumes, both of which matter for how and where you can reasonably use one (see the FAQ on noise below).</li>
+      </ul>
+      <p>
+        The bar and chain themselves wear out on every power type, petrol included. If yours is
+        cutting crooked, chewing through chains fast or the bar looks bent or grooved, our
+        <a href="/replace-bar/">step-by-step guide to replacing a chainsaw bar</a> covers picking
+        the right replacement and swapping it safely.
+      </p>
+    </div>
+
+    <HazardTape text="Mix and store two-stroke fuel outdoors, away from any ignition source, and never smoke near it. Full EN381 PPE, chain brake, cut-resistant trousers, gloves, eye and ear protection, applies every time the engine is running." />
+
+    <div id="how-we-choose">
+      <HowWeResearch />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/chainsaw-for-firewood/">Best chainsaw for processing firewood</a>, the full power-type comparison for a typical log pile.</li>
+        <li><a href="/chainsaw-safety/">Chainsaw safety: PPE, kickback and technique</a>, EN381 PPE tiers and HSE guidance before you cut.</li>
+        <li><a href="/replace-bar/">How to replace a chainsaw bar</a>, sizing and fitting a replacement bar safely.</li>
+        <li><a href="/#fit-check">Fit Check tool</a>, match your task to a power type, bar length and PPE tier in under a minute.</li>
+      </ul>
+    </div>
+
     <FAQ {faqs} />
   </article>
 </BaseLayout>

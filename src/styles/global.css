@@ -69,10 +69,22 @@ h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); }
 .prose-chainsaw ul { @apply list-disc pl-6 mb-4 text-steel-600 space-y-1; }
 .prose-chainsaw ol { @apply list-decimal pl-6 mb-4 text-steel-600 space-y-1; }
 .prose-chainsaw a  { @apply text-hazard-600 underline underline-offset-2 hover:text-hazard-700; }
-.prose-chainsaw table { @apply w-full text-sm border-collapse my-6; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.prose-chainsaw table {
+  @apply w-full text-sm my-6 rounded-xl border border-steel-200 bg-white;
+  border-collapse: separate;
+  border-spacing: 0;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 @media (min-width: 768px) { .prose-chainsaw table { display: table; overflow-x: visible; } }
-.prose-chainsaw th { @apply text-left px-3 py-2 bg-hazard-50 border border-steel-200 font-semibold; }
-.prose-chainsaw td { @apply px-3 py-2 border border-steel-200 align-top; }
+.prose-chainsaw th {
+  @apply text-left px-3 py-2.5 bg-hazard-50 font-semibold text-graphite-900 text-xs uppercase tracking-wide border-b border-steel-200;
+}
+.prose-chainsaw td { @apply px-3 py-2.5 border-b border-steel-200 align-top; }
+.prose-chainsaw tr:last-child td { border-bottom: none; }
+.prose-chainsaw tbody tr:hover td { @apply bg-surface-100; }
 /* Opt-in for numeric spec cells (bar length, cc, voltage, price) inside a table, e.g. <td class="font-mono-spec">. */
 .prose-chainsaw blockquote { @apply border-l-4 border-hazard-400 bg-hazard-50 rounded-r-lg px-5 py-4 my-6 italic text-steel-600; }
 .prose-chainsaw blockquote p { @apply mb-1; }

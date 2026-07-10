@@ -3,27 +3,57 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FitCheck from '../components/FitCheck.astro';
 import HowWeResearch from '../components/HowWeResearch.astro';
 import FAQ from '../components/FAQ.astro';
+import ReviewedStamp from '../components/ReviewedStamp.astro';
 import { personSchema, webApplicationSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
 
 // orgSchema/websiteSchema/speakableSchema are already injected globally by BaseLayout.
-const title = 'Best Chainsaw UK - Independent Chainsaw Buying Guides & Fit Check';
-const description = 'Independent UK chainsaw buying guides, research-led from manufacturer specs, verified owner reviews and HSE/EN381 safety standards, plus a free Fit Check tool that matches your task to the right saw.';
+const title = 'Chainsaw Fit Check UK: What Size Chainsaw Do You Need?';
+const lastReviewed = '2026-07-10';
+const description = 'Free Fit Check tool matches your task to the right chainsaw, plus UK guides to electric, cordless and petrol saws, sizing and safety.';
 
 const hubs = [
-  { slug: 'electric-chainsaws', label: 'Electric chainsaws', tagline: 'Corded, mains-powered. The cheapest, lightest way to cut near a power source.' },
-  { slug: 'cordless-chainsaws', label: 'Cordless chainsaws', tagline: 'Battery-powered. No cable, no fuel, the default choice for most UK gardens now.' },
-  { slug: 'petrol-chainsaws', label: 'Petrol chainsaws', tagline: 'For felling, thick rounds and all-day cutting away from power.' },
+  {
+    slug: 'electric-chainsaws',
+    label: 'Electric chainsaws',
+    tagline: 'Corded and mains powered: the cheapest and quietest way in for light pruning and branches under about 20cm near a socket.',
+  },
+  {
+    slug: 'cordless-chainsaws',
+    label: 'Cordless chainsaws',
+    tagline: 'Battery powered, no cable and no fuel: the default pick for most portable UK garden work away from a plug.',
+  },
+  {
+    slug: 'petrol-chainsaws',
+    label: 'Petrol chainsaws',
+    tagline: 'The choice for regular firewood processing, storm clean-up or felling away from power, where torque and run time matter more than noise.',
+  },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs once wave-1 content lands.
-const faqs: { q: string; a: string }[] = [];
+const faqs = [
+  {
+    q: 'What size chainsaw do I need?',
+    a: 'Match the bar to your thickest cut, not the biggest saw you can afford. Pick a bar roughly 5cm longer than the thickest branch or trunk you will cut: under 20cm calls for a 12 to 14 inch bar, 20 to 25cm calls for 14 to 16 inches, and over 25cm or regular felling needs 16 to 18 inches. Use the <a href="/#fit-check">Fit Check tool</a> above for a recommendation based on your own task.',
+  },
+  {
+    q: 'Electric vs cordless vs petrol: which should I get?',
+    a: 'Corded electric is the cheapest and quietest choice for light pruning under about 20cm near a socket, cordless battery is the most portable option for general UK garden work away from a plug, and petrol is worth the extra weight and noise only for regular firewood processing or storm and felling clearance. See the <a href="/electric-chainsaws/">electric</a>, <a href="/cordless-chainsaws/">cordless</a> and <a href="/petrol-chainsaws/">petrol</a> guides for the detail.',
+  },
+  {
+    q: 'Do I need a licence for a chainsaw in the UK?',
+    a: 'No, not for domestic or personal use in your own garden: there is no licence requirement to buy or own a chainsaw in the UK. The <a href="https://www.hse.gov.uk/" rel="noopener noreferrer">Health and Safety Executive (HSE)</a> only requires a valid certificate of competence when a chainsaw is used at work or in a professional capacity. Training is not a legal requirement for personal use, but we would still recommend it: see our <a href="/chainsaw-safety/">chainsaw safety guide</a>.',
+  },
+  {
+    q: 'What PPE do I need to use a chainsaw safely?',
+    a: 'EN381 rated protective equipment is the minimum: a working chain brake on the saw itself, cut-resistant gloves, leg protection (chainsaw trousers or chaps, Class 1 minimum), and eye and ear protection. Our <a href="/chainsaw-safety/">chainsaw safety guide</a> covers PPE classes and kickback risk in full.',
+  },
+];
 
 const schema = [
   personSchema(),
   webApplicationSchema({
     name: 'Chainsaw Fit Check',
     description: 'Free rule-based tool that matches a cutting task, branch diameter and experience level to a recommended chainsaw power type, bar length and PPE tier.',
-    url: '/#fit-check',
+    url: '/',
   }),
   itemListSchema({
     name: 'Chainsaw power types',
@@ -37,37 +67,80 @@ const schema = [
 <BaseLayout {title} {description} {schema}>
   <FitCheck />
 
-  <section class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-8 text-center font-heading">Browse by power type</h2>
-    <div class="grid sm:grid-cols-3 gap-5">
-      {hubs.map((h) => (
-        <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
-          <h3 class="text-xl font-bold text-graphite-900 group-hover:text-hazard-600 mb-2 font-heading">{h.label}</h3>
-          <p class="text-steel-600 text-sm leading-relaxed">{h.tagline}</p>
-          <span class="inline-block mt-4 text-hazard-600 font-semibold text-sm">Read the guide →</span>
-        </a>
-      ))}
-    </div>
-  </section>
+  <section class="max-w-4xl mx-auto px-4 py-14 md:py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-4 font-heading">Size the saw to the wood, not the wish list</h2>
+    <p class="text-base md:text-lg text-steel-600 leading-relaxed mb-4">
+      The bar length that matters is the one that matches your thickest cut, not the biggest saw
+      on the shelf. Pick a bar roughly 5cm longer than the thickest branch or trunk you expect to
+      cut: a 15cm branch does not need a 45cm petrol bar bought 'just in case'. Power type follows
+      the same logic: corded electric handles light pruning under about 20cm near a socket,
+      cordless battery saws cover most portable UK garden work away from a plug, and petrol earns
+      its weight and noise on regular firewood processing or storm and felling clearance.
+    </p>
+    <ReviewedStamp date={lastReviewed} />
+    <p class="text-base md:text-lg text-steel-600 leading-relaxed mb-4">
+      The recurring complaint across the owner threads and reviews we research (Arbtalk, UK
+      retailer reviews, Amazon UK) is a saw that is too heavy, too loud or too much machine for
+      the job, not one that is underpowered. Buying bigger 'just in case' is the more common
+      regret. That is why the Fit Check above is deliberately conservative rather than
+      aspirational.
+    </p>
+    <p class="text-base md:text-lg text-steel-600 leading-relaxed mb-8">
+      The <a href="/first-chainsaw/" class="text-hazard-600 underline underline-offset-2 hover:text-hazard-700">beginner's guide</a>
+      covers the training and features that matter most before you buy your first saw.
+    </p>
 
-  <section class="bg-surface-100 border-y border-steel-200 py-16">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-8 text-center font-heading">More guides</h2>
-      <div class="grid sm:grid-cols-3 gap-5 text-center">
-        <a href="/chainsaw-safety/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Chainsaw safety</strong><span class="block mt-1 text-sm text-steel-600">EN381 PPE and safe technique</span></a>
-        <a href="/first-chainsaw/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Your first chainsaw</strong><span class="block mt-1 text-sm text-steel-600">What to buy as a beginner</span></a>
-        <a href="/chainsaw-for-firewood/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500"><strong class="text-graphite-900 font-heading">Chainsaws for firewood</strong><span class="block mt-1 text-sm text-steel-600">Best picks for processing logs</span></a>
+    <figure class="my-8">
+      <div class="rounded-xl border border-steel-200 bg-white p-4 md:p-6 overflow-x-auto">
+        <svg viewBox="0 0 660 190" class="w-full h-auto min-w-[560px]" role="img" aria-labelledby="sizingSvgTitle">
+          <title id="sizingSvgTitle">Chainsaw bar length by task: corded electric for cuts under 20cm, cordless battery for 20 to 25cm, petrol for 25cm and over</title>
+          <line x1="140" y1="14" x2="140" y2="168" stroke="var(--color-steel-200)" stroke-width="2" />
+          <text x="0" y="35" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="var(--color-graphite-900)">Corded electric</text>
+          <rect x="140" y="20" width="140" height="22" rx="4" fill="var(--color-hazard-400)" />
+          <text x="290" y="36" font-family="'IBM Plex Mono', monospace" font-size="13" fill="var(--color-graphite-900)">up to 20cm, 12 to 14in bar</text>
+          <text x="0" y="90" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="var(--color-graphite-900)">Cordless battery</text>
+          <rect x="140" y="75" width="220" height="22" rx="4" fill="var(--color-hazard-500)" />
+          <text x="370" y="91" font-family="'IBM Plex Mono', monospace" font-size="13" fill="var(--color-graphite-900)">20 to 25cm, 14 to 16in bar</text>
+          <text x="0" y="145" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="var(--color-graphite-900)">Petrol</text>
+          <rect x="140" y="130" width="320" height="22" rx="4" fill="var(--color-hazard-600)" />
+          <text x="470" y="146" font-family="'IBM Plex Mono', monospace" font-size="13" fill="var(--color-graphite-900)">25cm+, 16 to 18in bar</text>
+        </svg>
       </div>
+      <figcaption class="mt-2 text-center text-xs text-steel-400">
+        Bar length follows the cut, not the other way round: corded electric for cuts under 20cm,
+        cordless battery for 20 to 25cm, petrol for 25cm and over.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="bg-surface-100 border-y border-steel-200 py-14 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-3 text-center font-heading">Choose by power type</h2>
+      <p class="text-center text-steel-600 max-w-2xl mx-auto mb-8">
+        Three power types cover UK gardens end to end, from a quiet Sunday prune to a wet Tuesday
+        felling storm damage.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-5">
+        {hubs.map((h) => (
+          <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
+            <h3 class="text-xl font-bold text-graphite-900 group-hover:text-hazard-600 mb-2 font-heading">{h.label}</h3>
+            <p class="text-steel-600 text-sm leading-relaxed">{h.tagline}</p>
+            <span class="inline-block mt-4 text-hazard-600 font-semibold text-sm">Read the guide &rarr;</span>
+          </a>
+        ))}
+      </div>
+      <p class="text-center text-steel-600 text-sm mt-8">
+        EN381 PPE applies across all three power types: see the <a href="/chainsaw-safety/" class="text-hazard-600 underline underline-offset-2 hover:text-hazard-700">chainsaw safety guide</a>
+        for PPE classes and kickback risk.
+      </p>
     </div>
   </section>
 
-  <section class="max-w-4xl mx-auto px-4 py-16">
-    <HowWeResearch />
+  <section class="max-w-4xl mx-auto px-4 pt-14 md:pt-16">
+    <HowWeResearch heading="Why bestchainsaw.uk" />
   </section>
 
   <div class="max-w-4xl mx-auto px-4">
     <FAQ {faqs} />
   </div>
-
-  <!-- TODO(content agent): flesh out homepage with real editorial content, hero copy refinement and sourced FAQs. -->
 </BaseLayout>

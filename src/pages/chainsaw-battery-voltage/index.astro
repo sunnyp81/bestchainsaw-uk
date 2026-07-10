@@ -2,10 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
+import HowWeResearch from '../../components/HowWeResearch.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Chainsaw Battery Voltage Explained: 18V vs 36V vs 40V vs 56V (UK)';
-const description = 'What chainsaw battery voltage actually means for cutting power and runtime, and which class (18V, 36-40V, 56V+) suits pruning, firewood or bigger jobs.';
+const title = '18V vs 40V vs 80V Chainsaw: Voltage Guide (UK)';
+const description = "What chainsaw voltage actually controls, how amp-hours affect run-time, and which class (18V, 36-40V, 60-80V) suits your cutting job. UK guide.";
 const datePublished = '2026-07-10';
 const url = '/chainsaw-battery-voltage/';
 
@@ -14,14 +16,23 @@ const crumbs = [
   { name: 'Battery voltage guide', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-
-// TODO(content agent): verify every figure against real manufacturer spec sheets before publishing.
-const voltageClasses = [
-  { tier: '18V', typicalBar: '10 to 12 in', bestFor: 'Light pruning, branches under 10cm' },
-  { tier: '36 to 40V', typicalBar: '14 to 16 in', bestFor: 'General garden use, firewood up to ~25cm' },
-  { tier: '56V+', typicalBar: '16 to 18 in', bestFor: 'Heavier garden work, occasional felling' },
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'Is 18V enough for a chainsaw?',
+    a: "Yes, for pruning and branches up to around 15cm. An 18-20V saw is genuinely enough. It's lighter and cheaper to run than a bigger platform too. It isn't enough for firewood-sized logs: expect it to bog down or stall on anything much thicker. Runtime per charge is short at this tier, so it suits short, occasional jobs rather than sustained cutting.",
+  },
+  {
+    q: 'Is 40V enough for firewood?',
+    a: "Generally yes. A 36-40V saw handles typical UK firewood-sized rounds up to around 25cm without much trouble. Bigger rounds, or a large pile processed in one session, mean swapping batteries often or feeling the saw slow down. That's when people move up to 60-80V or a small petrol saw instead.",
+  },
+  {
+    q: 'What does Ah mean on a chainsaw battery?',
+    a: 'Ah stands for amp-hours, a measure of how much charge the battery stores, not how powerful the saw is. A higher-Ah battery at the same voltage runs the saw for longer between charges and weighs more; it does not cut faster or through thicker wood. Cutting power comes from voltage, runtime comes from Ah.',
+  },
+  {
+    q: 'Is 80V better than a petrol chainsaw?',
+    a: "Close on peak performance, but no, not for sustained heavy felling. A good 60-80V saw gets genuinely near a small petrol saw for occasional bigger jobs, with less noise, no exhaust and no fuel mixing. Battery packs still run flat and need real recharging time rather than a five-second refuel. Over a full day of continuous cutting, a 45cc+ petrol saw still outlasts it.",
+  },
 ];
 
 const schema = [
@@ -29,28 +40,98 @@ const schema = [
   faqSchema(faqs),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
+
+// Centrepiece table: voltage tier mapped to typical max cut diameter and typical
+// battery/run-time. Figures are typical, manufacturer-published ranges, not lab
+// measured by us, and are clearly labelled as such throughout the page.
+const voltageTiers = [
+  {
+    tier: '18-20V',
+    maxDiameter: 'Up to around 15cm',
+    runtime: '2.0-5.0Ah typical, good for a few dozen light cuts per charge',
+    bestFor: 'Pruning, hedges, branches, light garden tidy-ups',
+  },
+  {
+    tier: '36-40V',
+    maxDiameter: 'Up to around 25cm',
+    runtime: '4.0-6.0Ah typical: a 4.0Ah pack gives roughly 40 to 60 cuts, depending on wood',
+    bestFor: 'General garden use, firewood-sized logs, most UK gardens',
+  },
+  {
+    tier: '60-80V',
+    maxDiameter: 'Beyond 25cm, approaching light petrol performance',
+    runtime: '4.0-7.5Ah typical, higher-capacity packs common given the extra current draw',
+    bestFor: 'Bigger gardens, sustained cutting, occasional felling',
+  },
+];
 ---
 <BaseLayout {title} {description} {schema}>
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Battery guide</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw battery voltage explained</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Chainsaw battery voltage explained: 18V vs 40V vs 80V</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      Voltage is a rough proxy for cutting power, but bar length, chain speed and battery amp
-      hours matter just as much. Here is what each class is realistically good for.
+      Chainsaw battery voltage sets the saw's peak cutting power: how fast the chain drives
+      through wood without bogging down. Amp-hours (Ah) set how long that power lasts on a single
+      charge, not how strong the saw is. That mix-up catches out most first-time buyers. Match the
+      voltage tier to what you actually cut, not the highest number on the box. Doing that avoids
+      both an underpowered saw and paying for power you'll never use.
     </p>
+    <ReviewedStamp date={datePublished} />
 
-    <!-- TODO(content agent): replace with the real, sourced voltage comparison + full prose. -->
     <div class="prose-chainsaw my-10">
+      <blockquote>
+        <p>Voltage is power, not runtime. Higher voltage cuts thicker wood faster; it doesn't run
+        for longer. Amp-hours (Ah) are runtime, not power. A bigger Ah battery at the same voltage
+        lasts longer per charge; it doesn't cut any harder. By UK tier: 18-20V suits pruning and
+        branches, 36-40V covers most gardens and firewood-sized logs, 60-80V approaches light
+        petrol performance for bigger jobs.</p>
+      </blockquote>
+
+      <h2>Volts vs amp-hours: what each number actually does</h2>
+      <p>
+        The two numbers printed on a chainsaw battery answer different questions. Mixing them up
+        is probably the most common confusion for first-time cordless buyers. Voltage is the
+        electrical pressure the battery pushes through the motor. It's the main driver of chain
+        speed and torque: how hard and how fast the saw can bite into wood. Amp-hours measure the
+        battery's storage capacity: how much charge it holds, and therefore how long it keeps the
+        saw running before you need to recharge or swap packs.
+      </p>
+      <p>
+        Think of it like a hosepipe. Voltage is the water pressure: it decides how forcefully the
+        water comes out. Amp-hours is the size of the tank behind it: it decides how long the
+        water keeps flowing before the tank runs dry. Fit a bigger tank and the pressure stays the
+        same; you just get more time before it runs out. Fit a higher-Ah battery to the same
+        voltage saw and the same rule applies: longer runtime and a heavier pack, not a saw that
+        cuts through thicker wood.
+      </p>
+      <p>
+        This shows up when comparing two saws with the same voltage but different Ah ratings, or
+        the same battery family sold in different pack sizes. A saw on an 18V platform with a
+        5.0Ah battery cuts at the same speed as the identical saw with a 3.0Ah battery; it just
+        keeps going for longer between charges. A bigger battery won't fix a saw that feels
+        underpowered. Only a higher voltage tier, or occasionally a better-designed brushless
+        motor within the same voltage, fixes that.
+      </p>
+
+      <h2>Voltage tier to cutting capacity</h2>
+      <p>
+        The table below maps the three broad voltage bands UK retailers sell to what they're
+        realistically good for. Treat these as typical ranges, not fixed limits. Motor design,
+        chain sharpness and the wood species you're cutting all move the real-world number.
+        Different nominal voltages within a band, 56V, 60V, 80V and 82V packs, for example, land
+        in roughly the same performance tier despite the different label on the box.
+      </p>
       <table>
         <thead>
-          <tr><th>Voltage class</th><th>Typical bar</th><th>Best for</th></tr>
+          <tr><th scope="col">Voltage tier</th><th scope="col">Typical max cut diameter</th><th scope="col">Typical battery / run-time</th><th scope="col">Best for</th></tr>
         </thead>
         <tbody>
-          {voltageClasses.map((v) => (
+          {voltageTiers.map((v) => (
             <tr>
               <td class="font-mono-spec">{v.tier}</td>
-              <td class="font-mono-spec">{v.typicalBar}</td>
+              <td class="font-mono-spec">{v.maxDiameter}</td>
+              <td>{v.runtime}</td>
               <td>{v.bestFor}</td>
             </tr>
           ))}
@@ -58,10 +139,111 @@ const schema = [
       </table>
     </div>
 
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <figure class="my-8">
+      <svg viewBox="0 0 500 165" class="w-full h-auto max-w-xl mx-auto" aria-hidden="true" focusable="false">
+        <rect x="140" y="15" width="300" height="24" rx="4" class="fill-steel-200" />
+        <rect x="140" y="57" width="300" height="24" rx="4" class="fill-steel-200" />
+        <rect x="140" y="99" width="300" height="24" rx="4" class="fill-steel-200" />
+        <rect x="140" y="15" width="112" height="24" rx="4" class="fill-hazard-400" />
+        <rect x="140" y="57" width="188" height="24" rx="4" class="fill-hazard-500" />
+        <rect x="140" y="99" width="262" height="24" rx="4" class="fill-hazard-600" />
+        <text x="4" y="31" class="fill-graphite-900" font-family="Archivo, Inter, sans-serif" font-size="14" font-weight="700">18-20V</text>
+        <text x="4" y="73" class="fill-graphite-900" font-family="Archivo, Inter, sans-serif" font-size="14" font-weight="700">36-40V</text>
+        <text x="4" y="115" class="fill-graphite-900" font-family="Archivo, Inter, sans-serif" font-size="14" font-weight="700">60-80V</text>
+        <text x="260" y="31" class="fill-graphite-900" font-family="IBM Plex Mono, monospace" font-size="13">~15cm</text>
+        <text x="336" y="73" class="fill-graphite-900" font-family="IBM Plex Mono, monospace" font-size="13">~25cm</text>
+        <text x="410" y="115" class="fill-graphite-900" font-family="IBM Plex Mono, monospace" font-size="13">35cm+</text>
+        <line x1="140" y1="133" x2="440" y2="133" class="stroke-steel-400" stroke-width="1" />
+        <text x="140" y="150" class="fill-steel-400" font-size="11" text-anchor="middle">0</text>
+        <text x="215" y="150" class="fill-steel-400" font-size="11" text-anchor="middle">10</text>
+        <text x="290" y="150" class="fill-steel-400" font-size="11" text-anchor="middle">20</text>
+        <text x="365" y="150" class="fill-steel-400" font-size="11" text-anchor="middle">30</text>
+        <text x="440" y="150" class="fill-steel-400" font-size="11" text-anchor="middle">40cm</text>
+      </svg>
+      <figcaption class="text-center text-sm text-steel-400 mt-2">
+        Typical maximum cut diameter by voltage tier. Manufacturer-published typical figures, not
+        lab-tested by us; actual capacity depends on wood species, chain condition and motor
+        design.
+      </figcaption>
+    </figure>
+
+    <div class="prose-chainsaw my-10">
+      <blockquote>
+        <p>
+          <strong>Amp-hours in practice:</strong> a 36V saw running a 4.0Ah battery typically
+          manages somewhere around 40 to 60 cuts through seasoned logs before it needs recharging,
+          depending on wood hardness, moisture and chain sharpness. Move up to a 6.0Ah pack on the
+          same 36V saw and you get roughly half as many cuts again, more runtime, not more power.
+          If you need to cut for longer without stopping, buy more Ah or a second battery. If cuts
+          are slow or the chain bogs down, that's a voltage problem, not an Ah one.
+        </p>
+      </blockquote>
     </div>
 
+    <a href="/cordless-chainsaws/" class="group flex items-center justify-between gap-4 my-10 border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
+      <div>
+        <p class="text-xs font-semibold text-hazard-600 uppercase tracking-wide mb-1 font-heading">Compare specific saws</p>
+        <strong class="block text-xl font-bold text-graphite-900 group-hover:text-hazard-600 font-heading">Read the cordless chainsaws guide</strong>
+        <p class="text-steel-600 text-sm mt-1">Ranks 36-40V and 60-80V models sold in the UK by task, budget and battery platform.</p>
+      </div>
+      <span class="text-hazard-600 font-bold text-2xl shrink-0" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <div class="prose-chainsaw my-10">
+      <h2>Voltage isn't the whole story: battery platforms</h2>
+      <p>
+        Picking a voltage tier from the table above also means buying into a specific brand's
+        battery platform. Batteries are generally platform-specific. An 18V pack from one brand
+        will not fit a 56V or 80V tool from another, and it usually won't fit a different brand's
+        tool even at a matching voltage. The number on the label is not a compatibility promise.
+      </p>
+      <p>
+        Platform does matter inside a single brand's own range. Most manufacturers design one
+        battery to run across dozens of tools: drills, strimmers, hedge trimmers, blowers, on the
+        same voltage platform. If you already own cordless tools from a brand, check whether their
+        chainsaw shares that battery before you buy. Sharing a platform can save a genuinely
+        useful amount of money by skipping a second charger and pack. Don't assume this crosses
+        brands, and don't assume two different brands' tools are interchangeable just because the
+        box states the same voltage. Voltage tells you how powerful a saw is. Platform tells you
+        what else you can run off the same batteries. Check both before you buy.
+      </p>
+
+      <h2>Which voltage do you actually need?</h2>
+      <p>
+        If you're only pruning, clearing hedges or cutting branches under about 15cm, an 18-20V
+        saw is genuinely enough. It's lighter and cheaper to run too. If you're processing
+        firewood-sized rounds up to around 25cm, which covers most UK garden use, 36-40V is the
+        sensible default. Only step up to 60-80V if you're regularly cutting bigger rounds,
+        felling small trees, or you want cordless power that gets close to a petrol saw without
+        the fuel and maintenance.
+      </p>
+      <p>
+        Not sure where you land? Our free <a href="/#fit-check">Fit Check tool</a> asks three
+        quick questions and matches your task to a power type and bar length in seconds. If this
+        is your first saw, voltage is only half the decision. Safety features and proper training
+        matter just as much; see the guide below.
+      </p>
+    </div>
+
+    <nav aria-label="Keep reading" class="my-12">
+      <h2 class="text-xl md:text-2xl font-bold text-graphite-900 mb-4 font-heading">Keep reading</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/cordless-chainsaws/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+          <strong class="text-graphite-900 font-heading">Cordless chainsaws</strong>
+          <span class="block mt-1 text-sm text-steel-600">Full guide and ranked picks</span>
+        </a>
+        <a href="/first-chainsaw/" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+          <strong class="text-graphite-900 font-heading">Your first chainsaw</strong>
+          <span class="block mt-1 text-sm text-steel-600">Beginner-safe buying advice</span>
+        </a>
+        <a href="/#fit-check" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+          <strong class="text-graphite-900 font-heading">Fit Check tool</strong>
+          <span class="block mt-1 text-sm text-steel-600">Match your task to a saw in seconds</span>
+        </a>
+      </div>
+    </nav>
+
+    <HowWeResearch />
     <FAQ {faqs} />
   </article>
 </BaseLayout>

@@ -4,10 +4,13 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import FAQ from '../../components/FAQ.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
+import HazardTape from '../../components/HazardTape.astro';
+import PickCard from '../../components/PickCard.astro';
+import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
 
-const title = 'Buying Your First Chainsaw: A Beginner’s Guide (UK)';
-const description = 'What a first-time chainsaw buyer in the UK actually needs to know: power type, safety features, training and the mistakes beginners make.';
+const title = "First Chainsaw UK: A Beginner's Buying Guide";
+const description = 'What UK beginners actually need before buying a first chainsaw: safe sizing, chain brake basics, PPE, and whether you legally need training.';
 const datePublished = '2026-07-10';
 const url = '/first-chainsaw/';
 
@@ -16,15 +19,38 @@ const crumbs = [
   { name: 'Your first chainsaw', url },
 ];
 
-// TODO(content agent): replace with real, sourced FAQs.
-const faqs: { q: string; a: string }[] = [];
-// TODO(content agent): populate with real ranked beginner picks once sourced; itemListSchema activates automatically.
-const picks: { name: string; url: string }[] = [];
+const faqs: { q: string; a: string }[] = [
+  {
+    q: 'Do I need a licence to use a chainsaw in the UK?',
+    a: 'No. UK law has no licence or certificate requirement for using a chainsaw on your own property for personal, domestic work, such as pruning your own trees or cutting firewood in your own garden. Paid or work use is different. <a href="https://www.hse.gov.uk/treework/safety-topics/chainsaw-operator.htm" target="_blank" rel="noopener">HSE guidance</a> requires employers and the self-employed to ensure operators are adequately trained, commonly through the NPTC CS30 and CS31 units. Domestic use and work use are legally treated differently.',
+  },
+  {
+    q: 'What size chainsaw should a beginner buy?',
+    a: 'Smaller than you think. A corded electric saw or a 36 to 40V cordless saw with a 12 to 14 inch bar covers pruning, hedge clearance and firewood-sized logs for most first-time buyers. It is easier to control, lighter to hold up and less tiring than a bigger saw. Step up to a longer bar or petrol power only once a specific job needs it, such as felling or repeated large-diameter logs. See our <a href="/chainsaw-battery-voltage/">battery voltage guide</a> if you are choosing between voltage classes.',
+  },
+  {
+    q: 'Is a chainsaw dangerous for beginners?',
+    a: 'A chainsaw can be dangerous if used carelessly. Kickback is the main risk beginners worry about, and that risk is manageable. Buy a saw with a working chain brake and a low-kickback bar. Always hold it with both hands, thumb wrapped under the front handle. Never let the bar tip touch anything while the chain is moving. Combined with EN381 PPE and basic training, a small saw used carefully is a low-risk garden tool, not something to fear.',
+  },
+  {
+    q: "What training should I do even if it's not legally required?",
+    a: 'Read the HSE guidance on chainsaw operation and PPE first. Then get a competent person, an experienced friend or a short course at a local training provider, to show you the safe starting position, two-handed grip and chain brake test before your first real cut. A half-day chainsaw awareness or maintenance course costs a fraction of the saw itself and removes most of the guesswork. It is not a legal requirement for domestic use. It is still the best return on time for a beginner.',
+  },
+];
+
+// Two research-led beginner picks: a corded electric and a lower-voltage cordless,
+// both genuinely small (12-14in class), both with a mechanical chain brake.
+// No affiliateUrl supplied on either PickCard - both fall back to a tagged
+// amazonSearch() link (chainsaw0f6-21). No ASIN or price invented.
+const picks = [
+  { name: 'Einhell GH-EC 1835 corded electric chainsaw', url: '/electric-chainsaws/' },
+  { name: 'Einhell GE-LC 36/35 Li-Solo cordless chainsaw', url: '/cordless-chainsaws/' },
+];
 
 const schema = [
   articleSchema({ headline: title, description, url, datePublished, author: 'Sunny Patel' }),
   faqSchema(faqs),
-  ...(picks.length ? [itemListSchema({ name: 'Best first chainsaws for beginners UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) })] : []),
+  itemListSchema({ name: 'Best first chainsaws for beginners UK', url, items: picks.map((p, i) => ({ ...p, position: i + 1 })) }),
   breadcrumbSchema(crumbs),
 ].filter(Boolean);
 ---
@@ -32,20 +58,187 @@ const schema = [
   <article class="max-w-4xl mx-auto px-4 py-10">
     <Breadcrumbs items={crumbs} />
     <p class="text-sm font-semibold text-hazard-600 uppercase tracking-wide mb-2 font-heading">Beginners</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Buying your first chainsaw</h1>
+    <h1 class="text-3xl md:text-5xl font-bold text-graphite-900 leading-tight font-heading">Buying your first chainsaw in the UK</h1>
     <p class="mt-5 text-lg text-steel-600 leading-relaxed">
-      A first chainsaw should be forgiving, not powerful. This guide covers the power type,
-      safety features and (genuinely important) training that make a beginner's first saw a safe
-      one, not just a cheap one.
+      The safest first chainsaw for a UK beginner is a corded electric saw or a 36 to 40V cordless
+      model with a chain brake and a low-kickback bar. Keep the bar small, roughly 12 to 14 inches.
+      You do not need a licence to use one on your own property for personal, domestic work. PPE
+      and basic training are not legally required for that domestic use. Both are still worth doing.
     </p>
+    <ReviewedStamp date={datePublished} />
     <Disclosure />
 
-    <!-- TODO(content agent): full guide prose, PickCard beginner picks, sourced FAQs. -->
-    <div class="my-12 rounded-xl border border-dashed border-steel-400 bg-surface-100 p-6 text-sm text-steel-600">
-      Placeholder shell. Full guide content pending from the wave-1 content pipeline.
+    <div class="prose-chainsaw mt-8">
+      <h2>Buy smaller than you think</h2>
+      <p>
+        The most common regret among first-time UK chainsaw buyers is not buying too small a saw.
+        It is the opposite. Beginners buy too much saw, then struggle with the weight, the
+        vibration and the chain speed. That pattern shows up repeatedly on UK chainsaw forums like
+        Arbtalk and general chainsaw communities. "You will regret it after the first hour" is a
+        genuine, recurring sentiment, not a scare story. It is almost always about oversizing, not
+        undersizing.
+      </p>
+      <p>
+        A 12 to 14 inch bar handles the majority of first-time jobs: pruning, hedge and branch
+        clearance, and firewood rounds up to about 25cm. This bar length works on a corded electric
+        saw or a 36 to 40V cordless saw. A smaller bar is lighter. It is easier to hold up for a
+        full session. It also produces less kickback energy than a longer bar. A genuinely bigger
+        job, such as felling a small tree, is a reason to hire a saw or bring in a competent person.
+        It is not a reason to buy big on day one.
+      </p>
+      <p>
+        Budget is a separate question from size. Our <a href="/cheap-chainsaws/">cheap chainsaws guide</a>
+        covers where you can genuinely save money and where you should not.
+      </p>
+
+      <h2>Kickback: what it actually is, and why it is manageable</h2>
+      <p>
+        Kickback is the reason chainsaws frighten beginners. It is the sudden, upward snap of the
+        bar that happens when the top quarter of the bar tip, the kickback zone, touches wood or
+        gets pinched while the chain is moving. It happens fast. It is the main mechanism behind
+        serious chainsaw injuries. None of that means a beginner cannot use a saw safely. Three
+        things matter more than anything else on the spec sheet:
+      </p>
+      <ul>
+        <li>
+          <strong>A working chain brake.</strong> Every saw recommended on this page has one. It
+          stops the chain in a fraction of a second when triggered, either by your hand hitting the
+          front guard or automatically on newer saws during a strong kickback motion.
+        </li>
+        <li>
+          <strong>A low-kickback bar and chain.</strong> These reduce kickback energy and are
+          standard on beginner-oriented saws. Check for them on any model you consider.
+        </li>
+        <li>
+          <strong>Two-handed grip and technique.</strong> Hold the saw with both hands, thumb
+          wrapped under the front handle, feet planted. Never let the bar tip contact material
+          while the chain is running. This habit alone prevents most kickback incidents.
+        </li>
+      </ul>
+      <p>
+        Our <a href="/chainsaw-safety/">chainsaw safety guide</a> covers kickback mechanics, PPE
+        tiers and safe technique in full. Treat kickback as a known, managed risk. It is not a
+        reason to avoid a saw altogether.
+      </p>
+    </div>
+
+    <div class="my-10">
+      <HazardTape />
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>The chainsaw licence myth</h2>
+      <p>
+        UK law has no general chainsaw licence. There is no legal requirement to hold any
+        certificate to buy or use a chainsaw on your own property for personal, domestic work.
+        That covers pruning your own trees, clearing your own hedges and cutting firewood for your
+        own use.
+      </p>
+      <p>
+        Work use is different. <a href="https://www.hse.gov.uk/treework/safety-topics/chainsaw-operator.htm" target="_blank" rel="noopener">HSE guidance on chainsaw operators</a>
+        requires employers and the self-employed to ensure operators are adequately trained. Most
+        professional tree and forestry work requires the relevant City & Guilds NPTC units,
+        commonly CS30 for maintenance and cross-cutting and CS31 for felling and processing small
+        trees up to 380mm. These units are sometimes called a "chainsaw ticket" informally. They
+        are a work competence certificate, not a licence to own or use a saw at home. Paid or work
+        use is when NPTC training becomes the sensible, and effectively required, standard to meet.
+      </p>
+      <p>
+        Domestic use requires no certificate by law. That is a statement about legality, not about
+        risk. The physical risks do not disappear just because you are in your own garden. Basic
+        training and full PPE are worth doing even when nobody requires them.
+      </p>
+
+      <h2>PPE checklist: what to wear, every time</h2>
+      <p>
+        The EN381 family of standards, now being progressively replaced by EN ISO 11393 with the
+        same intent, sets the minimum protective specification for chainsaw clothing and gloves.
+        This is the kit that actually reduces injury risk in practice, whatever saw you buy:
+      </p>
+      <ul>
+        <li><strong>A saw with a working chain brake.</strong> Non-negotiable. Check it engages before every session.</li>
+        <li><strong>Cut-resistant chainsaw trousers or chaps</strong> (EN381-5). Long fibres jam a moving chain almost instantly if it touches your leg.</li>
+        <li><strong>Chainsaw-rated gloves</strong> (EN381-7), at minimum on the hand nearest the bar.</li>
+        <li><strong>Eye protection</strong>: a mesh visor or safety glasses/goggles, against flying chips and sawdust.</li>
+        <li><strong>Ear defenders or hearing protection</strong>, rated for the noise level of the saw you use.</li>
+        <li><strong>Sturdy, reinforced boots</strong> with a protective toe cap and good grip, historically EN381-3 and now largely covered by EN ISO 17249.</li>
+      </ul>
+      <p>
+        None of this is optional kit. It is the difference between a minor scare and a serious
+        injury. It costs a fraction of the price of the saw itself. HSE publishes the
+        <a href="https://www.hse.gov.uk/treework/safety-topics/chainppe.htm" target="_blank" rel="noopener">same PPE guidance</a>
+        for professional chainsaw operators.
+      </p>
+    </div>
+
+    <div class="prose-chainsaw">
+      <h2>What to actually buy first</h2>
+      <p>
+        These two picks are sensible, genuinely beginner-sized starting points: a corded electric
+        saw for working near a socket, and a lower-voltage cordless saw for working anywhere in the
+        garden. Both come from published manufacturer specifications and verified UK owner reviews,
+        not hands-on testing (see how we research, below). Both keep to the 12 to 14 inch bar
+        range. Both have a mechanical chain brake as standard.
+      </p>
+    </div>
+
+    <div class="space-y-6 my-8">
+      <PickCard
+        rank={1}
+        name="Einhell GH-EC 1835 corded electric chainsaw"
+        brand="Einhell"
+        bestFor="corded beginners near a socket"
+        rating={4.5}
+        pros={[
+          'No battery to charge or run flat, always full power from the mains',
+          'Instant mechanical chain brake plus a chain-catcher bolt',
+          'Tool-free chain tensioning and automatic chain lubrication',
+          'Lightweight and simple to store, low running cost',
+        ]}
+        cons={[
+          'Tethered to an extension lead, so working radius is limited by cable length',
+          'Not sensible for jobs away from a power source',
+          'Not intended for repeated felling or large-diameter logs',
+        ]}
+        reviewUrl="/electric-chainsaws/"
+        verdict="A straightforward 1800W corded electric with a 35cm (14in) bar, an instant mechanical chain brake and tool-free chain tensioning. If most of your cutting happens within reach of an extension lead, this class of saw removes battery cost and runtime worries entirely."
+      />
+      <PickCard
+        rank={2}
+        name="Einhell GE-LC 36/35 Li-Solo cordless chainsaw"
+        brand="Einhell"
+        bestFor="cordless beginners without a socket nearby"
+        rating={4.3}
+        pros={[
+          'No cable, so you can work anywhere in the garden',
+          'Brushless motor keeps it light at around 4kg',
+          'Same 35cm (14in) bar class as a beginner corded saw',
+          'Mechanical chain brake plus a chain-catcher bolt',
+          'Runs on Einhell\'s wider 18V Power X-Change battery family if you already own their tools',
+        ]}
+        cons={[
+          'Sold "Li-Solo", meaning body only, battery and charger are bought separately',
+          'Battery runtime is finite, bigger jobs may need a spare pack',
+          'Twin 18V battery setup adds some weight versus a single-cell saw',
+        ]}
+        reviewUrl="/cordless-chainsaws/"
+        verdict="Runs on two 18V batteries for a genuine 36V-class, 35cm (14in) bar with a brushless motor and mechanical chain brake. A sensible step up from corded if you need to work away from the house, without jumping to a heavier 45cc+ petrol saw you do not yet need."
+      />
     </div>
 
     <HowWeResearch />
+
+    <div class="prose-chainsaw">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/chainsaw-safety/">Chainsaw safety: PPE, kickback and technique</a>, the full breakdown of EN381 PPE tiers and safe technique.</li>
+        <li><a href="/electric-chainsaws/">Best electric chainsaws for UK gardens</a>, if corded is your likely choice.</li>
+        <li><a href="/cordless-chainsaws/">Best cordless battery chainsaws for UK gardens</a>, if you need to work away from a socket.</li>
+        <li><a href="/cheap-chainsaws/">Best cheap chainsaws that are still safe to use</a>, if budget is the main constraint.</li>
+        <li><a href="/#fit-check">The Fit Check tool</a>, a free, rule-based way to match your task to the right bar length and power type.</li>
+      </ul>
+    </div>
+
     <FAQ {faqs} />
   </article>
 </BaseLayout>
