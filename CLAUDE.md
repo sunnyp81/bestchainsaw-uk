@@ -29,6 +29,23 @@ Dead-link/placeholder sweep: clean. No TODO/PLACEHOLDER/Lorem ipsum in any page.
 
 `public/og-default.png` (1200x630) generated via new `scripts/make-og.mjs` (adapted from thebestmowers' sharp-based script, re-themed to this site's hazard-orange/graphite palette with the HazardTape diagonal-stripe motif top and bottom, wordmark + honest tagline, no fabricated ratings/claims).
 
+## Model accuracy + price grid (Opus reassessment, 2026-07-10)
+
+A fresh-eyes reassessment caught that the wave-1 content agents had named **four discontinued or non-existent chainsaw models** (they "verified specs via web search" but the specs belonged to superseded models). All corrected + verified live:
+
+| Wrong model (shipped) | Problem | Corrected to | Buy path |
+|---|---|---|---|
+| Bosch AKE 35 (electric) | discontinued | Bosch UniversalChain 35 | Amazon (on sale there) + B&Q £129 verified |
+| EGO CS1401E (cordless, firewood) | delisted UK | EGO Power+ CS1410E (bare) / CS1411E (kit) | Amazon (EGO is Amazon + specialist-dealer only) |
+| Ryobi RY18CSA (cordless) | phantom SKU, never existed | Ryobi ONE+ OCS1830 | Amazon |
+| Stihl MS 211 (petrol, firewood) | discontinued | Stihl MS 212 | dealer only (see below) |
+
+**Dealer-channel rule (important, honesty-critical):** Stihl and Husqvarna petrol saws are NOT sold new by Amazon/B&Q/Screwfix in the UK (dealer / brand-direct only); Screwfix's Titan own-brand is Screwfix-exclusive (not on Amazon). Linking any of these to an Amazon affiliate search lands the buyer on used/grey-import/parts junk. `PickCard.astro` now takes `dealerUrl` + `dealerLabel` props that render an honest non-affiliate (rel nofollow) "Find a dealer" / "View at Screwfix" CTA. Stihl -> `stihl.co.uk/en/dealer-locator`, Husqvarna -> `husqvarna.com/uk/dealer-locator/`, Titan -> Screwfix. **Strategic takeaway: the premium picks people actually want (Stihl/Husqvarna) are editorial/dealer and earn no affiliate; the affiliate money is the mid-market online brands (Bosch, Makita, Ryobi, EGO, Hyundai). The site reflects both honestly.**
+
+**Price grid = now data-driven + real.** `PriceGrid.astro` reads `src/data/priceGrid.ts` by `modelKey` (single source of truth). Every non-Amazon row is a fetch-verified product-page DEEP LINK (not a search page) with a dated indicative price ("Prices checked 10 Jul 2026") and a `nofollow` rel; Amazon rows are tagged (`sponsored`) and deep-link by ASIN or fall back to tagged search, with no snapshot price (live on click). Three grids live, all verified 2026-07-10: `bosch-universalchain-35` (electric, B&Q £129 + Amazon), `makita-duc353z` (cordless, Screwfix £279.98 + Toolstation £279.99 bare tool + Amazon), `hyundai-hyc6200x` (petrol, Hyundai-direct £129.99 + Amazon). To refresh prices, edit only `src/data/priceGrid.ts` and bump each entry's `checked` date. Retailers that bot-block automated fetches (Amazon price, ManoMano, Robert Dyas, Currys) are deep-linked without a snapshot rather than carrying a guessed figure.
+
+Committed + pushed to `master` (commit "fix: correct 4 discontinued/phantom chainsaw models + real data-driven price grid"). Verified post-fix: build green, 78 JSON-LD blocks parse, no discontinued/phantom model names in built HTML, no Amazon links wrapping Stihl/Husqvarna/Titan, all 4 product URLs resolve 200, no dashes / fabricated testing / fake ratings.
+
 ## Identity summary
 
 - **Brand**: Best Chainsaw (`bestchainsaw.uk`). Independent UK chainsaw buying guides.
