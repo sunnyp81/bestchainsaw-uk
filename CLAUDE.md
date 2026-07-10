@@ -68,7 +68,13 @@ Committed + pushed to `master` (commit "fix: correct 4 discontinued/phantom chai
 
 ## Deploy
 
-**GitHub: LIVE at `sunnyp81/bestchainsaw-uk` (branch `master`). Cloudflare Pages: BLOCKED on a dead API token — see status note above.** Once unblocked: `npm run build`, output `dist`, `NODE_VERSION=22`, project name `bestchainsaw-uk` for consistency with the repo/GitHub name.
+**LIVE at https://bestchainsaw-uk.pages.dev (deployed 2026-07-10).** GitHub `sunnyp81/bestchainsaw-uk` (branch `master`) + Cloudflare Pages project `bestchainsaw-uk` (account `aba0a6722a4510842ca473315a8ba13e`). All 11 routes 200, legacy 301s fire, `/replace-bar/` kept live, sitemap 200.
+
+**Deploy method: wrangler OAuth, NOT the API token.** The `cfut_143...` token in master-builds.md is dead; instead `wrangler` is logged in via OAuth (sunnypat81@gmail.com, has `pages (write)`). To redeploy: `cd ~/repos/bestchainsaw-uk && npm run build && npx wrangler pages deploy dist --project-name bestchainsaw-uk --branch master` (unset any CLOUDFLARE_API_TOKEN env var first so it uses OAuth). Build `npm run build`, output `dist`, `NODE_VERSION=22`.
+
+**Note on the deploy:** the account was at the Cloudflare Pages project cap; freed a slot by deleting the orphaned duplicate project `heatpumpcheck-uk` (the `-eb8` one with no custom domain; the live heat-pump site is the separate `heatpumpchecker` project holding heatpumpchecker.co.uk, untouched).
+
+**STILL [MANUAL]:** attach the custom domain `bestchainsaw.uk` to this Pages project + point DNS at it (domain renewed to July 2027, currently a stale Namecheap parking page); set the real GA4 Measurement ID (placeholder `G-XXXXXXXXXX` in BaseLayout.astro); then GSC/Bing property + sitemap submission + index-push per docs/growth-plan.md.
 
 ## Dossier / prior phases
 
