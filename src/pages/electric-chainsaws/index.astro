@@ -9,7 +9,7 @@ import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
-import { amazonSearch } from '../../lib/affiliate';
+import { amazonSearch, amazonImage } from '../../lib/affiliate';
 
 const title = 'Best Corded Electric Chainsaws UK 2026 - Buying Guide';
 const description = 'Corded, mains-powered chainsaws explained: real UK prices, named models like the Titan TTL585CHN, and how they differ from cordless and petrol saws.';
@@ -149,6 +149,7 @@ const schema = [
         rrp="Typically around £129"
         reviewUrl={`${url}#bosch-ake-30-35`}
         affiliateUrl={amazonSearch('Bosch UniversalChain 35 corded electric chainsaw')}
+        image={amazonImage('B09MFYW6HY')}
         verdict="The UniversalChain 35 is Bosch's current 1800W corded saw, the direct successor to the older AKE 35 (which is now discontinued), with a 35cm bar. Bosch is the brand most likely to be in stock at a local shop if a chain or bar needs replacing. The SDS tool-less tensioner and auto chain oiling matter more day to day than the spec sheet suggests. It is stocked across several UK retailers, so it is the easiest of the three to compare on price."
       />
       <PickCard

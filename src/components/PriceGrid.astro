@@ -13,13 +13,14 @@
 //  - Amazon links carry the affiliate tag + rel="sponsored" (we earn a small
 //    commission). Other retailers are NOT affiliate here, so they get a plain
 //    rel="nofollow" - calling them "sponsored" would be untrue.
-import { AFFILIATE_REL, amazonSearch, amazonLink } from '../lib/affiliate';
+import { AFFILIATE_REL, amazonSearch, amazonLink, amazonImage } from '../lib/affiliate';
 import { PRICE_GRID } from '../data/priceGrid';
 
 interface Props { modelKey: string }
 const { modelKey } = Astro.props as Props;
 const entry = PRICE_GRID[modelKey];
 if (!entry) throw new Error(`PriceGrid: no data for modelKey "${modelKey}" in src/data/priceGrid.ts`);
+const thumb = amazonImage(entry.rows.find((r) => r.retailer === 'Amazon UK')?.asin);
 
 const RETAILER_REL = 'nofollow noopener noreferrer';
 const checkedLabel = new Date(entry.checked + 'T00:00:00Z').toLocaleDateString('en-GB', {
@@ -43,8 +44,11 @@ const rows = entry.rows.map((r) => {
 }).filter((r) => r.url);
 ---
 <div class="my-8 border border-steel-200 rounded-xl overflow-hidden bg-white">
-  <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-    <span class="text-sm font-semibold font-heading">Where to buy: {entry.model}</span>
+  <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+    <span class="flex items-center gap-3">
+      {thumb && <img src={thumb} alt={entry.model} loading="lazy" decoding="async" width="40" height="40" class="bg-white rounded object-contain p-0.5" />}
+      <span class="text-sm font-semibold font-heading">Where to buy: {entry.model}</span>
+    </span>
     <span class="text-xs text-steel-200">Prices checked {checkedLabel}</span>
   </div>
   <div class="overflow-x-auto">

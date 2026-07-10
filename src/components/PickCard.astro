@@ -33,7 +33,7 @@ const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check 
     <div class="bg-hazard-50 flex items-center justify-center p-6 md:p-4 relative">
       <span class="absolute top-3 left-3 bg-hazard-600 text-white text-xs font-bold px-2 py-1 rounded">#{rank}</span>
       {image ? (
-        <img src={image} alt={name} loading="lazy" width="180" height="180" class="object-contain max-h-44" />
+        <img src={image} alt={name} loading="lazy" decoding="async" width="180" height="180" class="object-contain max-h-44" />
       ) : (
         <div class="w-32 h-32 rounded-lg bg-hazard-100 flex items-center justify-center text-hazard-600 text-3xl font-bold font-heading">{brand.slice(0,1)}</div>
       )}

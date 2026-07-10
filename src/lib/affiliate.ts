@@ -1,3 +1,5 @@
+import amazonImages from '../data/amazon-images.json';
+
 // Amazon Associates UK: single source of truth for the tracking tag.
 export const AMAZON_TAG = 'chainsaw0f6-21';
 
@@ -11,3 +13,10 @@ export const amazonLink = (asin: string) =>
 // Build a tagged Amazon UK search link (used when no single ASIN is canonical).
 export const amazonSearch = (query: string) =>
   `https://www.amazon.co.uk/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}`;
+
+// Product image for a given ASIN, from the build-time synced src/data/amazon-images.json
+// (gitignored, TOS: URLs stale after 24h). Returns undefined when no ASIN or no synced
+// image, so callers can fall back to a placeholder.
+type AmazonImages = { items: Record<string, { image: { url: string } }> };
+export const amazonImage = (asin?: string): string | undefined =>
+  asin ? (amazonImages as AmazonImages).items[asin]?.image.url : undefined;
