@@ -4,9 +4,9 @@ Per-repo brain for bestchainsaw.uk, created at Phase 3 (Build/scaffold). Canonic
 
 ## Current state
 
-**Phase 4 (content) + QA gate complete, 2026-07-10.** Astro 6 + Tailwind 4 site built locally at `C:\Users\sunny\repos\bestchainsaw-uk`. Not yet deployed, not yet pushed to GitHub (no remote configured). All 11 wave-1 pages have full prose, PickCard/PriceGrid data and FAQs written by parallel content agents, then passed a pre-deploy QA gate: winner-audit (7-rule/14pt rubric) scored on homepage + all 3 money pages (electric/cordless/petrol), WCAG 2.1 AA accessibility pass, table-style audit, dead-link/placeholder sweep, and `public/og-default.png` generation. Full scorecard and fixes below under "QA gate results (2026-07-10)". `OwnerVoices.astro`/`ownerVoices.ts` are still deliberately empty (no real quotes sourced yet) - that stays Wave 2 scope, not fabricated to pass the audit.
+**Wave-1 build + QA gate complete, GitHub live, Cloudflare deploy BLOCKED, 2026-07-10.** Astro 6 + Tailwind 4 site built at `C:\Users\sunny\repos\bestchainsaw-uk`. All 11 wave-1 pages have full prose, PickCard/PriceGrid data and FAQs written by parallel content agents, then passed a pre-deploy QA gate: winner-audit (7-rule/14pt rubric) scored on homepage + all 3 money pages (electric/cordless/petrol), WCAG 2.1 AA accessibility pass, table-style audit, dead-link/placeholder sweep, and `public/og-default.png` generation. Full scorecard below under "QA gate results". `OwnerVoices.astro`/`ownerVoices.ts` are still deliberately empty (no real quotes sourced yet) - that stays Wave 2 scope, not fabricated to pass the audit.
 
-Build verified green (`npm run build`, 12 pages, no errors) after QA fixes. Git repo initialised locally; not pushed to GitHub, no remote created.
+Build verified green (`npm run build`, 12 pages, no errors). **Pushed to GitHub: `sunnyp81/bestchainsaw-uk`, branch `master`.** Cloudflare Pages deploy attempted via the standard `cfut_143...` wrangler token from `master-builds.md` and FAILED: `Authentication error [code: 10000]` / `Invalid access token [code: 9109]`. Per `reference_hermes-autodeploy-cf-token.md` in central memory, that exact token is confirmed DEAD from a prior rotation gap - the current working token only lives in `/etc/hermes-operator.env` on the Hermes VPS, not synced to this desktop's `~/.claude/.env`. **[MANUAL, blocking]: Sunny needs to either (a) supply a current `CLOUDFLARE_API_TOKEN` for account `aba0a6722a4510842ca473315a8ba13e`, (b) connect the GitHub repo to Cloudflare Pages himself via the dashboard, or (c) add this repo to Hermes's wrangler-autodeploy cron.** Once deployed, DNS still needs pointing at the new Pages project (domain is confirmed renewed, active to July 2027, currently shows a stale Namecheap parking page).
 
 ## QA gate results (2026-07-10)
 
@@ -51,17 +51,19 @@ Dead-link/placeholder sweep: clean. No TODO/PLACEHOLDER/Lorem ipsum in any page.
 
 ## Deploy
 
-**TBD. [MANUAL: Sunny to create the Cloudflare Pages project].** Matches portfolio convention: GitHub repo -> Cloudflare Pages, build `npm run build`, output `dist`, `NODE_VERSION=22`. Repo not yet pushed to GitHub (deliberately out of scope for Phase 3, see build instructions).
+**GitHub: LIVE at `sunnyp81/bestchainsaw-uk` (branch `master`). Cloudflare Pages: BLOCKED on a dead API token — see status note above.** Once unblocked: `npm run build`, output `dist`, `NODE_VERSION=22`, project name `bestchainsaw-uk` for consistency with the repo/GitHub name.
 
 ## Dossier / prior phases
 
-Phase 0 (research/GO-NO-GO), Phase 1 (brand identity/USP/visual identity) and Phase 2 (semantic architecture) outputs were supplied inline to the Phase 3 build instructions rather than as a linked file; no dossier document was found on disk at scaffold time (checked `G:\My Drive\SEO\`). **[MANUAL: link the actual Phase 0-2 dossier/research doc here once located]** so later phases and future agents have the sourcing trail.
+All three now live in this repo: `docs/research-dossier.md` (Phase 0, verdict GO lean-scope-only — corrected mid-session from a real arithmetic error, see the dossier's own header for the correction), `site-identity.md` (Phase 1, brand/USP/voice/visual identity), `docs/build-manifest.md` (Phase 2, topical map + schema plan + AI-answer architecture + the 11-URL build manifest). `docs/growth-plan.md` (Phase 5) is also in place, with its enrolment/review dates marked as placeholders pending the actual go-live date.
 
 ## Open items (MANUAL, for Sunny)
 
+- **Cloudflare Pages deploy blocker (see status note above) — this is the one thing actually stopping launch.**
 - Real GA4 Measurement ID (`BaseLayout.astro` currently has placeholder `G-XXXXXXXXXX`, clearly commented).
-- Cloudflare Pages project creation + DNS, then push this repo to GitHub (no remote yet).
+- DNS: point bestchainsaw.uk at the Cloudflare Pages project once it exists (domain itself is fine, renewed to July 2027).
 - Real logo (`public/logo.svg`) and favicon (`public/favicon.svg`), both are lean placeholders, flagged inline.
-- Real `SITE.sameAs` URLs once verified profiles exist.
-- Sourced OwnerVoices quotes (`src/data/ownerVoices.ts` is still deliberately empty) - real, attributed quotes from Arbtalk/UK chainsaw forums/Amazon UK reviews, never invented. Wave 2 scope.
+- Real `SITE.sameAs` URLs once verified profiles exist; confirm publishing entity (personal vs ND Media LTD).
+- Sourced OwnerVoices quotes (`src/data/ownerVoices.ts` is still deliberately empty) - real, attributed quotes from Arbtalk/UK chainsaw forums/Amazon UK reviews, never invented. Wave 2 scope. (Note: the Phase 0 dossier already captured some real, sourced Arbtalk quotes with thread IDs - see `docs/research-dossier.md` section 4 - these could seed this file honestly rather than needing fresh sourcing.)
 - `og-default.png` now exists (`public/og-default.png`, generated via `scripts/make-og.mjs`); regenerate with `node scripts/make-og.mjs` if the brand palette changes.
+- Once live: GSC + Bing property setup, sitemap submission, `/launch-seo` + `/index-push` (all blocked on deploy, see `docs/growth-plan.md` section 2).
