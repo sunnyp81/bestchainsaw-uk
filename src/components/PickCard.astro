@@ -29,11 +29,21 @@ const buyRel = isDealer ? 'nofollow noopener noreferrer' : AFFILIATE_REL;
 const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check price on Amazon';
 ---
 <article class="border border-steel-200 rounded-xl bg-white overflow-hidden shadow-sm">
-  <div class="grid md:grid-cols-[200px_1fr] gap-0">
+  <div class="grid md:grid-cols-[240px_1fr] gap-0">
     <div class="bg-hazard-50 flex items-center justify-center p-6 md:p-4 relative">
       <span class="absolute top-3 left-3 bg-hazard-600 text-white text-xs font-bold px-2 py-1 rounded">#{rank}</span>
       {image ? (
-        <img src={image} alt={name} loading="lazy" decoding="async" width="180" height="180" class="object-contain max-h-44" />
+        <div class="w-full max-w-[220px] h-[200px] mx-auto bg-white rounded-lg border border-steel-200 shadow-sm flex items-center justify-center p-4">
+          <img
+            src={image}
+            alt={name}
+            loading={rank === 1 ? 'eager' : 'lazy'}
+            decoding="async"
+            width="220"
+            height="220"
+            class="w-full h-full object-contain"
+          />
+        </div>
       ) : (
         <div class="w-32 h-32 rounded-lg bg-hazard-100 flex items-center justify-center text-hazard-600 text-3xl font-bold font-heading">{brand.slice(0,1)}</div>
       )}

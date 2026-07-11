@@ -44,9 +44,23 @@ const rows = entry.rows.map((r) => {
 }).filter((r) => r.url);
 ---
 <div class="my-8 border border-steel-200 rounded-xl overflow-hidden bg-white">
+  {thumb && (
+    <div class="bg-white border-b border-steel-200 p-4 flex items-center justify-center">
+      <div class="w-full max-w-[240px] h-[200px] bg-white rounded-lg border border-steel-200 shadow-sm flex items-center justify-center p-4">
+        <img
+          src={thumb}
+          alt={entry.model}
+          loading="lazy"
+          decoding="async"
+          width="220"
+          height="220"
+          class="w-full h-full object-contain"
+        />
+      </div>
+    </div>
+  )}
   <div class="bg-graphite-900 text-surface-50 px-4 py-2.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
     <span class="flex items-center gap-3">
-      {thumb && <img src={thumb} alt={entry.model} loading="lazy" decoding="async" width="40" height="40" class="bg-white rounded object-contain p-0.5" />}
       <span class="text-sm font-semibold font-heading">Where to buy: {entry.model}</span>
     </span>
     <span class="text-xs text-steel-200">Prices checked {checkedLabel}</span>
