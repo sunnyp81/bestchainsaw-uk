@@ -9,6 +9,7 @@ import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = 'Best Petrol Chainsaw UK 2026: cc Guide & Real Prices';
 const description = 'Independent UK guide to petrol chainsaws: which cc you need for firewood or felling, real prices, named models and fuel mix basics.';
@@ -179,8 +180,8 @@ const schema = [
         ]}
         rrp="£180 to £230"
         reviewUrl={`${url}#husqvarna-120-mark-ii`}
-        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
-        dealerLabel="Find a Husqvarna dealer"
+        affiliateUrl={amazonLink('B07HB1H2GL')}
+        image={amazonImage('B07HB1H2GL')}
         verdict="A genuine step up from the smallest 30cc saws while staying light and easy to start, the model that keeps turning up as a recommended first petrol saw in UK owner forums."
       />
       <PickCard
@@ -200,8 +201,8 @@ const schema = [
         ]}
         rrp="£270 to £340"
         reviewUrl={`${url}#husqvarna-435-ii`}
-        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
-        dealerLabel="Find a Husqvarna dealer"
+        affiliateUrl={amazonLink('B0B6JJFYV6')}
+        image={amazonImage('B0B6JJFYV6')}
         verdict="More headroom than the MS 212 or 120 Mark II, worth the extra weight and price if your rounds run larger or you're cutting for longer stretches at a time."
       />
     </div>

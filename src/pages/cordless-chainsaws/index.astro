@@ -9,6 +9,7 @@ import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = 'Best Cordless Chainsaws UK 2026: Battery Buying Guide';
 const description = 'Cordless chainsaw buying guide for the UK: battery voltage tiers, typical prices, real run-time and three models worth checking.';
@@ -184,6 +185,8 @@ const schema = [
         rating={4}
         rrp="~£70 to £120, battery often sold separately"
         reviewUrl={`${url}#ryobi-ocs1830`}
+        affiliateUrl={amazonLink('B06WRNLQPP')}
+        image={amazonImage('B06WRNLQPP')}
         verdict="An 18V, 30cm-bar saw built around Ryobi's ONE+ battery platform. Sensible if pruning and light branch work is genuinely all you need, especially if you already own other ONE+ garden tools and can share a battery across them."
         pros={[
           'Battery and charger shared across Ryobi’s wide ONE+ 18V tool range',
@@ -207,6 +210,8 @@ const schema = [
         rating={4.5}
         rrp="~£150 to £220, tool only, LXT batteries sold separately"
         reviewUrl={`${url}#makita-duc353`}
+        affiliateUrl={amazonLink('B01MQIAZ7J')}
+        image={amazonImage('B01MQIAZ7J')}
         verdict="The Z suffix in Makita's naming means this is sold as a bare tool, body only. It runs on two 18V LXT batteries rather than a dedicated pack, so it sits in the 36V mid-tier, and if you are not already on Makita's LXT platform you will need to budget for two batteries and a charger on top of the tool price. The 35cm bar handles more than the 18V-class saws above. Makes most sense if you are already invested in Makita's LXT ecosystem from other cordless tools."
         pros={[
           'Runs on Makita’s huge 18V LXT battery range, no separate platform to buy into',

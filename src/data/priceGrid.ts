@@ -55,7 +55,7 @@ export const PRICE_GRID: Record<string, PriceEntry> = {
     rows: [
       { retailer: 'Screwfix', url: 'https://www.screwfix.com/p/makita-duc353z-36v-li-ion-lxt-brushless-cordless-35cm-chainsaw-bare/7377x', price: '£279.98', note: 'Bare tool, no battery or charger' },
       { retailer: 'Toolstation', url: 'https://www.toolstation.com/makita-duc353z-36v-2x18v-35cm-cordless-chainsaw/p33721', price: '£279.99', note: 'Bare tool, no battery or charger' },
-      { retailer: 'Amazon UK', note: 'Bare and kit versions; live price on Amazon' },
+      { retailer: 'Amazon UK', asin: 'B01MQIAZ7J', note: 'Bare and kit versions; live price on Amazon' },
     ],
     note: 'Priced rows are bare tool (body only). You will also need two 18V LXT batteries and a charger if you are not already on the Makita platform.',
   },

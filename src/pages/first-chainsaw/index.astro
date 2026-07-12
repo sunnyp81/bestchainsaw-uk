@@ -8,6 +8,7 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = "First Chainsaw UK: A Beginner's Buying Guide";
 const description = 'What UK beginners actually need before buying a first chainsaw: safe sizing, chain brake basics, PPE, and whether you legally need training.';
@@ -201,6 +202,8 @@ const schema = [
           'Not intended for repeated felling or large-diameter logs',
         ]}
         reviewUrl="/electric-chainsaws/"
+        affiliateUrl={amazonLink('B0CSDQVXZT')}
+        image={amazonImage('B0CSDQVXZT')}
         verdict="A straightforward 1800W corded electric with a 35cm (14in) bar, an instant mechanical chain brake and tool-free chain tensioning. If most of your cutting happens within reach of an extension lead, this class of saw removes battery cost and runtime worries entirely."
       />
       <PickCard
@@ -222,6 +225,8 @@ const schema = [
           'Twin 18V battery setup adds some weight versus a single-cell saw',
         ]}
         reviewUrl="/cordless-chainsaws/"
+        affiliateUrl={amazonLink('B07FD8BK2D')}
+        image={amazonImage('B07FD8BK2D')}
         verdict="Runs on two 18V batteries for a genuine 36V-class, 35cm (14in) bar with a brushless motor and mechanical chain brake. A sensible step up from corded if you need to work away from the house, without jumping to a heavier 45cc+ petrol saw you do not yet need."
       />
     </div>

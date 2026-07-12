@@ -8,7 +8,7 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
-import { amazonSearch } from '../../lib/affiliate';
+import { amazonSearch, amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = 'Best Chainsaw for Firewood UK 2026: Petrol or Cordless';
 const description = 'Independent, research-led guide to the best chainsaw for UK firewood: bar-to-log sizing, petrol vs cordless, real UK models and sharpening frequency.';
@@ -200,8 +200,8 @@ const schema = [
         cons={["1.4kW is on the light side for anything beyond mid-sized rounds", "14in bar caps the log diameter you can cut in one pass", "A homeowner saw, not built for daily heavy use"]}
         rrp="Typically £160-£200"
         reviewUrl={`${url}#husqvarna-120-mark-ii`}
-        dealerUrl="https://www.husqvarna.com/uk/dealer-locator/"
-        dealerLabel="Find a Husqvarna dealer"
+        affiliateUrl={amazonLink('B07HB1H2GL')}
+        image={amazonImage('B07HB1H2GL')}
         verdict="38.2cc and a 14in bar make the 120 Mark II an easy way into petrol power for someone processing firewood a few weekends a year rather than every weekend. The 135 Mark II sits just above it with a bit more power in the same size class, worth a look if the 120 feels underpowered for your rounds."
       />
       <PickCard
