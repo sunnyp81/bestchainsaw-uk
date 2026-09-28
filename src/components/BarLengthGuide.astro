@@ -1,0 +1,74 @@
+---
+// Bar length vs trunk diameter, built only from what HSE, Stihl and Husqvarna actually publish.
+const bars = [30, 35, 40, 45, 50]; // cutting length, cm
+const MAX = 110;
+const pct = (v: number) => `${((v / MAX) * 100).toFixed(2)}%`;
+const ticks = [0, 20, 40, 60, 80, 100];
+const id = 'bar-length-guide';
+const src = {
+  hse: 'https://www.hse.gov.uk/pubns/indg317.pdf',
+  stihl: 'https://ssc.stihl.com/tsa/techdoc-documents/DVS_STIHL/ZBA/ZBA/0458-737-8321-C_ZBA_04_01.pdf',
+  husq: 'https://www.husqvarna.com/uk/learn-and-discover/felling-trees-greater-than-twice-the-guide-bar-length/',
+  husqChoose: 'https://www.husqvarna.com/uk/learn-and-discover/chainsaw-academy/basic-tree-felling/how-to-choose-the-right-chainsaw/',
+  einhell: 'https://d2c5rvsfjg2eub.cloudfront.net/asset/208244749100/document_navh2s0aj16npd8facr8d5i52v?attachment;filename=4501709_21013_001_SPK7.pdf',
+};
+---
+<figure class="plate" id={id} aria-labelledby={`${id}-title`}>
+  <div class="plate-head">
+    <p class="plate-title" id={`${id}-title`}>Cutting length vs trunk diameter: where the felling method changes</p>
+    <span class="plate-code">Trunk diameter · cm</span>
+  </div>
+  <div class="plate-body">
+    <p class="text-sm text-steel-600 mb-4 leading-relaxed">
+      Stihl's manuals give one felling cut for trunks narrower than the saw's cutting length and a different
+      one for wider trunks. Husqvarna teaches a separate technique again once a tree is more than twice the
+      guide bar length, so a 35 cm bar reaches that point at trunks over 70 cm. Each row below is a cutting
+      length: check yours in the manual, as it may be shorter than the nominal bar.
+    </p>
+    <div aria-hidden="true">
+      <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[6rem_minmax(0,1fr)] gap-x-4">
+        <span class="hidden md:block"></span>
+        <div class="relative h-5 plate-scale">
+          {ticks.map((t) => (<span class="absolute -translate-x-1/2" style={`left:${pct(t)}`}>{t}</span>))}
+        </div>
+      </div>
+      {bars.map((b) => (
+        <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[6rem_minmax(0,1fr)] gap-x-4 items-center py-1.5 border-t border-surface-100">
+          <span class="font-mono-spec text-sm text-graphite-900">{b} cm cut</span>
+          <div class="relative h-7 mt-1 md:mt-0 flex">
+            <span class="h-full bg-hazard-600" style={`width:${pct(b)}`}></span>
+            <span class="h-full bg-steel-400 flex-1"></span>
+          </div>
+        </div>
+      ))}
+      <ul class="plate-scale mt-3 space-y-1.5">
+        <li><span class="inline-block w-4 h-3 align-middle bg-hazard-600 mr-1.5"></span>Trunk narrower than the cutting length: Stihl's standard felling cut</li>
+        <li><span class="inline-block w-4 h-3 align-middle bg-steel-400 mr-1.5"></span>Wider than the cutting length: Stihl's cut for wider trunks</li>
+      </ul>
+    </div>
+    <div class="plate-scroll mt-5" tabindex="0" role="region" aria-label="Bar length and trunk diameter thresholds table">
+      <table>
+        <caption class="sr-only">Trunk diameters at which the felling method changes, by cutting length</caption>
+        <thead><tr><th scope="col">Cutting length</th><th scope="col">Standard felling cut</th><th scope="col">Wider-trunk cut</th></tr></thead>
+        <tbody>
+          {bars.map((b) => (
+            <tr>
+              <th scope="row" class="row-head">{b} cm</th>
+              <td class="num">under {b} cm</td>
+              <td class="num">over {b} cm</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <figcaption class="plate-foot">
+    Stihl notes that the actual cutting length may be less than the specified
+    length: Einhell's GH-EC 1835, for example, has a 35.6 cm bar and a 32.5 cm cutting length in
+    <a href={src.einhell} target="_blank" rel="nofollow noopener noreferrer">its manual</a>. Sources:
+    <a href={src.stihl} target="_blank" rel="nofollow noopener noreferrer">Stihl MS 231/251 manual</a>,
+    <a href={src.husq} target="_blank" rel="noopener">Husqvarna UK: felling trees greater than twice the guide bar length</a>,
+    <a href={src.hse} target="_blank" rel="noopener">HSE INDG317</a> ("choose a chainsaw with the shortest guide bar
+    suitable for the work"). This chart shows where manufacturers change method, not what is safe for you to fell.
+  </figcaption>
+</figure>

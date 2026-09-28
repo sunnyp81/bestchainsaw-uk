@@ -8,6 +8,7 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
+import SpecSheetChart from '../../components/SpecSheetChart.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 import { amazonLink, amazonImage } from '../../lib/affiliate';
 
@@ -148,6 +149,25 @@ const schema = [
         standing around waiting for a charge.
       </p>
 
+      <h2>How loud and heavy are cordless chainsaws?</h2>
+      <p>
+        Quieter running is the biggest practical difference between a battery saw and a petrol one,
+        and the makers' own noise declarations show it. The four cordless saws we cover declare a
+        measured sound power of 94.1 to 102.25 dB(A). The four petrol saws all declare 113 dB(A) or
+        just above. Decibels run on a logarithmic scale, so a gap of about 11 to 19 dB(A) is far larger
+        than the numbers suggest.
+      </p>
+      <p>
+        Weight is harder to compare because makers weigh their saws differently. Cordless weights
+        are quoted without the battery: the Makita DUC353Z is 3.3kg as a bare tool but 4.6 to 5.5kg
+        with its two batteries fitted, according to Makita UK. The table below keeps each maker's
+        weighing basis next to the figure.
+      </p>
+    </div>
+
+    <SpecSheetChart highlight="cordless" />
+
+    <div class="prose-chainsaw">
       <h2>Buy for the task, not the badge</h2>
       <p>
         The most common regret in UK chainsaw forums is not buying too small, it is buying too

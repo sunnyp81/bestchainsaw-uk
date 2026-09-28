@@ -43,7 +43,7 @@ const rows = entry.rows.map((r) => {
   };
 }).filter((r) => r.url);
 ---
-<div class="my-8 border border-steel-200 rounded-xl overflow-hidden bg-white">
+<div class="my-8 border border-steel-200 rounded-sm overflow-hidden bg-white">
   {thumb && (
     <div class="bg-white border-b border-steel-200 p-4 flex items-center justify-center">
       <div class="w-full max-w-[240px] h-[200px] bg-white rounded-lg border border-steel-200 shadow-sm flex items-center justify-center p-4">
@@ -65,7 +65,7 @@ const rows = entry.rows.map((r) => {
     </span>
     <span class="text-xs text-steel-200">Prices checked {checkedLabel}</span>
   </div>
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto" tabindex="0" role="region" aria-label={`Retailer prices for ${entry.model}, scrolls sideways on small screens`}>
     <table class="w-full text-sm">
       <thead>
         <tr class="bg-surface-100 text-left">
@@ -94,7 +94,7 @@ const rows = entry.rows.map((r) => {
   {entry.note && (
     <p class="px-4 py-2 text-xs text-steel-600 border-t border-steel-200 bg-hazard-50">{entry.note}</p>
   )}
-  <p class="px-4 py-2 text-xs text-steel-400 border-t border-steel-200">
+  <p class="px-4 py-2 text-xs text-steel-600 border-t border-steel-200">
     Indicative prices from the dates shown, not a live feed. Stock and prices change often, so we deep-link each
     listing and let the retailer show the current price. As an Amazon Associate we earn from qualifying Amazon purchases.
   </p>

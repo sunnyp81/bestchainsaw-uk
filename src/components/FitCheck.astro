@@ -13,7 +13,7 @@ import HazardTape from './HazardTape.astro';
       saw is recommended by name.
     </p>
 
-    <form id="fit-check-form" class="mt-8 bg-graphite-800 border border-graphite-700 rounded-xl p-5 md:p-6 grid gap-5 sm:grid-cols-3" novalidate>
+    <form id="fit-check-form" class="mt-8 bg-graphite-800 border border-graphite-700 rounded-sm p-5 md:p-6 grid gap-5 sm:grid-cols-3" novalidate>
       <div>
         <label for="fc-task" class="block text-sm font-medium text-surface-50 mb-1.5">What are you cutting?</label>
         <select id="fc-task" name="task" required class="w-full rounded-md border border-steel-400 bg-graphite-900 text-surface-50 px-3 py-2.5 text-sm focus:border-hazard-500 focus:ring-2 focus:ring-hazard-500">
@@ -98,11 +98,11 @@ import HazardTape from './HazardTape.astro';
     var rec = recommend(task, diameter, experience);
 
     result.innerHTML =
-      '<div class="bg-surface-50 text-graphite-900 border-2 border-hazard-500 rounded-xl p-5 md:p-6">' +
+      '<div class="bg-surface-50 text-graphite-900 border-2 border-hazard-500 rounded-sm p-5 md:p-6">' +
         '<p class="text-xs font-bold uppercase tracking-wide text-hazard-600 mb-2">Your fit check result</p>' +
         '<dl class="grid sm:grid-cols-2 gap-4 mb-4">' +
-          '<div><dt class="text-xs uppercase tracking-wide text-steel-400 mb-0.5">Recommended power type</dt><dd class="font-heading font-bold text-lg">' + rec.powerType + '</dd></div>' +
-          '<div><dt class="text-xs uppercase tracking-wide text-steel-400 mb-0.5">Recommended bar length</dt><dd class="font-mono-spec font-bold text-lg">' + rec.barRange + '</dd></div>' +
+          '<div><dt class="text-xs uppercase tracking-wide text-steel-600 mb-0.5">Recommended power type</dt><dd class="font-heading font-bold text-lg">' + rec.powerType + '</dd></div>' +
+          '<div><dt class="text-xs uppercase tracking-wide text-steel-600 mb-0.5">Recommended bar length</dt><dd class="font-mono-spec font-bold text-lg">' + rec.barRange + '</dd></div>' +
         '</dl>' +
         '<p class="text-sm leading-relaxed text-steel-600 mb-4">' + rec.reasoning + '</p>' +
         '<p class="text-sm leading-relaxed text-graphite-900 bg-hivis-300/40 border border-hivis-500 rounded-md px-3 py-2 mb-4">' +

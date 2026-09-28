@@ -143,16 +143,16 @@ const schema = [
       <h2 class="text-xl md:text-2xl font-bold text-graphite-900 mb-4 font-heading">Where to start</h2>
       <div class="grid sm:grid-cols-3 gap-4">
         {POWER_TYPE_HUBS.map((h) => (
-          <a href={`/${h.slug}/`} class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+          <a href={`/${h.slug}/`} class="block bg-white border border-steel-200 rounded-sm p-5 hover:border-hazard-500 hover:shadow-md transition">
             <strong class="text-graphite-900 font-heading">{h.label} chainsaws</strong>
             <span class="block mt-1 text-sm text-steel-600">Guide and picks</span>
           </a>
         ))}
-        <a href={`/${SAFETY_LINK.slug}/`} class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+        <a href={`/${SAFETY_LINK.slug}/`} class="block bg-white border border-steel-200 rounded-sm p-5 hover:border-hazard-500 hover:shadow-md transition">
           <strong class="text-graphite-900 font-heading">{SAFETY_LINK.label}</strong>
           <span class="block mt-1 text-sm text-steel-600">EN381 PPE and safe technique</span>
         </a>
-        <a href="/#fit-check" class="block bg-white border border-steel-200 rounded-xl p-5 hover:border-hazard-500 hover:shadow-md transition">
+        <a href="/#fit-check" class="block bg-white border border-steel-200 rounded-sm p-5 hover:border-hazard-500 hover:shadow-md transition">
           <strong class="text-graphite-900 font-heading">Fit Check tool</strong>
           <span class="block mt-1 text-sm text-steel-600">Match your task to a saw in seconds</span>
         </a>

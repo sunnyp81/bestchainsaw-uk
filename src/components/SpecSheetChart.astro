@@ -1,0 +1,120 @@
+---
+// Original data asset: maker-declared sound power (LwA) for every saw this site covers, plus a
+// weight table that keeps each maker's weighing basis visible (the bases differ, so no weight chart).
+import { SPEC_ROWS, SPEC_CHECKED, TYPE_LABEL, type PowerType } from '../data/specSheet';
+
+interface Props { highlight: PowerType; id?: string }
+const { highlight, id = 'noise-weight-data' } = Astro.props as Props;
+
+const MIN = 90;
+const MAX = 120;
+const pos = (v: number) => `${(((v - MIN) / (MAX - MIN)) * 100).toFixed(2)}%`;
+const order: PowerType[] = ['cordless', 'corded', 'petrol'];
+const groups = order.map((t) => ({ type: t, rows: SPEC_ROWS.filter((r) => r.type === t) }));
+const ticks = [90, 95, 100, 105, 110, 115, 120];
+const fmt = (n: number | null, unit = '') => (n === null ? 'Not published' : `${n}${unit}`);
+const checked = new Date(`${SPEC_CHECKED}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const avg = (t: PowerType) => {
+  const rs = SPEC_ROWS.filter((r) => r.type === t);
+  return String(Math.round(rs.reduce((s, r) => s + r.lwaMeasured * 100, 0) / rs.length) / 100);
+};
+---
+<figure class="plate" id={id} aria-labelledby={`${id}-title`}>
+  <div class="plate-head">
+    <p class="plate-title" id={`${id}-title`}>How loud is each saw? Declared sound power, 10 UK chainsaws</p>
+    <span class="plate-code">LwA dB(A) · maker figures</span>
+  </div>
+  <div class="plate-body">
+    <p class="text-sm text-steel-600 mb-4 leading-relaxed">
+      Sound power (LwA) is the standard noise figure makers declare for their saws. Filled dots are the
+      maker's measured value; open rings are the guaranteed value, a slightly higher ceiling, where one is
+      published.
+      Averages from these sheets: cordless {avg('cordless')} dB(A), corded {avg('corded')} dB(A), petrol {avg('petrol')} dB(A).
+    </p>
+    <div aria-hidden="true">
+      <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[13rem_minmax(0,1fr)] gap-x-4">
+        <span class="hidden md:block"></span>
+        <div class="relative h-5 plate-scale">
+          {ticks.map((t) => (
+            <span class="absolute -translate-x-1/2" style={`left:${pos(t)}`}>{t}</span>
+          ))}
+        </div>
+      </div>
+      {groups.map((g) => (
+        <div class="mt-3">
+          <p class={`text-xs font-semibold uppercase tracking-wide mb-1 ${g.type === highlight ? 'text-hazard-700' : 'text-steel-600'}`}>
+            {TYPE_LABEL[g.type]}{g.type === highlight ? ' (this guide)' : ''}
+          </p>
+          {g.rows.map((r) => (
+            <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[13rem_minmax(0,1fr)] gap-x-4 items-center py-1.5 border-t border-surface-100">
+              <span class="text-sm text-graphite-900 leading-tight">{r.model}</span>
+              <div class="relative h-6 mt-1 md:mt-0">
+                {ticks.map((t) => (<span class="absolute top-0 bottom-0 w-px bg-surface-100" style={`left:${pos(t)}`}></span>))}
+                                {r.lwaGuaranteed !== null && (
+                  <span class="absolute top-1/2 h-0.5 bg-graphite-900" style={`left:${pos(r.lwaMeasured)};width:${(((r.lwaGuaranteed - r.lwaMeasured) / (MAX - MIN)) * 100).toFixed(2)}%`}></span>
+                )}
+                {r.lwaGuaranteed !== null && (
+                  <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border-2 border-graphite-900 bg-white" style={`left:${pos(r.lwaGuaranteed)}`}></span>
+                )}
+                <span class={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full ${g.type === highlight ? 'bg-hazard-600' : 'bg-steel-600'}`} style={`left:${pos(r.lwaMeasured)}`}></span>
+                <span class="absolute top-1/2 -translate-y-1/2 font-mono-spec text-xs text-graphite-900" style={`right:calc(100% - ${pos(r.lwaMeasured)} + 12px)`}>{r.lwaMeasured}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <p class="plate-scale mt-3">Scale starts at 90 dB(A). A dot plot is used so the gaps are not exaggerated by cut-off bars.</p>
+    </div>
+  </div>
+
+  <p class="lg:hidden plate-scale px-4 pb-2" aria-hidden="true">Swipe the table sideways to see every column.</p>
+  <div class="plate-scroll" tabindex="0" role="region" aria-label="Chainsaw noise and weight data table, scrolls sideways on small screens">
+    <table class="wide">
+      <caption class="sr-only">Maker-declared noise, weight and chain speed for 10 chainsaws, checked {checked}</caption>
+      <thead>
+        <tr>
+          <th scope="col">Saw</th>
+          <th scope="col">Type</th>
+          <th scope="col">Bar (cm)</th>
+          <th scope="col">Weight (kg)</th>
+          <th scope="col">Weight basis</th>
+          <th scope="col">LwA measured</th>
+          <th scope="col">LwA guaranteed</th>
+          <th scope="col">LpA at ear</th>
+          <th scope="col">Chain speed (m/s)</th>
+          <th scope="col">Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        {groups.flatMap((g) => g.rows).map((r) => (
+          <tr>
+            <th scope="row" class="row-head">{r.model}</th>
+            <td>{TYPE_LABEL[r.type]}, {r.power}</td>
+            <td class="num">{r.barCm}</td>
+            <td class="num">{r.weightKg}</td>
+            <td>{r.weightBasis}</td>
+            <td class="num">{r.lwaMeasured}</td>
+            <td class="num">{fmt(r.lwaGuaranteed)}</td>
+            <td class="num">{fmt(r.lpa)}</td>
+            <td class="num">{r.chainSpeed}{r.chainSpeedNote && <span class="block font-sans text-xs text-steel-600 whitespace-normal">{r.chainSpeedNote}</span>}</td>
+            <td>
+              <a class="text-hazard-700 underline underline-offset-2" href={r.source} target="_blank" rel="nofollow noopener noreferrer">{r.sourceLabel}</a>
+              {r.source2 && (<><br /><a class="text-hazard-700 underline underline-offset-2" href={r.source2} target="_blank" rel="nofollow noopener noreferrer">{r.source2Label}</a></>)}
+              {r.source3 && (<><br /><a class="text-hazard-700 underline underline-offset-2" href={r.source3} target="_blank" rel="nofollow noopener noreferrer">{r.source3Label}</a></>)}
+              {r.note && <span class="block text-xs mt-1">{r.note}</span>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <figcaption class="plate-foot">
+    Compiled by Best Chainsaw from each maker's own UK product page, spec sheet or operator manual, checked {checked}.
+    All figures are manufacturer declarations, not our measurements. Weights are not charted because makers weigh
+    differently: some include the bar and chain, some exclude them, and cordless weights exclude the battery. Compare
+    weights only where the basis matches. Where a maker's page and manual disagree, the manual figure is used.
+    EGO's manual states one set of sound figures for the CS1410E and CS1610E. The Titan saw on our electric guide is
+    not included because we could not find a published spec sheet for it. You are welcome to cite this table with a
+    link to this page.
+  </figcaption>
+</figure>

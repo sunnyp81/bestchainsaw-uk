@@ -1,0 +1,80 @@
+---
+// Original asset: each reviewed saw's published chain speed set against the EN ISO 11393 / EN 381
+// cut-protection classes, so a buyer can see which trouser class covers their saw.
+import { SPEC_ROWS, SPEC_CHECKED, PPE_CLASSES, PPE_SOURCE, TYPE_LABEL } from '../data/specSheet';
+
+const MAX = 30;
+const pct = (v: number) => `${((v / MAX) * 100).toFixed(2)}%`;
+const rows = [...SPEC_ROWS].sort((a, b) => a.chainSpeed - b.chainSpeed);
+const classFor = (s: number) => PPE_CLASSES.find((c) => s <= c.speed)?.cls ?? null;
+const checked = new Date(`${SPEC_CHECKED}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const overClass1 = rows.filter((r) => r.chainSpeed > 20);
+const id = 'ppe-class-chart';
+---
+<figure class="plate" id={id} aria-labelledby={`${id}-title`}>
+  <div class="plate-head">
+    <p class="plate-title" id={`${id}-title`}>Saw chain speeds vs cut-protection class test speeds</p>
+    <span class="plate-code">EN ISO 11393 · m/s</span>
+  </div>
+  <div class="plate-body">
+    <p class="text-sm text-steel-600 mb-4 leading-relaxed">
+      Chainsaw trousers are tested against a chain running at a set speed: Class 0 to 16 m/s, Class 1 to
+      20 m/s, Class 2 to 24 m/s and Class 3 to 28 m/s. Each bar below is a saw's chain speed from its
+      maker's spec sheet, drawn against those test speeds. STIHL UK says Class 1 is usually suitable for home use, and {overClass1.length} of
+      these {rows.length} saws publish a chain speed above 20 m/s.
+    </p>
+    <div aria-hidden="true">
+      <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[13rem_minmax(0,1fr)] gap-x-4">
+        <span class="hidden md:block"></span>
+        <div class="relative h-9">
+          {PPE_CLASSES.map((c) => (
+            <span class="absolute bottom-0 -translate-x-full pr-1 text-right leading-tight" style={`left:${pct(c.speed)}`}>
+              <span class="block text-[11px] font-semibold text-graphite-900"><span class="hidden sm:inline">Class </span><span class="sm:hidden">C</span>{c.cls}</span>
+              <span class="block plate-scale">{c.speed}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+      {rows.map((r) => (
+        <div class="grid grid-cols-[minmax(0,1fr)] md:grid-cols-[13rem_minmax(0,1fr)] gap-x-4 items-center py-1.5 border-t border-surface-100">
+          <span class="text-sm text-graphite-900 leading-tight">{r.model} <span class="text-steel-600 text-xs">({TYPE_LABEL[r.type].toLowerCase()})</span></span>
+          <div class="relative h-6 mt-1 md:mt-0 bg-surface-100">
+            {PPE_CLASSES.map((c) => (<span class="absolute top-0 bottom-0 border-l border-dashed border-graphite-900" style={`left:${pct(c.speed)}`}></span>))}
+            <span class={`absolute left-0 top-1 bottom-1 ${r.chainSpeed > 20 ? 'hatch' : 'bg-hazard-600'}`} style={`width:${pct(r.chainSpeed)}`}></span>
+            <span class="absolute top-1/2 -translate-y-1/2 font-mono-spec text-xs text-graphite-900 ml-1 px-1 bg-white" style={`left:${pct(r.chainSpeed)}`}>{r.chainSpeed}</span>
+          </div>
+        </div>
+      ))}
+      <p class="plate-scale mt-3 flex flex-wrap gap-x-5 gap-y-1">
+        <span><span class="inline-block w-4 h-3 align-middle bg-hazard-600 mr-1"></span>Within Class 1 (20 m/s or less)</span>
+        <span><span class="inline-block w-4 h-3 align-middle hatch mr-1"></span>Above 20 m/s: check the class you buy</span>
+      </p>
+    </div>
+  </div>
+  <div class="plate-scroll" tabindex="0" role="region" aria-label="Chain speed and protection class table">
+    <table>
+      <caption class="sr-only">Published chain speed of 10 chainsaws and EN ISO 11393 class test speeds</caption>
+      <thead>
+        <tr><th scope="col">Saw</th><th scope="col">Chain speed (m/s)</th><th scope="col">First class tested at or above that speed</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row" class="row-head">{r.model}</th>
+            <td class="num">{r.chainSpeed}{r.chainSpeedNote && <span class="block font-sans text-xs text-steel-600 whitespace-normal">{r.chainSpeedNote}</span>}</td>
+            <td>Class {classFor(r.chainSpeed)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <figcaption class="plate-foot">
+    Class speeds from <a href={PPE_SOURCE} target="_blank" rel="noopener">STIHL UK: cut protection classes</a>. Chain
+    speeds from each maker's UK spec sheet or manual, checked {checked}; see the
+    <a href="/cordless-chainsaws/#noise-weight-data">full spec table</a> for sources. Makers do not all measure chain
+    speed the same way, and Stihl publishes both a maximum and an at-power figure, so this chart uses the higher one.
+    It compares published figures and is not a PPE rating for any saw: follow your saw's manual and
+    the clothing maker's guidance when choosing a class. HSE's leaflet INDG317 notes that no protective equipment can ensure
+    100% protection against a hand-held chainsaw.
+  </figcaption>
+</figure>

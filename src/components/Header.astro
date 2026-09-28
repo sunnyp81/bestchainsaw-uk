@@ -1,5 +1,8 @@
 ---
 import { POWER_TYPE_HUBS, GUIDE_LINKS, SAFETY_LINK } from '../lib/site';
+const here = Astro.url.pathname;
+const cur = (slug: string) => (here === `/${slug}/` ? 'page' : undefined);
+const inGuides = GUIDE_LINKS.some((g) => here === `/${g.slug}/`);
 ---
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-hazard-600 focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
 <header class="border-b border-graphite-700 bg-graphite-900 sticky top-0 z-30">
@@ -10,21 +13,21 @@ import { POWER_TYPE_HUBS, GUIDE_LINKS, SAFETY_LINK } from '../lib/site';
     </a>
     <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-surface-50" aria-label="Primary">
       {POWER_TYPE_HUBS.map((h) => (
-        <a href={`/${h.slug}/`} class="hover:text-hivis-400">{h.label}</a>
+        <a href={`/${h.slug}/`} aria-current={cur(h.slug)} class="hover:text-hivis-400 py-1 border-b-2 border-transparent aria-[current=page]:border-hazard-500 aria-[current=page]:text-white">{h.label}</a>
       ))}
-      <a href={`/${SAFETY_LINK.slug}/`} class="hover:text-hivis-400">{SAFETY_LINK.label}</a>
+      <a href={`/${SAFETY_LINK.slug}/`} aria-current={cur(SAFETY_LINK.slug)} class="hover:text-hivis-400 py-1 border-b-2 border-transparent aria-[current=page]:border-hazard-500 aria-[current=page]:text-white">{SAFETY_LINK.label}</a>
       <details class="relative">
-        <summary class="cursor-pointer list-none hover:text-hivis-400 flex items-center gap-1 select-none">
-          Guides
+        <summary class={`cursor-pointer list-none hover:text-hivis-400 flex items-center gap-1 select-none py-1 border-b-2 ${inGuides ? 'border-hazard-500 text-white' : 'border-transparent'}`}>
+          Guides{inGuides && <span class="sr-only"> (current section)</span>}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
-        <div class="absolute right-0 mt-2 w-56 bg-white text-graphite-900 border border-steel-200 rounded-lg shadow-lg py-2 z-40">
+        <div class="absolute right-0 mt-2 w-56 bg-white text-graphite-900 border border-steel-200 rounded-sm shadow-lg py-2 z-40">
           {GUIDE_LINKS.map((g) => (
-            <a href={`/${g.slug}/`} class="block px-4 py-2 text-sm hover:bg-hazard-50 hover:text-hazard-600">{g.label}</a>
+            <a href={`/${g.slug}/`} aria-current={cur(g.slug)} class="block px-4 py-2 text-sm hover:bg-hazard-50 hover:text-hazard-700 aria-[current=page]:font-bold aria-[current=page]:underline">{g.label}</a>
           ))}
         </div>
       </details>
-      <a href="/about/" class="hover:text-hivis-400">About</a>
+      <a href="/about/" aria-current={cur('about')} class="hover:text-hivis-400 py-1 border-b-2 border-transparent aria-[current=page]:border-hazard-500 aria-[current=page]:text-white">About</a>
       <a href="/#fit-check" class="bg-hazard-500 hover:bg-hivis-400 text-graphite-900 font-bold px-3 py-1.5 rounded-md">Fit Check tool</a>
     </nav>
     <button id="mobile-menu-btn" class="md:hidden p-2 -mr-2 text-surface-50" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
@@ -33,11 +36,11 @@ import { POWER_TYPE_HUBS, GUIDE_LINKS, SAFETY_LINK } from '../lib/site';
   </div>
   <nav id="mobile-menu" class="md:hidden hidden border-t border-graphite-700 bg-graphite-900 px-4 py-4" aria-label="Mobile navigation">
     <ul class="space-y-1 text-sm font-medium text-surface-50">
-      {POWER_TYPE_HUBS.map((h) => (<li><a href={`/${h.slug}/`} class="block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{h.label} chainsaws</a></li>))}
-      <li><a href={`/${SAFETY_LINK.slug}/`} class="block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{SAFETY_LINK.label}</a></li>
+      {POWER_TYPE_HUBS.map((h) => (<li><a href={`/${h.slug}/`} aria-current={cur(h.slug)} class="aria-[current=page]:text-hivis-400 aria-[current=page]:underline block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{h.label} chainsaws</a></li>))}
+      <li><a href={`/${SAFETY_LINK.slug}/`} aria-current={cur(SAFETY_LINK.slug)} class="aria-[current=page]:text-hivis-400 aria-[current=page]:underline block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{SAFETY_LINK.label}</a></li>
       <li class="border-t border-graphite-700 mt-2 pt-2 text-xs uppercase tracking-wide text-steel-400 px-2">Guides</li>
-      {GUIDE_LINKS.map((g) => (<li><a href={`/${g.slug}/`} class="block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{g.label}</a></li>))}
-      <li class="border-t border-graphite-700 mt-2 pt-2"><a href="/about/" class="block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">About</a></li>
+      {GUIDE_LINKS.map((g) => (<li><a href={`/${g.slug}/`} aria-current={cur(g.slug)} class="aria-[current=page]:text-hivis-400 aria-[current=page]:underline block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">{g.label}</a></li>))}
+      <li class="border-t border-graphite-700 mt-2 pt-2"><a href="/about/" aria-current={cur("about")} class="aria-[current=page]:text-hivis-400 aria-[current=page]:underline block py-2 px-2 rounded hover:bg-graphite-800 hover:text-hivis-400">About</a></li>
       <li class="mt-2"><a href="/#fit-check" class="block text-center bg-hazard-500 hover:bg-hivis-400 text-graphite-900 font-bold px-3 py-2.5 rounded-md">Fit Check tool</a></li>
     </ul>
   </nav>

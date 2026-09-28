@@ -91,7 +91,7 @@ const schema = [
     </p>
 
     <figure class="my-8">
-      <div class="rounded-xl border border-steel-200 bg-white p-4 md:p-6 overflow-x-auto">
+      <div class="rounded-sm border border-steel-200 bg-white p-4 md:p-6 overflow-x-auto">
         <svg viewBox="0 0 660 190" class="w-full h-auto min-w-[560px]" role="img" aria-labelledby="sizingSvgTitle">
           <title id="sizingSvgTitle">Chainsaw bar length by task: corded electric for cuts under 20cm, cordless battery for 20 to 25cm, petrol for 25cm and over</title>
           <line x1="140" y1="14" x2="140" y2="168" stroke="var(--color-steel-200)" stroke-width="2" />
@@ -106,7 +106,7 @@ const schema = [
           <text x="470" y="146" font-family="'IBM Plex Mono', monospace" font-size="13" fill="var(--color-graphite-900)">25cm+, 16 to 18in bar</text>
         </svg>
       </div>
-      <figcaption class="mt-2 text-center text-xs text-steel-400">
+      <figcaption class="mt-2 text-center text-xs text-steel-600">
         Bar length follows the cut, not the other way round: corded electric for cuts under 20cm,
         cordless battery for 20 to 25cm, petrol for 25cm and over.
       </figcaption>
@@ -122,7 +122,7 @@ const schema = [
       </p>
       <div class="grid sm:grid-cols-3 gap-5">
         {hubs.map((h) => (
-          <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
+          <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-sm p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
             <h3 class="text-xl font-bold text-graphite-900 group-hover:text-hazard-600 mb-2 font-heading">{h.label}</h3>
             <p class="text-steel-600 text-sm leading-relaxed">{h.tagline}</p>
             <span class="inline-block mt-4 text-hazard-600 font-semibold text-sm">Read the guide &rarr;</span>
