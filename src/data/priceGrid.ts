@@ -44,7 +44,7 @@ export const PRICE_GRID: Record<string, PriceEntry> = {
       { retailer: 'B&Q', url: 'https://www.diy.com/departments/bosch-universalchain35-1-8w-mains-fed-corded-350mm-chainsaw/4059952608167_BQ.prd', price: '£129', note: 'Corded, 1800W, 35cm bar' },
       { retailer: 'Amazon UK', asin: 'B09MFYW6HY', note: 'Live price on Amazon' },
     ],
-    note: 'Also listed at Currys and Robert Dyas; we link the two we could price-check and let Amazon show its live price.',
+    note: 'Also listed at Currys and Robert Dyas; we link the non-Amazon retailer we could price-check.',
   },
 
   // Cordless 14in-class. Sold bare tool (body only) at the trade retailers, so
@@ -70,6 +70,6 @@ export const PRICE_GRID: Record<string, PriceEntry> = {
       { retailer: 'Hyundai (direct)', url: 'https://hyundaipowerequipment.co.uk/62cc-20-hyundai-petrol-chainsaw-2-stroke-easy-start-hyc6200x', price: '£129.99', note: '62cc, 20in/50cm bar, 3-year warranty' },
       { retailer: 'Amazon UK', asin: 'B08SQCP9LH', note: 'Live price on Amazon' },
     ],
-    note: 'Also listed at ManoMano, eBay and Robert Dyas; we link the brand-direct price we could verify and let Amazon show its live price.',
+    note: 'Also listed at ManoMano, eBay and Robert Dyas; we link the brand-direct price we could verify.',
   },
 };

@@ -59,7 +59,9 @@ const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check 
           <div class="text-hazard-600 text-lg" aria-label={`${rating} out of 5`}>
             {'★'.repeat(Math.round(rating))}<span class="text-steel-200">{'★'.repeat(5 - Math.round(rating))}</span>
           </div>
-          {rrp && <div class="text-sm font-semibold text-graphite-900 mt-1 font-mono-spec">{rrp}</div>}
+          {/* Amazon compliance: never show a static price alongside an Amazon buy link/image.
+              Only the dealer path (no affiliate link) may display rrp. */}
+          {rrp && isDealer && <div class="text-sm font-semibold text-graphite-900 mt-1 font-mono-spec">{rrp}</div>}
         </div>
       </div>
       <p class="text-steel-600 text-sm md:text-base mb-4 leading-relaxed">{verdict}</p>
