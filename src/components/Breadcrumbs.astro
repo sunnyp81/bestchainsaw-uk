@@ -2,7 +2,7 @@
 interface Props { items: { name: string; url: string }[]; }
 const { items } = Astro.props as Props;
 ---
-<nav aria-label="Breadcrumb" class="text-sm text-steel-400 mb-6">
+<nav aria-label="Breadcrumb" class="text-sm text-steel-600 mb-6">
   <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
     {items.map((item, i) => (
       <li class="flex items-center gap-2">

@@ -32,7 +32,7 @@ const hubs = [
 const faqs = [
   {
     q: 'What size chainsaw do I need?',
-    a: 'Match the bar to your thickest cut, not the biggest saw you can afford. Pick a bar roughly 5cm longer than the thickest branch or trunk you will cut: under 20cm calls for a 12 to 14 inch bar, 20 to 25cm calls for 14 to 16 inches, and over 25cm or regular felling needs 16 to 18 inches. Use the <a href="/#fit-check">Fit Check tool</a> above for a recommendation based on your own task.',
+    a: 'Match the bar to your thickest cut, not the biggest saw you can afford. Our own rule of thumb is a bar roughly 5cm longer than the thickest branch or trunk you will cut: under 20cm calls for a 12 to 14 inch bar, 20 to 25cm calls for 14 to 16 inches, and over 25cm or regular felling needs 16 to 18 inches. Use the <a href="/#fit-check">Fit Check tool</a> above for a recommendation based on your own task.',
   },
   {
     q: 'Electric vs cordless vs petrol: which should I get?',
@@ -71,9 +71,11 @@ const schema = [
     <h2 class="text-2xl md:text-3xl font-bold text-graphite-900 mb-4 font-heading">Size the saw to the wood, not the wish list</h2>
     <p class="text-base md:text-lg text-steel-600 leading-relaxed mb-4">
       The bar length that matters is the one that matches your thickest cut, not the biggest saw
-      on the shelf. Pick a bar roughly 5cm longer than the thickest branch or trunk you expect to
-      cut: a 15cm branch does not need a 45cm petrol bar bought 'just in case'. Power type follows
-      the same logic: corded electric handles light pruning under about 20cm near a socket,
+      on the shelf. Our own rule of thumb: pick a bar roughly 5cm longer than the thickest branch
+      or trunk you expect to cut, so a 15cm branch does not need a 45cm petrol bar bought 'just in
+      case'. For the manufacturer guidance behind bar length and cutting length, see the
+      <a href="/replace-bar/#bar-length-guide" class="text-hazard-600 underline underline-offset-2 hover:text-hazard-700">bar length guide</a>.
+      Power type follows the same logic: corded electric handles light pruning under about 20cm near a socket,
       cordless battery saws cover most portable UK garden work away from a plug, and petrol earns
       its weight and noise on regular firewood processing or storm and felling clearance.
     </p>
@@ -91,7 +93,7 @@ const schema = [
     </p>
 
     <figure class="my-8">
-      <div class="rounded-xl border border-steel-200 bg-white p-4 md:p-6 overflow-x-auto">
+      <div class="rounded-sm border border-steel-200 bg-white p-4 md:p-6 overflow-x-auto">
         <svg viewBox="0 0 660 190" class="w-full h-auto min-w-[560px]" role="img" aria-labelledby="sizingSvgTitle">
           <title id="sizingSvgTitle">Chainsaw bar length by task: corded electric for cuts under 20cm, cordless battery for 20 to 25cm, petrol for 25cm and over</title>
           <line x1="140" y1="14" x2="140" y2="168" stroke="var(--color-steel-200)" stroke-width="2" />
@@ -106,7 +108,7 @@ const schema = [
           <text x="470" y="146" font-family="'IBM Plex Mono', monospace" font-size="13" fill="var(--color-graphite-900)">25cm+, 16 to 18in bar</text>
         </svg>
       </div>
-      <figcaption class="mt-2 text-center text-xs text-steel-400">
+      <figcaption class="mt-2 text-center text-xs text-steel-600">
         Bar length follows the cut, not the other way round: corded electric for cuts under 20cm,
         cordless battery for 20 to 25cm, petrol for 25cm and over.
       </figcaption>
@@ -122,7 +124,7 @@ const schema = [
       </p>
       <div class="grid sm:grid-cols-3 gap-5">
         {hubs.map((h) => (
-          <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-xl p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
+          <a href={`/${h.slug}/`} class="group border border-steel-200 rounded-sm p-6 bg-white hover:border-hazard-500 hover:shadow-md transition">
             <h3 class="text-xl font-bold text-graphite-900 group-hover:text-hazard-600 mb-2 font-heading">{h.label}</h3>
             <p class="text-steel-600 text-sm leading-relaxed">{h.tagline}</p>
             <span class="inline-block mt-4 text-hazard-600 font-semibold text-sm">Read the guide &rarr;</span>

@@ -8,7 +8,9 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
+import SpecSheetChart from '../../components/SpecSheetChart.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = 'Best Cordless Chainsaws UK 2026: Battery Buying Guide';
 const description = 'Cordless chainsaw buying guide for the UK: battery voltage tiers, typical prices, real run-time and three models worth checking.';
@@ -147,6 +149,25 @@ const schema = [
         standing around waiting for a charge.
       </p>
 
+      <h2>How loud and heavy are cordless chainsaws?</h2>
+      <p>
+        Quieter running is the biggest practical difference between a battery saw and a petrol one,
+        and the makers' own noise declarations show it. The four cordless saws we cover declare a
+        measured sound power of 94.1 to 102.25 dB(A). The four petrol saws all declare 113 dB(A) or
+        just above. Decibels run on a logarithmic scale, so a gap of about 11 to 19 dB(A) is far larger
+        than the numbers suggest.
+      </p>
+      <p>
+        Weight is harder to compare because makers weigh their saws differently. Cordless weights
+        are quoted without the battery: the Makita DUC353Z is 3.3kg as a bare tool but 4.6 to 5.5kg
+        with its two batteries fitted, according to Makita UK. The table below keeps each maker's
+        weighing basis next to the figure.
+      </p>
+    </div>
+
+    <SpecSheetChart highlight="cordless" />
+
+    <div class="prose-chainsaw">
       <h2>Buy for the task, not the badge</h2>
       <p>
         The most common regret in UK chainsaw forums is not buying too small, it is buying too
@@ -181,9 +202,9 @@ const schema = [
         name="Ryobi ONE+ OCS1830"
         brand="Ryobi"
         bestFor="light pruning on a budget"
-        rating={4}
-        rrp="~£70 to £120, battery often sold separately"
         reviewUrl={`${url}#ryobi-ocs1830`}
+        affiliateUrl={amazonLink('B06WRNLQPP')}
+        image={amazonImage('B06WRNLQPP')}
         verdict="An 18V, 30cm-bar saw built around Ryobi's ONE+ battery platform. Sensible if pruning and light branch work is genuinely all you need, especially if you already own other ONE+ garden tools and can share a battery across them."
         pros={[
           'Battery and charger shared across Ryobi’s wide ONE+ 18V tool range',
@@ -204,9 +225,9 @@ const schema = [
         name="Makita DUC353Z"
         brand="Makita"
         bestFor="existing Makita LXT owners"
-        rating={4.5}
-        rrp="~£150 to £220, tool only, LXT batteries sold separately"
         reviewUrl={`${url}#makita-duc353`}
+        affiliateUrl={amazonLink('B01MQIAZ7J')}
+        image={amazonImage('B01MQIAZ7J')}
         verdict="The Z suffix in Makita's naming means this is sold as a bare tool, body only. It runs on two 18V LXT batteries rather than a dedicated pack, so it sits in the 36V mid-tier, and if you are not already on Makita's LXT platform you will need to budget for two batteries and a charger on top of the tool price. The 35cm bar handles more than the 18V-class saws above. Makes most sense if you are already invested in Makita's LXT ecosystem from other cordless tools."
         pros={[
           'Runs on Makita’s huge 18V LXT battery range, no separate platform to buy into',
@@ -228,8 +249,6 @@ const schema = [
         name="EGO Power+ CS1410E"
         brand="EGO"
         bestFor="firewood-sized rounds, no petrol"
-        rating={4.5}
-        rrp="~£200 to £300 as a kit with battery and charger"
         reviewUrl={`${url}#ego-cs1401e`}
         verdict="A 56V ARC Lithium saw with a 35cm bar, EGO's higher-end cordless tier. The bare tool is sold as the CS1410E, while the kit with battery and charger is the CS1411E, so check which listing you are looking at. This is roughly where UK owners report cordless starts to genuinely handle firewood-sized rounds without stepping up to petrol. The 56V battery is shared with EGO's mower and trimmer range, worth factoring in if you are already on that platform. EGO sells through Amazon UK and specialist dealers rather than the mainstream DIY sheds."
         pros={[

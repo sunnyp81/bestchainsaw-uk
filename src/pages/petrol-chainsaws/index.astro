@@ -8,6 +8,7 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import PriceGrid from '../../components/PriceGrid.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
+import SpecSheetChart from '../../components/SpecSheetChart.astro';
 import { articleSchema, itemListSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
 const title = 'Best Petrol Chainsaw UK 2026: cc Guide & Real Prices';
@@ -146,9 +147,8 @@ const schema = [
         name="Stihl MS 212"
         brand="Stihl"
         bestFor="most UK firewood and general garden work"
-        rating={4.5}
         pros={[
-          "35.2cc engine comfortably handles a season's firewood",
+          "38.6cc engine comfortably handles a season's firewood",
           'Up to 16in bar covers most rounds and the odd small tree',
           'Parts and servicing widely available at UK Stihl dealers',
         ]}
@@ -160,14 +160,13 @@ const schema = [
         reviewUrl={`${url}#stihl-ms-211`}
         dealerUrl="https://www.stihl.co.uk/en/dealer-locator"
         dealerLabel="Find a Stihl dealer"
-        verdict="A 35.2cc all-rounder that sits right in the middle of the useful range: enough engine for a season of firewood and the odd small tree, without the weight and price of a felling saw."
+        verdict="A 38.6cc all-rounder that sits right in the middle of the useful range: enough engine for a season of firewood and the odd small tree, without the weight and price of a felling saw."
       />
       <PickCard
         rank={2}
         name="Husqvarna 120 Mark II"
         brand="Husqvarna"
         bestFor="first-time petrol buyers on a tighter budget"
-        rating={4}
         pros={[
           '38.2cc X-Torq engine is a genuine step up from entry 30cc saws',
           'Lighter and more forgiving to start than bigger Husqvarna models',
@@ -188,7 +187,6 @@ const schema = [
         name="Husqvarna 435 II"
         brand="Husqvarna"
         bestFor="bigger gardens and heavier firewood rounds"
-        rating={4.5}
         pros={[
           '40cc X-Torq engine gives more headroom than the 120 Mark II',
           'LowVib dampening noticeably reduces hand and arm fatigue over a session',
@@ -209,7 +207,7 @@ const schema = [
     <div class="prose-chainsaw">
       <h3 id="stihl-ms-211">Stihl MS 212: the middle-ground firewood saw</h3>
       <p>
-        The 35.2cc MS 212 sits right in the middle of the useful range for UK homeowners. It's a
+        The 38.6cc MS 212 sits right in the middle of the useful range for UK homeowners. It's a
         low-vibration, 2-MIX engine with a pre-separation air filter that extends the time between
         cleans, and it's rated by Stihl for cutting firewood and felling small trees rather than
         just light pruning. With a 16in bar it'll take on most rounds a UK garden or smallholding
@@ -232,6 +230,23 @@ const schema = [
         it at 16in for firewood work.
       </p>
 
+      <h2>Petrol vs battery: noise and weight from the spec sheets</h2>
+      <p>
+        Every petrol saw on this page declares a measured sound power of 113 dB(A) or just above,
+        against 94.1 to 102.25 dB(A) for the cordless saws we cover. The sound pressure at your ear is
+        also high: 95 to 103 dB(A) where the maker publishes it. That is why ear defenders sit on the
+        PPE list for any petrol saw.
+      </p>
+      <p>
+        Petrol weights are usually quoted with an empty tank and without the bar and chain, so the saw
+        you actually lift is heavier than the headline figure. Hyundai is the exception here and
+        includes the bar and chain in its 6.9kg. Check the weight basis column before comparing.
+      </p>
+    </div>
+
+    <SpecSheetChart highlight="petrol" />
+
+    <div class="prose-chainsaw">
       <h2>A petrol saw you can actually price-compare online</h2>
       <p>
         The Stihl and Husqvarna picks above are dealer-channel, bought through an approved dealer

@@ -4,7 +4,6 @@ interface Props {
   name: string;
   brand: string;
   bestFor: string;
-  rating: number;
   pros: string[];
   cons: string[];
   rrp?: string;
@@ -20,7 +19,7 @@ interface Props {
   dealerLabel?: string;
 }
 import { AFFILIATE_REL, amazonSearch } from '../lib/affiliate';
-const { rank, name, brand, bestFor, rating, pros, cons, rrp, reviewUrl, affiliateUrl, image, verdict, dealerUrl, dealerLabel } = Astro.props as Props;
+const { rank, name, brand, bestFor, pros, cons, rrp, reviewUrl, affiliateUrl, image, verdict, dealerUrl, dealerLabel } = Astro.props as Props;
 const isDealer = Boolean(dealerUrl);
 // Amazon path is affiliate (rel sponsored). Dealer path is a plain reference
 // link (rel nofollow), never marked sponsored since we earn nothing on it.
@@ -28,7 +27,7 @@ const buyUrl = isDealer ? dealerUrl! : (affiliateUrl || amazonSearch(`${name} ch
 const buyRel = isDealer ? 'nofollow noopener noreferrer' : AFFILIATE_REL;
 const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check price on Amazon';
 ---
-<article class="border border-steel-200 rounded-xl bg-white overflow-hidden shadow-sm">
+<article class="border border-steel-200 rounded-sm bg-white overflow-hidden shadow-sm">
   <div class="grid md:grid-cols-[240px_1fr] gap-0">
     <div class="bg-hazard-50 flex items-center justify-center p-6 md:p-4 relative">
       <span class="absolute top-3 left-3 bg-hazard-600 text-white text-xs font-bold px-2 py-1 rounded">#{rank}</span>
@@ -53,14 +52,15 @@ const buyLabel = isDealer ? (dealerLabel || 'Find an approved dealer') : 'Check 
         <div>
           <span class="inline-block text-xs font-semibold text-hazard-600 uppercase tracking-wide mb-1">Best for {bestFor}</span>
           <h3 class="text-xl font-bold text-graphite-900 leading-tight font-heading">{name}</h3>
-          <p class="text-sm text-steel-400">{brand}</p>
+          <p class="text-sm text-steel-600">{brand}</p>
         </div>
-        <div class="text-right shrink-0">
-          <div class="text-hazard-600 text-lg" aria-label={`${rating} out of 5`}>
-            {'★'.repeat(Math.round(rating))}<span class="text-steel-200">{'★'.repeat(5 - Math.round(rating))}</span>
+        {/* Amazon compliance: never show a static price alongside an Amazon buy link/image.
+            Only the dealer path (no affiliate link) may display rrp. */}
+        {rrp && isDealer && (
+          <div class="text-right shrink-0">
+            <div class="text-sm font-semibold text-graphite-900 mt-1 font-mono-spec">{rrp}</div>
           </div>
-          {rrp && <div class="text-sm font-semibold text-graphite-900 mt-1 font-mono-spec">{rrp}</div>}
-        </div>
+        )}
       </div>
       <p class="text-steel-600 text-sm md:text-base mb-4 leading-relaxed">{verdict}</p>
       <div class="grid sm:grid-cols-2 gap-3 mb-4 text-sm">

@@ -5,6 +5,7 @@ import FAQ from '../../components/FAQ.astro';
 import HazardTape from '../../components/HazardTape.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
+import PpeClassChart from '../../components/PpeClassChart.astro';
 import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
 const title = 'Chainsaw Safety UK: Licence, PPE and Kickback Guide';
@@ -61,7 +62,7 @@ const schema = [
       <HazardTape />
     </div>
 
-    <div class="my-10 rounded-xl border-2 border-hazard-500 bg-white p-5 md:p-6">
+    <div class="my-10 rounded-sm border-2 border-hazard-500 bg-white p-5 md:p-6">
       <p class="text-xs font-bold uppercase tracking-wide text-hazard-600 mb-2">Go to the source</p>
       <p class="text-steel-600 leading-relaxed">
         This page is a plain-English summary for buyers. The bodies who actually set and enforce
@@ -71,11 +72,11 @@ const schema = [
       <ul class="mt-3 space-y-1.5">
         <li>
           <a class="text-hazard-600 underline underline-offset-2 font-semibold" href="https://www.hse.gov.uk/treework/index.htm" target="_blank" rel="noopener">HSE: tree work and chainsaw safety</a>
-          <span class="text-steel-400 text-sm"> (Great Britain)</span>
+          <span class="text-steel-600 text-sm"> (Great Britain)</span>
         </li>
         <li>
           <a class="text-hazard-600 underline underline-offset-2 font-semibold" href="https://www.hseni.gov.uk/articles/chainsaw-safety-think-safe-saw-safe-operator-and-safe-site-sos" target="_blank" rel="noopener">HSENI: chainsaw safety guidance</a>
-          <span class="text-steel-400 text-sm"> (Northern Ireland)</span>
+          <span class="text-steel-600 text-sm"> (Northern Ireland)</span>
         </li>
       </ul>
     </div>
@@ -148,9 +149,15 @@ const schema = [
         rates protection by chain speed class: Class 0 up to 16 metres per second, Class 1 up to 20
         m/s, Class 2 up to 24 m/s, and Class 3 up to 28 m/s.
       </p>
+    </div>
+
+    <PpeClassChart />
+
+    <div class="prose-chainsaw">
       <p>
-        Your saw's manual or spec sheet gives its chain speed. Your leg protection should be rated
-        to match that speed, not bought as one size fits all. EN381 is gradually being superseded by
+        Your saw's manual or spec sheet gives its chain speed. Compare it with the class test speeds
+        and follow the saw maker's and clothing maker's guidance when you choose, rather than buying
+        one size fits all. EN381 is gradually being superseded by
         the equivalent EN ISO 11393 standard, but the classes and the intent carry across.
       </p>
       <p>This is the kit that actually reduces injury risk in practice, whatever saw you buy:</p>
@@ -168,6 +175,43 @@ const schema = [
         even for occasional garden use.
       </p>
     </div>
+
+    <section class="my-10" aria-labelledby="hse-figures">
+      <h2 id="hse-figures" class="text-2xl md:text-3xl font-bold text-graphite-900 font-heading mb-4">What HSE's injury figures show</h2>
+      <p class="text-base md:text-lg leading-relaxed text-steel-600 mb-5">
+        We could not find a current UK injury count for chainsaws alone. The clearest official
+        picture we found is HSE's record of reported tree-work accidents, which covers occupational tree work, including
+        incidents not caused by operating a chainsaw, rather than people cutting in their own gardens.
+      </p>
+      <dl class="grid sm:grid-cols-3 gap-px bg-graphite-900 border-2 border-graphite-900">
+        <div class="bg-white p-4 flex flex-col-reverse justify-end">
+          <dt class="text-sm text-steel-600">people killed in tree work in Great Britain, April 2000 to March 2013</dt>
+          <dd class="font-mono-spec text-4xl font-semibold text-graphite-900 mb-1">60</dd>
+        </div>
+        <div class="bg-white p-4 flex flex-col-reverse justify-end">
+          <dt class="text-sm text-steel-600">fatal injuries in arboriculture reported to HSE, 2002/03 to 2010/11</dt>
+          <dd class="font-mono-spec text-4xl font-semibold text-graphite-900 mb-1">27</dd>
+        </div>
+        <div class="bg-white p-4 flex flex-col-reverse justify-end">
+          <dt class="text-sm text-steel-600">major (non-fatal) injuries in arboriculture over the same nine years</dt>
+          <dd class="font-mono-spec text-4xl font-semibold text-graphite-900 mb-1">516</dd>
+        </div>
+      </dl>
+      <p class="text-xs text-steel-600 mt-3 leading-relaxed">
+        Sources: HSE, <a class="text-hazard-700 underline underline-offset-2" href="http://web.archive.org/web/20260109144804/https://www.hse.gov.uk/treework/safety-topics/treework-incidents.htm" target="_blank" rel="noopener">What causes tree work injuries?</a>
+        and <a class="text-hazard-700 underline underline-offset-2" href="http://web.archive.org/web/20260119175953/https://www.hse.gov.uk/treework/resources/arboriculture.htm" target="_blank" rel="noopener">Arboriculture statistics (RIDDOR)</a>,
+        both archived copies because HSE has since removed the pages. The 2010/11 figures were provisional. The data is old; it is the most
+        recent tree-work breakdown from HSE that we could find.
+      </p>
+      <blockquote class="mt-6 border-l-4 border-danger-600 bg-surface-100 px-5 py-4">
+        <p class="text-graphite-900 leading-relaxed">"HSE's investigations show that most fatal and major injuries involve chainsaw operators taking shortcuts and not following good practice guidance. Usually the reason is to save time."</p>
+        <cite class="not-italic text-xs text-steel-600 block mt-2">HSE, <a class="text-hazard-700 underline underline-offset-2" href="https://www.hse.gov.uk/treework/safety-topics/chainsaw-operator.htm" target="_blank" rel="noopener">Working with chainsaws</a></cite>
+      </blockquote>
+      <p class="text-base md:text-lg leading-relaxed text-steel-600 mt-5">
+        The same archived HSE page says the vast majority of fatal and major injuries in tree work are
+        associated with chainsaw operations, being struck by a tree or branch, or a fall.
+      </p>
+    </section>
 
     <div class="prose-chainsaw">
       <h2>Kickback: what causes it, and how it is prevented</h2>

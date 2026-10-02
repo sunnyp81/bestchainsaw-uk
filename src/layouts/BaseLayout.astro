@@ -74,5 +74,18 @@ const allSchema = [orgSchema(), websiteSchema(), speakableSchema(url), ...schema
     <slot />
   </main>
   <Footer />
+  <script is:inline>
+    document.querySelectorAll('.prose-chainsaw table').forEach(function (t) {
+      if (t.scrollWidth <= t.clientWidth + 1) return;
+      var w = document.createElement('div');
+      w.className = 'table-scroll';
+      w.setAttribute('tabindex', '0');
+      w.setAttribute('role', 'region');
+      w.setAttribute('aria-label', 'Table, scrolls sideways');
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+      t.style.display = 'table';
+    });
+  </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import HazardTape from '../../components/HazardTape.astro';
 import PickCard from '../../components/PickCard.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
 import { articleSchema, faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonLink, amazonImage } from '../../lib/affiliate';
 
 const title = "First Chainsaw UK: A Beginner's Buying Guide";
 const description = 'What UK beginners actually need before buying a first chainsaw: safe sizing, chain brake basics, PPE, and whether you legally need training.';
@@ -40,8 +41,8 @@ const faqs: { q: string; a: string }[] = [
 
 // Two research-led beginner picks: a corded electric and a lower-voltage cordless,
 // both genuinely small (12-14in class), both with a mechanical chain brake.
-// No affiliateUrl supplied on either PickCard - both fall back to a tagged
-// amazonSearch() link (chainsaw0f6-21). No ASIN or price invented.
+// Both PickCards use approved ASIN links/images from pickAsins.ts. No price is
+// rendered beside those Amazon links or images.
 const picks = [
   { name: 'Einhell GH-EC 1835 corded electric chainsaw', url: '/electric-chainsaws/' },
   { name: 'Einhell GE-LC 36/35 Li-Solo cordless chainsaw', url: '/cordless-chainsaws/' },
@@ -188,7 +189,6 @@ const schema = [
         name="Einhell GH-EC 1835 corded electric chainsaw"
         brand="Einhell"
         bestFor="corded beginners near a socket"
-        rating={4.5}
         pros={[
           'No battery to charge or run flat, always full power from the mains',
           'Instant mechanical chain brake plus a chain-catcher bolt',
@@ -201,6 +201,8 @@ const schema = [
           'Not intended for repeated felling or large-diameter logs',
         ]}
         reviewUrl="/electric-chainsaws/"
+        affiliateUrl={amazonLink('B0CSDQVXZT')}
+        image={amazonImage('B0CSDQVXZT')}
         verdict="A straightforward 1800W corded electric with a 35cm (14in) bar, an instant mechanical chain brake and tool-free chain tensioning. If most of your cutting happens within reach of an extension lead, this class of saw removes battery cost and runtime worries entirely."
       />
       <PickCard
@@ -208,7 +210,6 @@ const schema = [
         name="Einhell GE-LC 36/35 Li-Solo cordless chainsaw"
         brand="Einhell"
         bestFor="cordless beginners without a socket nearby"
-        rating={4.3}
         pros={[
           'No cable, so you can work anywhere in the garden',
           'Brushless motor keeps it light at around 4kg',
@@ -222,6 +223,8 @@ const schema = [
           'Twin 18V battery setup adds some weight versus a single-cell saw',
         ]}
         reviewUrl="/cordless-chainsaws/"
+        affiliateUrl={amazonLink('B07FD8BK2D')}
+        image={amazonImage('B07FD8BK2D')}
         verdict="Runs on two 18V batteries for a genuine 36V-class, 35cm (14in) bar with a brushless motor and mechanical chain brake. A sensible step up from corded if you need to work away from the house, without jumping to a heavier 45cc+ petrol saw you do not yet need."
       />
     </div>

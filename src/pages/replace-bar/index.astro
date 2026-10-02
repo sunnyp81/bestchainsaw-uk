@@ -5,6 +5,7 @@ import FAQ from '../../components/FAQ.astro';
 import HazardTape from '../../components/HazardTape.astro';
 import HowWeResearch from '../../components/HowWeResearch.astro';
 import ReviewedStamp from '../../components/ReviewedStamp.astro';
+import BarLengthGuide from '../../components/BarLengthGuide.astro';
 import { articleSchema, howToSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 
 // This exact slug (/replace-bar/) has real earnings history from the 2019 site - do not
@@ -148,6 +149,24 @@ const schema = [
         slack.
       </p>
 
+      <h2>Choosing a replacement bar length</h2>
+      <p>
+        The safest replacement is the same length as the bar you are taking off. If you are
+        thinking about going longer, check your saw's manual first: makers list the bar lengths a
+        saw is approved for. Stihl's manual for the MS 212 approves 30 to 45cm bars, for example.
+        A longer bar also needs a longer chain with more drive links.
+      </p>
+      <p>
+        HSE's advice in its leaflet <em>Chainsaws at work</em> is to choose the shortest guide bar
+        suitable for the work. Husqvarna UK says bar length is set by tree size, and that a shorter
+        bar weighs less and is easier to handle for cutting off branches. The chart below shows where
+        Stihl changes its felling method as a trunk gets wider than the saw's cutting length.
+      </p>
+    </div>
+
+    <BarLengthGuide />
+
+    <div class="prose-chainsaw">
       <h2>Keeping the chain sharp between changes</h2>
       <p>
         This bar-and-chain job is also the point to think about sharpening. A blunt or
